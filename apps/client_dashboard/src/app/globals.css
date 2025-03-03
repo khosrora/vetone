@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  direction: rtl;
+  font-family: var(--font-morabba), sans-serif !important;
+}
+
+:root {
+  --rsbs-max-w: auto;
+  /* --rsbs-ml: env(safe-area-inset-left); */
+  /* --rsbs-mr: env(safe-area-inset-right); */
+}
+
+@media (min-width: 900px) {
+  :root {
+    --rsbs-max-w: 40%;
+    --rsbs-ml: auto;
+    --rsbs-mr: auto;
+  }
+}
