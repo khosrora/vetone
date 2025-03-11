@@ -22,10 +22,11 @@ function SearchBox() {
   }
 
   return (
-    <div className="w-full flex justify-between items-center bg-white p-4 rounded-md max-w-2xl m-auto">
+    <div className="px-4">
+    <div className="w-full flex justify-between items-center bg-white p-2 lg:p-4 rounded-md max-w-2xl m-auto">
       <input
         placeholder="جستجو دامپزشک"
-        className="p-4 focus:outline-none text-xs"
+        className="p-4 focus:outline-none text-sm placeholder:text-sm"
         onChange={(e) => setSearchText(e.target.value)}
       />
       {searchText ? (
@@ -66,6 +67,7 @@ function SearchBox() {
           </div>
         </div>
       </BottomSheet>
+    </div>
     </div>
   );
 }

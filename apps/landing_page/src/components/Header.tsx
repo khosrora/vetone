@@ -14,7 +14,7 @@ function Header() {
   const { push } = useRouter();
 
   return (
-    <div className="flex justify-between items-center p-4 lg:bg-white lg:rounded-md">
+    <div className="flex justify-between items-center my-8 p-4 lg:bg-white lg:rounded-md">
       <div className="flex justify-start items-center gap-x-4">
         <Img src="/images/logo.png" width={50} height={50} alt={name_project} />
         <small className="font-black text-green_vetone">{name_project}</small>
@@ -23,7 +23,7 @@ function Header() {
         {constantsItemsNavigation.map((item: navigationBottomType) => (
           <li key={item.id}>
             <Link
-              className="text-[14px] hover:text-green_vetone"
+              className="text-[14px] text-gray-800 hover:text-green_vetone"
               href={item.link}
             >
               {item.title}

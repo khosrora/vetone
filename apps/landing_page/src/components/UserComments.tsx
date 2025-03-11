@@ -9,7 +9,7 @@ function UserComments() {
   const swiperRef = useRef<any>(null);
 
   return (
-    <div className="mr-2 p-4 lg:bg-white ">
+    <div className="lg:mr-2 lg:px-2">
       <Swiper
         spaceBetween={30}
         slidesPerView={1.2}
@@ -17,21 +17,21 @@ function UserComments() {
           swiperRef.current = swiper;
         }}
         breakpoints={{
-          320: { slidesPerView: 1.1, spaceBetween: 5 },
-          600: { slidesPerView: 2, spaceBetween: 4 },
+          320: { slidesPerView: 1.8, spaceBetween: 8 },
+          600: { slidesPerView: 3, spaceBetween: 12 },
         }}
       >
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item: number) => (
           <SwiperSlide key={item}>
-            <div className="flex flex-col bg-white rounded-md p-4 gap-y-4 lg:bg-[#F6FAF6]">
+            <div className="flex flex-col bg-white rounded-md p-4 gap-y-4">
               <div className="flex justify-start items-center rounded-md gap-x-2">
                 <img
                   src="https://avatar.iran.liara.run/public"
                   className="w-12 h-12 rounded-full"
                 />
-                <p className="font-light">دکتر نوری</p>
+                <p className="font-bold text-base lg:text-lg">دکتر نوری</p>
               </div>
-              <p className="text-[10px]">
+              <p className="text-[11px] lg:text-sm lg:leading-7 leading-6">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ لورم
                 ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
               </p>
