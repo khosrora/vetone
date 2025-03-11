@@ -12,11 +12,11 @@ function TitleLink({
   address?: string;
 }) {
   return (
-    <div className="flex justify-between items-center p-4">
-      <p className="font-bold">{title}</p>
+    <div className="flex justify-between items-center p-4 ">
+      <p className="font-bold text-base">{title}</p>
       {!!address && (
         <Link href={address} className="flex justify-end items-center gap-x-2">
-          <p className="text-green_vetone">{linkText}</p>
+          <p className="text-green_vetone text-xs">{linkText}</p>
           <IconChevronLeft className="text-green_vetone" />
         </Link>
       )}

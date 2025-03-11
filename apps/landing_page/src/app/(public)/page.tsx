@@ -9,17 +9,19 @@ import { IconBubbleText } from "@tabler/icons-react";
 
 export default function Page() {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col justify-center items-center space-y-2 p-4">
-        <p className="text-2xl text-green_vetone font-extrabold">
+    <div className="space-y-12 lg:space-y-24 py-6 lg:py-12">
+      <div className="space-y-4">
+      <div className="flex flex-col justify-center items-center space-y-2 p-4 ">
+        <p className="text-4xl text-green_vetone font-extrabold drop-shadow-[1px_1px_rgba(0,0,0,1)] ">
           {name_project}
         </p>
-        <p className="text-center">
+        <p className="text-center pt-6">
           خدمات جامع دامداری: بهبود سلامت، افزایش بهره‌وری و سودآوری
         </p>
       </div>
       <SearchBox />
-      <div className="bg-white">
+      </div>
+      <div className="bg-white my-my-4 lg:my-12">
         <TitleLink title="دامپزشکان" linkText="مشاهده همه" address="/veterinarian" />
         <VeterinarianSlider />
       </div>

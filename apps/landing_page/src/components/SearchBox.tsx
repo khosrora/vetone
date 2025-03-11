@@ -22,7 +22,8 @@ function SearchBox() {
   }
 
   return (
-    <div className="w-full flex justify-between items-center bg-white p-4 rounded-md max-w-2xl m-auto">
+    <div className="w-full px-4">
+    <div className="w-full flex justify-between items-center bg-white p-2 lg:p-2.5  rounded-md lg:max-w-2xl m-auto">
       <input
         placeholder="جستجو دامپزشک"
         className="p-4 focus:outline-none text-xs"
@@ -57,7 +58,7 @@ function SearchBox() {
               />
               {province.map((item: ProvinceType) => {
                 return item.fields.name.includes(searchProvince) ? (
-                  <div key={item.pk} className="bg-zinc-100 p-2 rounded-md cursor-pointer">
+                  <div key={item.pk} className="bg-zinc-100 px-4 py-3 lg:p-3 rounded-md cursor-pointer">
                     <p>{item.fields.name}</p>
                   </div>
                 ) : null;
@@ -66,6 +67,7 @@ function SearchBox() {
           </div>
         </div>
       </BottomSheet>
+    </div>
     </div>
   );
 }

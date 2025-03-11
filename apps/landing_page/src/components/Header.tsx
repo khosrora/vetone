@@ -19,11 +19,11 @@ function Header() {
         <Img src="/images/logo.png" width={50} height={50} alt={name_project} />
         <small className="font-black text-green_vetone">{name_project}</small>
       </div>
-      <ul className="hidden lg:flex gap-x-4">
+      <ul className="hidden lg:flex gap-x-6">
         {constantsItemsNavigation.map((item: navigationBottomType) => (
           <li key={item.id}>
             <Link
-              className="text-[14px] hover:text-green_vetone"
+              className="text-[14px] text-gray-600 hover:text-green_vetone"
               href={item.link}
             >
               {item.title}
