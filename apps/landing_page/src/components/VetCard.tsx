@@ -20,7 +20,7 @@ function VetCard({ item }: { item: string }) {
             src="https://avatar.iran.liara.run/public"
             className="w-12 h-12"
           />
-          <p className="font-bold">دکتر رضا رستمی</p>
+          <p className="font-bold text-lg">دکتر رضا رستمی</p>
         </div>
         <div className="flex justify-end items-center gap-x-2">
           <IconShare />
@@ -28,7 +28,7 @@ function VetCard({ item }: { item: string }) {
         </div>
       </div>
       <div className="flex justify-between items-center">
-        <div className="flex justify-start items-center gap-x-2">
+        <div className="flex justify-start items-center gap-x-2 text-[10px] lg:text-sm">
           <IconMapPinFilled size={16} color="gray" />
           <p className="text-[10px]">تهران - تهران</p>
         </div>
