@@ -28,13 +28,13 @@ function VetCard({ item }: { item: string }) {
         </div>
       </div>
       <div className="flex justify-between items-center">
-        <div className="flex justify-start items-center gap-x-2 text-[10px] lg:text-sm">
+        <div className="flex justify-start items-center gap-x-2">
           <IconMapPinFilled size={16} color="gray" />
-          <p className="text-[10px]">تهران - تهران</p>
+          <p className="text-[10px] lg:text-base">تهران - تهران</p>
         </div>
         <div className="flex justify-center items-center gap-x-2">
           <IconPhoneFilled size={16} color="gray" />
-          <p className="text-[10px]">مشاوره تلفنی</p>
+          <p className="text-[10px] lg:text-base">مشاوره تلفنی</p>
         </div>
         <div className="flex justify-end items-center gap-x-2">
           <IconBubbleFilled size={16} color="gray" />
