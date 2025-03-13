@@ -4,44 +4,37 @@ import React, { Dispatch, SetStateAction } from "react";
 
 function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
   return (
-    <form className="mt-4">
+    <form className="mt-4 space-y-6">
       <label className="form-control w-full">
         <div className="label">
-          <span className="label-text-alt">نام</span>
+          <span className="label-text-alt text-base">نام</span>
         </div>
         <input
           type="text"
           placeholder="نام خود را وارد نمایید"
-          className="input input-bordered w-full"
-        />
-        <div className="label">
-          <span className="label-text-alt">Bottom Left label</span>
-        </div>
+          className="input input-bordered w-full input-lg placeholder:text-sm"
+        /> 
       </label>
       <label className="form-control w-full">
         <div className="label">
-          <span className="label-text-alt">نام خانوادگی</span>
+          <span className="label-text-alt text-base">نام خانوادگی</span>
         </div>
         <input
           type="text"
           placeholder="نام خانوادگی خود را وارد نمایید"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full input-lg placeholder:text-sm"
         />
-        <div className="label">
-          <span className="label-text-alt">Bottom Left label</span>
-        </div>
+    
       </label>
       <label className="form-control">
         <div className="label">
-          <span className="label-text-alt">بیوگرافی</span>
+          <span className="label-text-alt text-base">بیوگرافی</span>
         </div>
         <textarea
-          className="textarea textarea-bordered h-24"
+          className="textarea textarea-bordered h-24 input-lg placeholder:text-sm"
           placeholder="بیوگرافی خود را بنویسید"
         ></textarea>
-        <div className="label">
-          <span className="label-text-alt">Your bio</span>
-        </div>
+      
       </label>
       <Btn className="w-full" onClick={() => setStep(2)}>
         {" "}

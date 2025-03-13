@@ -8,6 +8,7 @@ import {
   IconShare,
   IconStarFilled,
   IconZoomScanFilled,
+  IconThumbUpFilled
 } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -15,17 +16,18 @@ function page({ params: { slug } }: { params: { slug: string } }) {
   const name_doctor = slug[0];
 
   return (
+    <div className="mx-auto max-w-7xl px-4 lg:px-0">
     <div className="grid grid-cols-12">
-      <div className="col-span-12 p-4 mb-12 lg:col-span-8">
+      <div className="col-span-12  mb-12 lg:col-span-8">
         <div className="relative">
           <Img
             src="/test/Looking-for-a-vet.webp"
             width={500}
             height={500}
             alt={name_doctor!}
-            className="rounded-md max-h-64 object-cover w-full lg:max-h-96"
+            className="rounded-lg max-h-64 object-cover w-full lg:max-h-96"
           />
-          <div className="absolute -bottom-12 left-0 right-0 px-6">
+          <div className="absolute -bottom-12 left-0 right-0 px-8">
             <div className="avatar">
               <div className="ring-white ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
                 <img src="https://avatar.iran.liara.run/public" />
@@ -41,45 +43,46 @@ function page({ params: { slug } }: { params: { slug: string } }) {
             دریافت نوبت مشاوره
           </Link>
         </div>
-        <div className="bg-white p-4 rounded-md mt-6 space-y-8 lg:mt-20">
+        <div className="bg-white p-4 lg:p-6 rounded-md mt-6 space-y-8 lg:mt-20">
           <div className="flex justify-between items-center">
-            <p className="font-bold">
+            <p className="font-bold text-base lg:text-xl">
               دکتر رضا رستمی{" "}
-              <span className="text-[10px] font-light mx-2">
+              <span className="text-[10px] lg:text-sm font-light mx-2">
                 (20 سال سابقه)
               </span>
             </p>
             <div className="flex justify-between items-center">
-              <IconShare />
+              <IconShare className="ml-4"/>
               <IconHeart />
             </div>
           </div>
+          <div className="divider"></div>
           <div className="flex justify-between items-center">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center gap-x-2">
               <IconMapPinFilled />
-              <p className="text-[12px]">تهران , تهران</p>
+              <p className="text-[12px] lg:text-base">تهران , تهران</p>
             </div>
             <div className="flex justify-between items-center gap-x-2">
               <IconZoomScanFilled />
-              <p className="font-light text-[12px]"> کدنظام پزشکی: </p>
+              <p className="font-light text-[12px] lg:text-sm"> کدنظام پزشکی: </p>
               <p className="font-bold">1223412</p>
             </div>
           </div>
           <div className="divider"></div>
           <div className="flex justify-between items-center">
-            <div className="flex justify-between items-center">
-              <IconStarFilled color="yellow" size={18} />
+            <div className="flex justify-between items-center gap-x-2">
+              <IconStarFilled color="#ff7700" size={18} />
               <p>4.5</p>
             </div>
             <div className="flex justify-end items-center gap-x-2">
-              <IconFileLike color="green" />
+              <IconThumbUpFilled color="green" />
               <p className="font-bold text-[12px]"> 120 نوبت موفق</p>
             </div>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-md mt-6 space-y-8">
-          <p className="font-bold">بیوگرافی </p>
-          <p className="font-light">
+        <div className="bg-white p-4 lg:p-6 rounded-md mt-6 space-y-4">
+          <p className="font-bold lg:text-lg">بیوگرافی </p>
+          <p className="font-light leading-6 lg:leading-8 text-xs lg:text-sm">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
             ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
@@ -93,23 +96,23 @@ function page({ params: { slug } }: { params: { slug: string } }) {
             طراحی اساسا مورد استفاده قرار گیرد.
           </p>
         </div>
-        <div className="bg-white rounded-md mt-6 ">
-          <div className="p-4">
-            <p className="font-bold">نظرات کاربران </p>
+        <div className="bg-white rounded-md mt-6 py-6">
+          <div className="p-4 lg:py-2 lg:px-6">
+            <p className="font-bold text-lg">نظرات کاربران </p>
           </div>
           <UserComments />
         </div>
       </div>
       <div className="hidden lg:flex lg:col-span-4">
         <div className="w-full p-4">
-          <div className="bg-white p-4 rounded-md">
-            <p className="font-bold text-[12px]">
+          <div className="bg-white p-4 lg:p-6 rounded-md">
+            <p className="font-bold text-[12px] lg:text-base">
               نوبت‌دهی اینترنتی مطب دکتر علی اکبر سیاری
             </p>
             <div className="divider"></div>
             <div className="flex justify-between items-center">
-              <p>اولویت نوبت</p>
-              <p>۱۷ دی ۱۴۰۳</p>
+              <p className="font-light">اولویت نوبت</p>
+              <p className="font-bold">۱۷ دی ۱۴۰۳</p>
             </div>
             <div className="w-full mt-4">
               <Link
@@ -121,6 +124,7 @@ function page({ params: { slug } }: { params: { slug: string } }) {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -6,12 +6,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 function Tags() {
   return (
-    <div className="mr-2 pb-4 lg:bg-white">
+    <div className="mr-4 pb-4 lg:bg-white">
       <Swiper
         spaceBetween={30}
         slidesPerView={1.2}
         breakpoints={{
-          320: { slidesPerView: 2.6, spaceBetween: 4 },
+          320: { slidesPerView: 3.1, spaceBetween: 4 },
           600: { slidesPerView: 2, spaceBetween: 4 },
         }}
       >

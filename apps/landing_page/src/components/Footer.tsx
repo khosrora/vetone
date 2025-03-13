@@ -8,7 +8,7 @@ import { desc_project_footer, name_project } from "@repo/lib/titles";
 
 function Footer() {
   return (
-    <div className="bg-[#FFFFFF] p-8 mb-32 lg:mb-4 rounded-xl">
+    <div className="bg-[#FFFFFF] p-8 mb-32 lg:mb-4 rounded-xl mx-auto max-w-7xl">
       <ul className="flex flex-col space-y-4 lg:flex-row lg:space-y-0 justify-between items-start gap-x-4">
         <li className="w-full lg:w-1/4">
           <div className="flex justify-start items-center gap-x-4">

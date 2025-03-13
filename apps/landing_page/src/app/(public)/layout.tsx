@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body className={`${estedad.variable} bg-zinc-50`}>
-        <div className="min-h-screen overflow-y-scroll max-w-7xl m-auto">
+        <div className="min-h-screen overflow-y-scroll  m-auto">
           <Header />
           {children}
           <NavigationBottom />

@@ -10,7 +10,7 @@ function page() {
       </div>
       <div className="col-span-12 lg:col-span-9 space-y-4 lg:space-y-0">
         <FilterBtns />
-        <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="p-4 grid grid-cols-1 md:grid-cols-1 gap-4">
           {[1, 2, 3, 4, 5, , 6, 7, 8].map((item: any) => (
             <VetCard key={item} item={item} />
           ))}

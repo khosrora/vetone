@@ -15,7 +15,7 @@ function FilterItems() {
   const [searchProvince, setSearchProvince] = useState<string>("");
 
   return (
-    <div className="bg-white rounded-md w-full p-4 space-y-6">
+    <div className="bg-white rounded-md w-full p-4 lg:p-6 space-y-6 sticky top-0">
       <div className="flex gap-x-2">
         <IconAdjustmentsAlt />
         <p>فیلتره</p>
@@ -23,7 +23,7 @@ function FilterItems() {
       <SearchBoxName bgColor="bg-zinc-100 py-3" />
       <div className="">
         <div
-          className={`label flex justify-between items-center cursor-pointer ${!!type && "border-b-2 border-solid border-b-gray-200 py-3 my-2"}`}
+          className={`label flex justify-between items-center cursor-pointer border-b-2 border-solid border-b-gray-100 py-3 ${!!type && "border-b-2 border-solid border-b-gray-100 py-3 my-2"}`}
           onClick={() => {
             setType(!type);
           }}
@@ -50,7 +50,7 @@ function FilterItems() {
       </div>
       <div className="">
         <div
-          className={`label flex justify-between items-center cursor-pointer ${!!category && "border-b-2 border-solid border-b-gray-200 py-3 my-2"}`}
+          className={`label flex justify-between items-center cursor-pointer border-b-2 border-solid border-b-gray-100 py-3 ${!!category && "border-b-2 border-solid border-b-gray-200 py-3 my-2"}`}
           onClick={() => {
             setCategory(!category);
           }}
@@ -77,7 +77,7 @@ function FilterItems() {
       </div>
       <div className="">
         <div
-          className={`label flex justify-between items-center cursor-pointer ${!!activity && "border-b-2 border-solid border-b-gray-200 py-3 my-2"}`}
+          className={`label flex justify-between items-center cursor-pointer border-b-2 border-solid border-b-gray-100 py-3 ${!!activity && "border-b-2 border-solid border-b-gray-200 py-3 my-2"}`}
           onClick={() => setActivity(!activity)}
         >
           <span className="label-text">استان محل فعالیت</span>

@@ -9,7 +9,7 @@ function Steps({
 }) {
   return (
     <div>
-      <ul className="steps steps-horizontal w-full">
+      <ul className="steps steps-horizontal w-full mt-6">
         <li data-content="" className={`step ${step === 1 && "step-success"}`}>
           اطلاعات اولیه
         </li>

@@ -1,6 +1,6 @@
 "use client";
 import SearchBoxName from "@/components/SearchBoxName";
-import { IconFilter, IconSortAscendingShapes } from "@tabler/icons-react";
+import { IconAdjustmentsAlt, IconSortAscendingShapes } from "@tabler/icons-react";
 import Tags from "./Tags";
 import { useState } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
@@ -27,14 +27,14 @@ function FilterBtns() {
 
   return (
     <>
-      <div className="p-4 space-y-4 lg:hidden">
+      <div className="px-4 py-6 space-y-4 lg:hidden">
         <SearchBoxName />
         <div className="flex justify-between items-center bg-white rounded-md p-4">
           <div
             className="flex justify-center items-center gap-x-4"
             onClick={() => handleOpenModal(filterEnum.filter)}
           >
-            <IconFilter />
+            <IconAdjustmentsAlt />
             <p className="font-bold">فیلترها</p>
           </div>
           <div className="divider divider-horizontal"></div>

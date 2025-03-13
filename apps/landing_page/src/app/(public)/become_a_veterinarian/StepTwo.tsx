@@ -1,6 +1,6 @@
 "use client";
 import { Btn } from "@repo/ui/btn";
-import { IconPictureInPicture } from "@tabler/icons-react";
+import { IconPhotoFilled } from "@tabler/icons-react";
 
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
@@ -11,13 +11,13 @@ import { Dispatch, SetStateAction, useState } from "react";
 function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
   const [date, setDate] = useState<any>();
   return (
-    <div>
+    <div className="space-y-6">
       <div className="grid grid-cols-2 gap-x-2">
         <div className="">
           <p className="text-[14px] font-bold mb-2">تصویر مجوز</p>
-          <div className="border-2 border-dashed rounded-md min-h-32 flex flex-col justify-center items-center relative">
-            <IconPictureInPicture />
-            <p className="text-[10px]">افزودن عکس</p>
+          <div className="border-2 border-dashed rounded-md min-h-32 space-y-3 flex flex-col justify-center items-center relative">
+            <IconPhotoFilled size={36}/>
+            <p className="text-[10px] lg:text-sm">افزودن عکس</p>
             <input
               className="absolute top-0 right-0 bottom-0 left-0 opacity-0 cursor-pointer"
               type="file"
@@ -26,9 +26,9 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
         </div>
         <div className="">
           <p className="text-[14px] font-bold mb-2">تصویر کارت ملی</p>
-          <div className="border-2 border-dashed rounded-md min-h-32 flex flex-col justify-center items-center relative">
-            <IconPictureInPicture />
-            <p className="text-[10px]">افزودن عکس</p>
+          <div className="border-2 border-dashed rounded-md min-h-32 space-y-3 flex flex-col justify-center items-center relative">
+            <IconPhotoFilled size={36} />
+            <p className="text-[10px] lg:text-sm">افزودن عکس</p>
             <input
               className="absolute top-0 right-0 bottom-0 left-0 opacity-0 cursor-pointer"
               type="file"
@@ -38,20 +38,17 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
       </div>
       <label className="form-control w-full mt-6">
         <div className="label">
-          <span className="label-text-alt">کد مجوز نظام پزشکی</span>
+          <span className="label-text-alt  text-base">کد مجوز نظام پزشکی</span>
         </div>
         <input
           type="text"
           placeholder="کد مجوز نظام پزشکی خود را وارد نمایید"
-          className="input input-bordered w-full"
+          className="input  w-full input-lg placeholder:text-sm"
         />
-        <div className="label">
-          <span className="label-text-alt">Bottom Left label</span>
-        </div>
       </label>
       <div className="w-full">
         <div className="label">
-          <span className="label-text-alt">تاریخ صدور</span>
+          <span className="label-text-alt text-base">تاریخ صدور</span>
         </div>
         <DatePicker
           value={date}
@@ -63,9 +60,9 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
           style={{
             width: "100%",
             boxSizing: "border-box",
-            padding: "1.3rem",
+            padding: "1.8rem",
             marginTop: ".5rem",
-            border: "1px solid rgb(226 232 240)",
+            border: "1px solid rgb(255 255 255)",
           }}
           containerStyle={{
             width: "100%",
