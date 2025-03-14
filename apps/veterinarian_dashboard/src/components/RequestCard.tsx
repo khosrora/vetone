@@ -1,38 +1,56 @@
 "use client";
 import { Btn } from "@repo/ui/btn";
 import Link from "next/link";
-
+import {
+  IconCaretLeftFilled,
+} from "@tabler/icons-react";
 function RequestCard() {
   return (
-    <div className="p-4 bg-white rounded-md space-y-2">
-      <div className="flex justify-between items-center">
-        <div className="flex justify-start items-center gap-x-2">
-          <img
-            src="https://avatar.iran.liara.run/public"
-            className="w-12 h-12"
-          />
-          <p className="font-bold">دکتر رضا رستمی</p>
+<div className="p-4 bg-white rounded-md space-y-2">
+      <div className="p-0  lg:p-6 bg-white rounded-md space-y-2">
+        <div className="grid grid-cols-3 lg:flex justify-between items-center">
+          <div className="flex col-span-2 justify-start items-center gap-x-2">
+            <img
+              src="https://avatar.iran.liara.run/public"
+              className="w-10 h-10 lg:w-16 lg:h-16"
+            />
+            <div className="space-y-2 lg:space-y-3 px-4">
+              <p className="font-bold text-sm lg:text-lg block"> رضا رستمی</p>
+              <p className="text-[10px] lg:tet-sm texxt-gray-500 ">10 سال سابقه</p>
+            </div>
+          </div>
+          <div className="justify-self-end badge  bg-green-50 text-green-600  p-4 text-[10px] lg:text-xs text-white">
+             حضوری
+          </div>
         </div>
-        <div className="badge badge-success p-4 text-[10px] text-white">
-          درخواست حضوری
+        <div className="divider"></div>
+        <div className="grid grid-cols-1">
+          <div className="grid  grid-cols-2 lg:grid-cols-3 gap-4 gap-x-8 items-center py-3 col-span-2">
+            <div className="flex flex-row items-center gap-x-3 ">
+              <p className="text-[12px] lg:text-xs text-gray-600 font-regular"> تاریخ:</p>
+              <p className="text-[12px] lg:text-sm font-semibold">1403/10/12</p>
+            </div>
+            <div className="flex items-center gap-x-3 justify-self-end  md:justify-self-center">
+              <p className="text-[12px] lg:text-xs text-gray-600 font-regular">وضعیت:</p>
+              <p className="text-[12px] lg:text-sm text-yellow-500 font-semibold">درانتطار تایید</p>
+            </div>
+            <div className="flex items-center gap-x-3 hidden md:justify-self-end">
+              <p className="text-[12px] lg:text-xs text-gray-600 font-regular">کدرهگیری:</p>
+              <p className="text-[12px] lg:text-sm font-semibold">1234454</p>
+            </div>
+          </div>
+          </div>
+          <div className="divider"></div>
+          <div className="flex justify-between items-center">
+            <Btn>تایید درخواست</Btn>
+            <Link href={"/"} className="text-[11px] lg:text-sm font-bold text-green-700 flex items-center gap-x-2">
+              جزئیات درخواست
+              <IconCaretLeftFilled />
+            </Link>
+          </div>
+       
         </div>
-      </div>
-      <div className="flex justify-between items-center">
-        <p>
-          تاریخ : <small>10 / 08 / 1403</small>
-        </p>
-        <p className="text-[12px]">
-          وضعیت :{" "}
-          <small className="text-yellow-400 mr-2">در انتظار تایید</small>
-        </p>
-      </div>
-      <div className="divider"></div>
-      <div className="flex justify-between items-center">
-        <Btn>تایید درخواست</Btn>
-        <Link href={`/my_requests/1`} className="text-blue-500 ">
-          جزيیات درخواست
-        </Link>
-      </div>
+      
     </div>
   );
 }

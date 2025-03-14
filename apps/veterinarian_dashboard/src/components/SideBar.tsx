@@ -6,25 +6,26 @@ import Link from "next/link";
 
 function SideBar() {
   return (
-    <div className="hidden lg:flex col-span-2 p-8 rounded-xl bg-[#FFFFFF]">
+    <div className="hidden lg:flex col-span-2 rounded-xl bg-[#FFFFFF]">
       <ul className="flex flex-col gap-y-2 gap-x-4 w-full">
         {linksDashboad.map((item: LinkItems) => (
-          <li key={item.id}>
-            <Link
-              href={item.link}
-              className="flex justify-start items-center gap-x-2 cursor-pointer p-4 rounded-md"
-            >
-              {item.icon}
-              <span className="text-[14px]">{item.title}</span>
-            </Link>
-          </li>
-        ))}
-        <li className="rounded-md flex justify-between items-center bg-red-500 p-4 w-full cursor-pointer">
-          <div className="flex justify-start items-center gap-x-3 text-white">
-            <IconLogout />
-            <p>خروج</p>
-          </div>
-        </li>
+        <li key={item.id} className=" cursor-pointer p-5 border-b  border-solid border-b-gray-100 text-sm hover:bg-green-100 hover:text-green-700">
+        <Link
+          href={item.link}
+          className="flex justify-start items-center gap-x-2"
+        >
+          {item.icon}
+          <span className="text-[14px]">{item.title}</span>
+        </Link>
+   
+      </li>
+    ))}
+    <li className="rounded-md flex justify-between items-center p-5 w-full cursor-pointer text-sm">
+      <div className="flex justify-start items-center gap-x-3 text-white text-[#C80000]">
+        <IconLogout color="#C80000"/>
+        <p>خروج</p>
+      </div>
+    </li>
       </ul>
     </div>
   );

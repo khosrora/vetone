@@ -19,33 +19,32 @@ function FormProfile() {
   console.log(watch("example"));
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label className="form-control w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <label className="form-control w-full space-y-1">
         <div className="label">
-          <span className="label-text-alt">نام و نام خانوادگی</span>
+          <span className="label-text-alt text-sm">نام و نام خانوادگی</span>
         </div>
         <input
           type="text"
           placeholder="نام خود را وارد نمایید"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full input-md placholder:text-xs border-none"
         />
-        <div className="label">
-          <span className="label-text-alt">Bottom Right label</span>
-        </div>
+   
       </label>
-      <label className="form-control w-full">
+      <label className="form-control w-full space-y-1">
         <div className="label">
-          <span className="label-text-alt">کد ملی</span>
+          <span className="label-text-alt text-sm">کد ملی</span>
         </div>
         <input
           type="text"
           placeholder="کد ملی خود را وارد نمایید"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full input-md placholder:text-xs border-none"
         />
-        <div className="label">
-          <span className="label-text-alt">Bottom Right label</span>
-        </div>
       </label>
-      <Btn className="w-full"> ویرایش اطلاعات </Btn>
+      </div>
+      <div className="flex order-last my-4">
+      <Btn className="px-6 w-full md:w-6/12 lg:w-3/12 text-sm my-4 flex order-last"> ویرایش اطلاعات </Btn>
+      </div>
     </form>
   );
 }

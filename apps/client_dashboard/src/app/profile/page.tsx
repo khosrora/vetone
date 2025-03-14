@@ -5,10 +5,10 @@ import FormProfile from "./FormProfile";
 
 function page() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 p-4">
       <TitleBack text="پروفایل" />
       <UserTitle />
-      <div className="p-4">
+      <div className="">
         <FormProfile />
       </div>
     </div>

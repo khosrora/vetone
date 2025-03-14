@@ -1,9 +1,8 @@
 import {
-  IconBriefcase,
-  IconLayoutListFilled,
-  IconMoneybag,
-  IconPaw,
-  IconUserFilled,
+  IconHeart,
+  IconClipboardList,
+  IconStethoscope,
+  IconUser,
 } from "@tabler/icons-react";
 import { JSX } from "react";
 import { LINK_LANDINGPAGE } from "@repo/lib/links";
@@ -18,25 +17,25 @@ export type LinkItems = {
 export const linksDashboad: LinkItems[] = [
   {
     id: 1,
-    icon: <IconUserFilled />,
+    icon: <IconUser size={20}/>,
     title: "ویرایش پروفایل",
     link: "/profile",
   },
   {
     id: 2,
-    icon: <IconLayoutListFilled />,
+    icon: <IconClipboardList size={20}/>,
     title: "درخواست های من",
     link: "/my_requests",
   },
   {
     id: 3,
-    icon: <IconMoneybag />,
+    icon: <IconStethoscope size={20}/>,
     title: "درخواست پزشک شدن",
-    link: `${LINK_LANDINGPAGE}/become_a_veterinarian`,
+    link: `${LINK_LANDINGPAGE}become_a_veterinarian`,
   },
   {
     id: 4,
-    icon: <IconBriefcase />,
+    icon: <IconHeart size={20}/>,
     title: "دامپزشکان مورد علاقه",
     link: "/favorite_veterinarians",
   },
