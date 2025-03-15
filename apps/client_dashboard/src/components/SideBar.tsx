@@ -7,7 +7,7 @@ import Link from "next/link";
 function SideBar() {
   return (
     <div className="hidden lg:flex col-span-2  rounded-xl bg-[#FFFFFF]">
-      <ul className="flex flex-col gap-y-2 gap-x-4 w-full">
+      <ul className="flex flex-col  gap-x-4 w-full">
         {linksDashboad.map((item: LinkItems) => (
           <li key={item.id} className=" cursor-pointer p-5 border-b  border-solid border-b-gray-100 text-sm hover:bg-green-100 hover:text-green-700">
             <Link

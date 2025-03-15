@@ -11,7 +11,7 @@ function TitleBack({ text }: { text: string }) {
       onClick={() => back()}
     >
       <IconChevronRight />
-      <p className="font-bold text-base lg:text-xl px-2">{text}</p>
+      <p className="font-bold text-sm lg:text-xl px-2">{text}</p>
     </div>
   );
 }

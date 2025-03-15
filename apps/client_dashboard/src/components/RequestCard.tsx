@@ -18,7 +18,7 @@ function RequestCard() {
               <p className="text-[10px] lg:tet-sm texxt-gray-500 ">10 سال سابقه</p>
             </div>
           </div>
-          <div className="justify-self-end badge  bg-green-50 text-green-600  p-4 text-[10px] lg:text-xs text-white">
+          <div className="justify-self-end badge  bg-green-50 text-green-00  p-4 text-[10px] lg:text-xs text-green-600">
              حضوری
           </div>
         </div>
@@ -38,7 +38,7 @@ function RequestCard() {
               <p className="text-[11px] lg:text-sm font-semibold">1234454</p>
             </div>
             <div className="flex justify-self-end items-center">
-            <Link href={"/"} className="text-[11px] lg:text-sm font-bold text-green-700 flex items-center gap-x-2">
+            <Link href={"/my_requests/1"} className="text-[11px] lg:text-sm font-bold text-green-700 flex items-center gap-x-2">
               جزئیات درخواست
               <IconCaretLeftFilled />
             </Link>
