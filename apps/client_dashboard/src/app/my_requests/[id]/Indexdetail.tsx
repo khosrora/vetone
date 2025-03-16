@@ -1,14 +1,14 @@
-import React from "react";
+import Imageslider from "@/components/Imageslider";
+import Rasitem from "@/components/Rasitem";
 import TitleBack from "@/components/TitleBack";
-import Link from "next/link";
 import {
     IconCalendarEventFilled,
     IconPhone,
     IconRadar2
 } from "@tabler/icons-react";
-import Rasitem from "@/components/Rasitem";
+
 import MediaThemeTailwindAudio from 'player.style/tailwind-audio/react';
-import Imageslider from "@/components/Imageslider";
+
 function Indexxdetail() {
     return (
         <div className="p-4 space-y-4 ">
