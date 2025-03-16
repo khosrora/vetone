@@ -1,10 +1,12 @@
+import { postDataAPI } from "@/lib/fetch/fetch_axios";
 import { Btn } from "@repo/ui/btn";
-import React, { Dispatch, SetStateAction } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@repo/ui/errorMessage";
+import { Dispatch, SetStateAction, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 type Inputs = {
-  phoneNumber: string;
+  phone: string;
 };
 
 function GetPhoneNumber({
@@ -12,14 +14,28 @@ function GetPhoneNumber({
 }: {
   setPhoneNumber: Dispatch<SetStateAction<string | null>>;
 }) {
+  const [load, setLoad] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) =>
-    setPhoneNumber(data.phoneNumber);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setLoad(true);
+    try {
+      const res = await postDataAPI("/account/login_or_register/", {
+        phone: data.phone,
+      });
+      if (res.status === 201) {
+        setPhoneNumber(data.phone);
+        toast.success("پیامک حاوی کد تایید برای شما ارسال شد");
+        setLoad(false);
+      }
+    } catch (error) {
+      setLoad(false);
+      toast.error("دوباره امتحان کنید.");
+    }
+  };
 
   return (
     <form
@@ -32,16 +48,14 @@ function GetPhoneNumber({
         <div className="label">
           <span className="label-text-alt">شماره موبایل</span>
           <span className="label-text">
-            {errors.phoneNumber && (
-              <ErrorMessage message={"این فیلد ضروری است."} />
-            )}
+            {errors.phone && <ErrorMessage message={"این فیلد ضروری است."} />}
           </span>
         </div>
         <input
           type="text"
           className="input input-bordered w-full bg-zinc-100"
           autoFocus
-          {...register("phoneNumber", {
+          {...register("phone", {
             required: { value: true, message: "this field is required" },
           })}
         />
@@ -51,7 +65,9 @@ function GetPhoneNumber({
           </span>
         </div>
       </label>
-      <Btn className={"w-full"}>دریافت کد تایید</Btn>
+      <Btn disabled={load} loading={load} className={"w-full"}>
+        دریافت کد تایید
+      </Btn>
     </form>
   );
 }

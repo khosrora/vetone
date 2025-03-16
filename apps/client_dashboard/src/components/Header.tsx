@@ -3,7 +3,7 @@ import { name_project } from "@repo/lib/titles";
 import { Img } from "@repo/ui/img";
 
 function Header() {
-
+  
   return (
     <div className="flex justify-between items-center p-4 lg:bg-white lg:rounded-md">
       <div className="flex justify-start items-center gap-x-4">

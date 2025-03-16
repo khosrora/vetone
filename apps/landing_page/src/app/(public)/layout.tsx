@@ -2,11 +2,14 @@ import "@/app/globals.css";
 import { estedad } from "@/lib/local_fonts";
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
+import Providers from "@/app/Provider";
+import { Toaster } from "sonner";
 
 // ! components
 import Header from "@/components/Header";
 import NavigationBottom from "@/components/NavigationBottom";
 import Footer from "@/components/Footer";
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,12 +24,23 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body className={`${estedad.variable} bg-zinc-50`}>
-        <div className="min-h-screen overflow-y-scroll  m-auto">
-          <Header />
-          {children}
-          <NavigationBottom />
-          <Footer />
-        </div>
+        <Providers>
+          <Toaster
+            richColors
+            position="bottom-center"
+            toastOptions={{
+              style: {
+                fontFamily: "var(--font-dana)",
+              },
+            }}
+          />
+          <div className="min-h-screen overflow-y-scroll  m-auto">
+            <Header />
+            {children}
+            <NavigationBottom />
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

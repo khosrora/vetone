@@ -10,8 +10,15 @@ import { Btn } from "@repo/ui/btn";
 import { useRouter } from "next/navigation";
 import { IconUser } from "@tabler/icons-react";
 
+import { useSession } from "next-auth/react";
+
 function Header() {
   const { push } = useRouter();
+  const { data: session, status } = useSession();
+
+  const handleRoute = () => {
+    console.log(session);
+  };
 
   return (
     <div className="flex justify-between items-center bg-white mb-4 lg:my-8 p-4 lg:bg-white lg:rounded-md max-w-7xl mx-auto">
@@ -31,10 +38,17 @@ function Header() {
           </li>
         ))}
       </ul>
-      <Btn onClick={() => push("/login")}>
-        <IconUser />
-        ورود
-      </Btn>
+      {status === "authenticated" ? (
+        <Btn onClick={() => handleRoute()}>
+          <IconUser />
+          پنل کاربری
+        </Btn>
+      ) : (
+        <Btn onClick={() => push("/login")}>
+          <IconUser />
+          ورود
+        </Btn>
+      )}
     </div>
   );
 }

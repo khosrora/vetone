@@ -14,7 +14,9 @@
     "@repo/lib": "*",
     "@repo/ui": "*",
     "@tabler/icons-react": "^3.30.0",
+    "axios": "^1.8.3",
     "next": "15.1.7",
+    "next-auth": "^4.24.5",
     "react": "^19.0.0",
     "react-audio-voice-recorder": "^1.2.1",
     "react-dom": "^19.0.0",
@@ -22,7 +24,9 @@
     "react-multi-date-picker": "^4.5.2",
     "react-otp-input": "^3.1.1",
     "react-spring-bottom-sheet": "^3.5.0-alpha.0",
-    "swiper": "^11.2.3"
+    "sonner": "^1.2.4",
+    "swiper": "^11.2.3",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.1.6",
