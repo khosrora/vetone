@@ -1,8 +1,11 @@
 import React from 'react'
+import Indexreqdetail from './Indexreqdetail'
 
 function page() {
   return (
-    <div>page</div>
+    <div>
+      <Indexreqdetail/>
+    </div>
   )
 }
 

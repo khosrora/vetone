@@ -8,12 +8,12 @@ function PhonePage() {
   return (
     <div className="flex flex-col lg:hidden">
       <UserTitle />
-      <div className="space-y-4 mt-4 p-4">
+      <div className="mt-4 py-6 ">
         {linksDashboad.map((item: LinkItems) => (
           <Link
             href={item.link}
             key={item.id}
-            className="bg-white rounded-md p-4 flex justify-between items-center"
+            className="bg-white rounded-md p-6 flex justify-between items-center border-b-2 text-sm border-gray-100"
           >
             <div className="flex justify-start items-center gap-x-3">
               {item.icon}
@@ -22,7 +22,7 @@ function PhonePage() {
             <IconChevronLeft />
           </Link>
         ))}
-        <div className="bg-white rounded-md p-4 flex justify-between items-center">
+        <div className="bg-white rounded-md p-6 flex justify-between text-sm items-center">
           <div className="flex justify-start items-center gap-x-3 text-red-500">
             <IconLogout />
             <p>خروج</p>
