@@ -6,23 +6,19 @@ export const estedad = localFont({
       weight: "100",
     },
     {
-      path: "../../public/fonts/Estedad-Light.ttf",
+      path: "../../public/fonts/dana-light.ttf",
       weight: "300",
     },
     {
-      path: "../../public/fonts/Estedad-Regular.ttf",
+      path: "../../public/fonts/dana-medium.ttf",
       weight: "400",
     },
     {
-      path: "../../public/fonts/Estedad-Medium.ttf",
-      weight: "500",
-    },
-    {
-      path: "../../public/fonts/Estedad-SemiBold.ttf",
+      path: "../../public/fonts/dana-demiBold.ttf",
       weight: "600",
     },
     {
-      path: "../../public/fonts/Estedad-Bold.ttf",
+      path: "../../public/fonts/dana-bold.ttf",
       weight: "700",
     },
     {

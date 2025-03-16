@@ -1,11 +1,10 @@
 import { JSX } from "react";
 import {
-  IconBriefcase,
-  IconLayoutListFilled,
-  IconMapPinFilled,
-  IconMoneybag,
+  IconClipboardList,
+  IconBrandGoogleMaps,
+  IconWallet,
   IconPaw,
-  IconUserFilled,
+  IconStethoscope,
 } from "@tabler/icons-react";
 
 export type LinkItems = {
@@ -18,31 +17,31 @@ export type LinkItems = {
 export const linksDashboad: LinkItems[] = [
   {
     id: 1,
-    icon: <IconUserFilled />,
+    icon: <IconStethoscope/>,
     title: "اطلاعات دامپزشک",
     link: "/",
   },
   {
     id: 2,
-    icon: <IconLayoutListFilled />,
+    icon: <IconClipboardList size={20}/>,
     title: "درخواست های من",
     link: "/my_requests",
   },
   {
     id: 3,
-    icon: <IconMoneybag />,
+    icon: <IconWallet size={20}/>,
     title: "کیف پول",
     link: "/my_wallet",
   },
   {
     id: 5,
-    icon: <IconPaw />,
+    icon: <IconPaw size={20}/>,
     title: "دامدار ها",
     link: "/ranchers",
   },
   {
     id: 6,
-    icon: <IconMapPinFilled />,
+    icon: <IconBrandGoogleMaps size={20}/>,
     title: "آدرس محل کار",
     link: "/my_addresses",
   },

@@ -19,7 +19,7 @@ function RequestCard() {
               <p className="text-[10px] lg:tet-sm texxt-gray-500 ">10 سال سابقه</p>
             </div>
           </div>
-          <div className="justify-self-end badge  bg-green-50 text-green-600  p-4 text-[10px] lg:text-xs text-white">
+          <div className="justify-self-end badge  bg-green-50 text-green-600  p-4 text-[10px] lg:text-xs">
              حضوری
           </div>
         </div>
@@ -34,7 +34,7 @@ function RequestCard() {
               <p className="text-[12px] lg:text-xs text-gray-600 font-regular">وضعیت:</p>
               <p className="text-[12px] lg:text-sm text-yellow-500 font-semibold">درانتطار تایید</p>
             </div>
-            <div className="flex items-center gap-x-3 hidden md:justify-self-end">
+            <div className="lg:flex items-center gap-x-3 hidden md:justify-self-end">
               <p className="text-[12px] lg:text-xs text-gray-600 font-regular">کدرهگیری:</p>
               <p className="text-[12px] lg:text-sm font-semibold">1234454</p>
             </div>
@@ -43,7 +43,7 @@ function RequestCard() {
           <div className="divider"></div>
           <div className="flex justify-between items-center">
             <Btn>تایید درخواست</Btn>
-            <Link href={"/"} className="text-[11px] lg:text-sm font-bold text-green-700 flex items-center gap-x-2">
+            <Link href={"/my_requests/1"} className="text-[11px] lg:text-sm font-bold text-green-700 flex items-center gap-x-2">
               جزئیات درخواست
               <IconCaretLeftFilled />
             </Link>

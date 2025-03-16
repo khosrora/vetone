@@ -12,6 +12,7 @@
     "./card": "./src/card.tsx",
     "./btn": "./src/btn.tsx",
     "./img": "./src/img.tsx",
+    "./loader": "./src/loader.tsx",
     "./errorMessage": "./src/errorMessage.tsx"
   },
   "license": "MIT",

@@ -1,16 +1,17 @@
-import Imageslider from "@/components/Imageslider";
-import Rasitem from "@/components/Rasitem";
+"use client"
+import React from "react";
 import TitleBack from "@/components/TitleBack";
 import {
     IconCalendarEventFilled,
     IconPhone,
     IconRadar2
 } from "@tabler/icons-react";
-
+import Rasitem from "@/components/Rasitem";
 import MediaThemeTailwindAudio from 'player.style/tailwind-audio/react';
-
-function Indexxdetail() {
-    return (
+import Imageslider from "@/components/Imageslider";
+function Indexreqdetail(){
+    return(
+        <div>
         <div className="p-4 space-y-4 ">
             <div className="flex justify-between items-center">
                 <TitleBack text="جزئیات درخواست" />
@@ -20,39 +21,6 @@ function Indexxdetail() {
             </div>
 
             <div className="space-y-4">
-                {/* مشخصات دامپزشک و تاریخ*/}
-                <div>
-                    <h1 className="font-bold py-4 text-sm">دامپزشک و تاریخ ویزیت</h1>
-                    <div className="p-4  lg:p-6 bg-white rounded-md space-y-2">
-                        <div className="grid grid-cols-3 lg:flex justify-between items-center">
-                            <div className="flex col-span-2 justify-start items-center gap-x-2">
-                                <img
-                                    src="https://avatar.iran.liara.run/public"
-                                    className="w-10 h-10 lg:w-16 lg:h-16"
-                                />
-                                <div className="space-y-2 lg:space-y-3 px-2">
-                                    <p className="font-bold text-xs lg:text-lg block">دکتر رضا رستمی</p>
-                                </div>
-                            </div>
-                            <div className="justify-self-end badge  bg-green-50 text-green-00  p-4 text-[10px] lg:text-xs text-green-600">
-                                حضوری
-                            </div>
-                        </div>
-                        <div className="divider"></div>
-                        <div className="grid grid-cols-1">
-                            <div className="items-center lg:grid-cols-4 gap-4 gap-x-8 items-center py-3 ">
-                                <div className="flex flex-row items-center gap-x-3  justify-between">
-                                    <p className="text-[10px] lg:text-xs text-gray-600 font-regular flex gap-x-2 items-center">
-                                        <IconCalendarEventFilled size={20} />
-                                        تاریخ:
-                                    </p>
-                                    <p className="text-[12px] lg:text-sm font-semibold">1403/10/12</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
                 {/* مشخصات دامدار*/}
                 <div>
                     <h1 className="font-bold py-4 text-sm">دامدار </h1>
@@ -74,7 +42,7 @@ function Indexxdetail() {
                         </div>
                         <div className="divider"></div>
                         <div className="grid grid-cols-1">
-                            <div className="flex items-center lg:grid-cols-4 gap-4 gap-x-8 items-center py-3 ">
+                            <div className="flex lg:grid-cols-4 gap-4 gap-x-8 items-center py-3 ">
                                 <div className="lg:flex lg:items-center lg:space-y-0 lg:gap-x-4 space-y-3">
                                     <p className="text-[12px] lg:text-xs text-gray-600 font-regular flex gap-x-2 items-center">
                                         <IconRadar2 size={20} color="blue" />
@@ -139,6 +107,10 @@ function Indexxdetail() {
 
             </div>
         </div>
+
+
+        </div>
     )
 }
-export default Indexxdetail
+
+export default Indexreqdetail
