@@ -23,7 +23,7 @@ function page() {
                 </Link>
                 <Link href={"/"} className="flex  justify-self-center px-2.5 gap-x-2 items-center rounded-full  lg:px-4 py-2">
                     <IconBrandLine size={16}/>
-                    <p>متنی</p>
+                    <p>متrنی</p>
                 </Link>
             </div>
 
