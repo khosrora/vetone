@@ -1,5 +1,5 @@
 import React from "react";
-import { IconPictureInPicture } from "@tabler/icons-react";
+import { IconPhotoHexagon ,IconVideoPlus } from "@tabler/icons-react";
 import { AudioRecorder } from "react-audio-voice-recorder";
 import { Btn } from "@repo/ui/btn";
 
@@ -8,9 +8,9 @@ function StepTwo() {
     <div className="space-y-4">
       <div className="">
         <p className="text-[14px] font-bold mb-2">تصویر</p>
-        <div className="border-2 border-dashed rounded-md min-h-32 flex flex-col justify-center items-center relative">
-          <IconPictureInPicture />
-          <p className="text-[10px]">افزودن عکس های دام</p>
+        <div className="border-2 border-dashed rounded-md min-h-32 flex flex-col justify-center items-center relative space-y-2">
+          <IconPhotoHexagon size={48} />
+          <p className="text-[10px] lg:text-xs">افزودن عکس های دام</p>
           <input
             className="absolute top-0 right-0 bottom-0 left-0 opacity-0 cursor-pointer"
             type="file"
@@ -55,9 +55,9 @@ function StepTwo() {
       </div>
       <div className="">
         <p className="text-[14px] font-bold mb-2">ویدیو</p>
-        <div className="border-2 border-dashed rounded-md min-h-32 flex flex-col justify-center items-center relative">
-          <IconPictureInPicture />
-          <p className="text-[10px]">فایل مورد نظر خود را انتخای نمایید</p>
+        <div className="border-2 border-dashed rounded-md min-h-32 flex flex-col justify-center items-center relative space-y-2">
+          <IconVideoPlus size={48}/>
+          <p className="text-[10px] lg:text-xs">فایل مورد نظر خود را انتخای نمایید</p>
           <input
             className="absolute top-0 right-0 bottom-0 left-0 opacity-0 cursor-pointer"
             type="file"

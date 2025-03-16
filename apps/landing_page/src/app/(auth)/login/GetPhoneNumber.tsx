@@ -42,11 +42,11 @@ function GetPhoneNumber({
       className="w-full flex flex-col justify-start items-start space-y-6"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <p>ورود / ثبت نام</p>
-      <small>لطفا شماره موبایل خود را وارد نمایید</small>
+      <p className="font-bold text-xl">ورود / ثبت نام</p>
+      <small className="text-sm lg:text-base">لطفا شماره موبایل خود را وارد نمایید</small>
       <label className="form-control w-full">
         <div className="label">
-          <span className="label-text-alt">شماره موبایل</span>
+          <span className="label-text-alt text-sm">شماره موبایل</span>
           <span className="label-text">
             {errors.phone && <ErrorMessage message={"این فیلد ضروری است."} />}
           </span>

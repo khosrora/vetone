@@ -4,7 +4,7 @@ import FilterItems from "./FilterItems";
 
 function page() {
   return (
-    <div className=" my-2 lg:p-0 grid grid-cols-12 gap-4 lg:my-12">
+    <div className=" my-2 lg:p-0 grid grid-cols-12 gap-4 lg:my-12 max-w-7xl mx-auto">
       <div className="hidden lg:flex lg:col-span-3">
         <FilterItems />
       </div>
