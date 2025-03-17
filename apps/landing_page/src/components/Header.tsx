@@ -11,13 +11,14 @@ import { useRouter } from "next/navigation";
 import { IconUser } from "@tabler/icons-react";
 
 import { useSession } from "next-auth/react";
+import { IUser } from "@/lib/auth/auth";
 
 function Header() {
   const { push } = useRouter();
   const { data: session, status } = useSession();
 
   const handleRoute = () => {
-    console.log(session);
+    console.log(session?.user);
   };
 
   return (

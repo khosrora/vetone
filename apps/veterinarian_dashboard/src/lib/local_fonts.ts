@@ -14,7 +14,7 @@ export const estedad = localFont({
       weight: "400",
     },
     {
-      path: "../../public/fonts/dana-demiBold.ttf",
+      path: "../../public/fonts/dana-demibold.ttf",
       weight: "600",
     },
     {

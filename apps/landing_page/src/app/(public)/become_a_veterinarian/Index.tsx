@@ -1,9 +1,7 @@
 "use client";
 import { IconChevronRight } from "@tabler/icons-react";
-import React, { useState } from "react";
-import StepOne from "./StepOne";
+import { useState } from "react";
 import StepTwo from "./StepTwo";
-import Steps from "./Steps";
 
 function Index() {
   const [step, setStep] = useState<number>(1);
@@ -23,13 +21,13 @@ function Index() {
           <p className="font-bold">دریافت مدارک</p>
         </div>
       )}
-      <Steps step={step} setStep={setStep} />
+      {/* <Steps step={step} setStep={setStep} /> */}
       <div className="p-4">
-        {step === 1 ? (
+        {/* {step === 1 ? (
           <StepOne setStep={setStep} />
         ) : (
-          <StepTwo setStep={setStep} />
-        )}
+        )} */}
+        <StepTwo setStep={setStep} />
       </div>
     </div>
   );
