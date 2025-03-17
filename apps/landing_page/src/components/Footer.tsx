@@ -31,10 +31,10 @@ function Footer() {
               <Link href="/">خانه</Link>
             </li>
             <li className="text-xs font-semibold">
-              <Link href={`/`}>ارتباط با ما</Link>
+              <Link href={`/contactus`}>ارتباط با ما</Link>
             </li>
             <li className="text-xs font-semibold">
-              <Link href={`/`}>درباره ما</Link>
+              <Link href={`/aboutus`}>درباره ما</Link>
             </li>
           </ul>
         </li>

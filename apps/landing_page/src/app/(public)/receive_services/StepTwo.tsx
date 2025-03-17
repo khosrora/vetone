@@ -2,10 +2,11 @@ import React from "react";
 import { IconPhotoHexagon ,IconVideoPlus } from "@tabler/icons-react";
 import { AudioRecorder } from "react-audio-voice-recorder";
 import { Btn } from "@repo/ui/btn";
-
+import Back from "@/components/Back";
 function StepTwo() {
   return (
     <div className="space-y-4">
+        <Back title="توضیحات" />
       <div className="">
         <p className="text-[14px] font-bold mb-2">تصویر</p>
         <div className="border-2 border-dashed rounded-md min-h-32 flex flex-col justify-center items-center relative space-y-2">
