@@ -1,32 +1,38 @@
 "use client";
-import { Img } from "@repo/ui/img";
-import { name_project } from "@repo/lib/titles";
 import {
   constantsItemsNavigation,
   navigationBottomType,
 } from "@/lib/constants/constants";
-import Link from "next/link";
+import { name_project } from "@repo/lib/titles";
 import { Btn } from "@repo/ui/btn";
-import { useRouter } from "next/navigation";
+import { Img } from "@repo/ui/img";
 import { IconUser } from "@tabler/icons-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { useSession } from "next-auth/react";
+import { LINK_DASHBOARD_CLIENT, LINK_DASHBOARD_VET } from "@repo/lib/links";
 import { IUser } from "@/lib/auth/auth";
 
 function Header() {
   const { push } = useRouter();
   const { data: session, status } = useSession();
-
+  const user: IUser | undefined = session?.user;
+  
   const handleRoute = () => {
-    console.log(session?.user);
+    if (user?.is_veterinarian) {
+      push(LINK_DASHBOARD_VET);
+    } else {
+      push(LINK_DASHBOARD_CLIENT);
+    }
   };
 
   return (
     <div className="flex justify-between items-center bg-white mb-4 lg:my-8 p-4 lg:bg-white lg:rounded-md max-w-7xl mx-auto">
-      <div className="flex justify-start items-center gap-x-4">
+      <Link href="/" className="flex justify-start items-center gap-x-4">
         <Img src="/images/logo.png" width={50} height={50} alt={name_project} />
         <small className="font-black text-green_vetone">{name_project}</small>
-      </div>
+      </Link>
       <ul className="hidden lg:flex gap-x-6">
         {constantsItemsNavigation.map((item: navigationBottomType) => (
           <li key={item.id}>

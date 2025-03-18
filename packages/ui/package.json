@@ -13,7 +13,8 @@
     "./btn": "./src/btn.tsx",
     "./img": "./src/img.tsx",
     "./loader": "./src/loader.tsx",
-    "./errorMessage": "./src/errorMessage.tsx"
+    "./errorMessage": "./src/errorMessage.tsx",
+    "./alert": "./src/alert.tsx"
   },
   "license": "MIT",
   "scripts": {

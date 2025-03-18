@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import "@repo/ui/styles.css";
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
+import Provider from "@/app/Provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,15 +19,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${estedad.variable} bg-zinc-50 min-h-screen`}>
-        <div className="max-w-7xl m-auto lg:py-4">
-          <Header />
-          <div className="grid grid-cols-7 gap-x-6 lg:mt-4">
-            <SideBar />
-            <div className="col-span-7 lg:col-span-5">
-              <div className="mb-32">{children}</div>
+        <Provider>
+          <div className="max-w-7xl m-auto lg:py-4">
+            <Header />
+            <div className="grid grid-cols-7 gap-x-6 lg:mt-4">
+              <SideBar />
+              <div className="col-span-7 lg:col-span-5">
+                <div className="mb-32">{children}</div>
+              </div>
             </div>
           </div>
-        </div>
+        </Provider>
       </body>
     </html>
   );

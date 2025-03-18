@@ -2,13 +2,13 @@
 import { Btn } from "@repo/ui/btn";
 import { IconPhotoFilled } from "@tabler/icons-react";
 
-import DatePicker from "react-multi-date-picker";
+import { postDataAPI } from "@/lib/fetch/fetch_axios";
+import { Dispatch, SetStateAction, useState } from "react";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import DatePicker from "react-multi-date-picker";
 import "react-multi-date-picker/styles/layouts/mobile.css";
-import { Dispatch, SetStateAction, useState } from "react";
 import { toast } from "sonner";
-import { postDataAPI } from "@/lib/fetch/fetch_axios";
 
 function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
   const [date, setDate] = useState<any>();

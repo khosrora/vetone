@@ -21,8 +21,8 @@ export const constantsItemsNavigation: navigationBottomType[] = [
   },
   {
     id: 2,
-    title: "دامپزشک",
-    link: "/",
+    title: "دامپزشکان",
+    link: "/veterinarian",
     icon: <IconBuildingHospital />,
   },
   {

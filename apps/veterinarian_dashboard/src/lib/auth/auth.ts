@@ -1,23 +1,20 @@
 import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { DOMAIN } from "@repo/lib/links";
 import { AxiosResponse } from "axios";
 import { getDataAPI, postDataAPI } from "../fetch/fetch_axios";
 
 export interface IUser {
   id: number;
   fullName: string;
-  groups: [];
+  phone: string;
   is_active: boolean;
-  is_rancher: boolean;
   is_staff: boolean;
   is_superuser: boolean;
-  is_veterinarian: boolean;
   last_login: string;
   password: string;
-  phone: string;
-  user_permissions: [];
+  groups: number[];
+  user_permissions: number[];
 }
 
 export type UserType = {
@@ -62,7 +59,6 @@ export const authOptions: NextAuthOptions = {
         process.env.NODE_ENV == "production" ? "__Secure-" : ""
       }next-auth.session-token`,
       options: {
-        domain: DOMAIN,
         path: "/",
         httpOnly: true,
         sameSite: "lax",
