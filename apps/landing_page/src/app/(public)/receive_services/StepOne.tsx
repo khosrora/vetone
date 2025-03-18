@@ -1,4 +1,5 @@
-import TitleLink from "@/components/TitleLink";
+"use client"
+import Back from "@/components/Back";
 import { Btn } from "@repo/ui/btn";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 import Image from "next/image";
@@ -7,7 +8,7 @@ import { Dispatch, SetStateAction } from "react";
 function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
   return (
     <div className="space-y-4">
-      <TitleLink title="نوع جاندار" />
+      <Back title="نوع جاندار" />
       <div className="grid grid-cols-3 gap-4">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <div

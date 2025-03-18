@@ -1,8 +1,9 @@
-"use client";
-import { IconChevronLeft } from "@tabler/icons-react";
+"use client"
+import { IconChevronLeft,IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
-
-function TitleLink({
+import React from "react";
+import { useRouter } from "next/navigation";
+function Back({
   title,
   linkText,
   address,
@@ -11,11 +12,14 @@ function TitleLink({
   linkText?: string;
   address?: string;
 }) {
+  const { back } = useRouter();
   return (
-    <div className="flex justify-between items-center py-4  lg:px-0 lg:py-6 cursor-pointer">
+ 
+    <div className="flex justify-between items-center py-4  lg:px-0 lg:py-6 cursor-pointer" onClick={() => back()}>
       <p className="font-bold text-base lg:text-2xl flex items-center gap-x-2">
+        <IconArrowRight/>
         {title}
-      </p>
+        </p>
       {!!address && (
         <Link href={address} className="flex justify-end items-center gap-x-2">
           <p className="text-green_vetone texxt-sm">{linkText}</p>
@@ -26,4 +30,4 @@ function TitleLink({
   );
 }
 
-export default TitleLink;
+export default Back;
