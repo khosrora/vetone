@@ -1,6 +1,12 @@
+"use client";
+import { IUser } from "@/lib/auth/auth";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 function UserTitle() {
+  const { data: session } = useSession();
+  const user: IUser | undefined = session?.user;
+
   return (
     <div className="bg-green_vetone p-6 flex justify-start items-center gap-x-3 rounded-lg">
       <div className="avatar">
@@ -9,7 +15,7 @@ function UserTitle() {
         </div>
       </div>
       <div className="flex flex-col text-white space-y-3">
-        <p className="font-bold text-lg lg:text-xl">رضا خانزاده</p>
+        <p className="font-bold text-lg lg:text-xl">{user?.fullName}</p>
         <small className="text-[12px]">دامدار</small>
       </div>
     </div>

@@ -9,8 +9,12 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import DatePicker from "react-multi-date-picker";
 import "react-multi-date-picker/styles/layouts/mobile.css";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 
 function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
+  const { data: session } = useSession();
+  const token: string = session?.token.token!;
+
   const [date, setDate] = useState<any>();
 
   const [medicalLicense, setMedicalLicense] = useState<string>();
@@ -55,7 +59,8 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
     try {
       const res = await postDataAPI(
         `/veterinary/register_veterinarian/`,
-        formData
+        formData,
+        token
       );
       console.log(res.data);
     } catch (error) {

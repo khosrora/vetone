@@ -13,17 +13,26 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { LINK_DASHBOARD_CLIENT, LINK_DASHBOARD_VET } from "@repo/lib/links";
 import { IUser } from "@/lib/auth/auth";
+import { toast } from "sonner";
 
 function Header() {
   const { push } = useRouter();
   const { data: session, status } = useSession();
   const user: IUser | undefined = session?.user;
-  
+
   const handleRoute = () => {
     if (user?.is_veterinarian) {
       push(LINK_DASHBOARD_VET);
     } else {
       push(LINK_DASHBOARD_CLIENT);
+    }
+  };
+
+  const handleRequestVest = () => {
+    if (status === "authenticated") {
+      push("/become_a_veterinarian");
+    } else {
+      toast.error("ابتدا وارد شوید.");
     }
   };
 
@@ -44,6 +53,14 @@ function Header() {
             </Link>
           </li>
         ))}
+        <li>
+          <div
+            className="text-[14px] text-gray-800 cursor-pointer hover:text-green_vetone"
+            onClick={() => handleRequestVest()}
+          >
+            دامپزشک شوید
+          </div>
+        </li>
       </ul>
       {status === "authenticated" ? (
         <Btn onClick={() => handleRoute()}>

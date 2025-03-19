@@ -25,10 +25,4 @@ export const constantsItemsNavigation: navigationBottomType[] = [
     link: "/veterinarian",
     icon: <IconBuildingHospital />,
   },
-  {
-    id: 3,
-    title: "دامپزشک شوید",
-    link: "/become_a_veterinarian",
-    icon: <IconAppsFilled />,
-  },
 ];

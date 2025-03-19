@@ -5,6 +5,7 @@ import "@repo/ui/styles.css";
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
 import Provider from "@/app/Provider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,6 +21,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${estedad.variable} bg-zinc-50 min-h-screen`}>
         <Provider>
+          <Toaster
+            richColors
+            position="bottom-center"
+            toastOptions={{
+              style: {
+                fontFamily: "var(--font-dana)",
+              },
+            }}
+          />
           <div className="max-w-7xl m-auto lg:py-4">
             <Header />
             <div className="grid grid-cols-7 gap-x-6 lg:mt-4">
