@@ -2,7 +2,7 @@
 import { Btn } from "@repo/ui/btn";
 import { IconPhotoFilled } from "@tabler/icons-react";
 
-import { postDataAPI } from "@/lib/fetch/fetch_axios";
+import { fetcher, postDataAPI } from "@/lib/fetch/fetch_axios";
 import { Dispatch, SetStateAction, useState } from "react";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
@@ -10,8 +10,13 @@ import DatePicker from "react-multi-date-picker";
 import "react-multi-date-picker/styles/layouts/mobile.css";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
+import useSWR from "swr";
+import { CentersType } from "@/lib/types/CentersTypes";
+import { useRouter } from "next/navigation";
 
 function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
+  const { push } = useRouter();
+  const { data, isLoading } = useSWR(["/veterinary/centers/"], fetcher);
   const { data: session } = useSession();
   const token: string = session?.token.token!;
 
@@ -54,7 +59,8 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
     formData.append("license_image", licenseImage);
     formData.append("national_id_image", idCardImage);
     formData.append("issuance_date", issuance_date);
-    formData.append("medical_license", idCardImage);
+    formData.append("medical_license", medicalLicense);
+    formData.append("medical_center", data[0].id);
 
     try {
       const res = await postDataAPI(
@@ -62,6 +68,10 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
         formData,
         token
       );
+      if (res.status === 201) {
+        toast.success("درخواست شما با موفقیت ثبت شد.");
+        push("/");
+      }
       console.log(res.data);
     } catch (error) {
       toast.error("دوباره امتحان کنید.");
@@ -151,6 +161,19 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
           placeholder="مثال :‌ 1 / 2 / 1400"
           className="rmdp-mobile"
         />
+      </div>
+      <div className="w-full">
+        <div className="label">
+          <span className="label-text-alt text-base">نوع درخواست</span>
+        </div>
+        <select disabled className="select select-md w-full">
+          {!isLoading &&
+            data.map((item: CentersType) => (
+              <option key={item.id} value={item.id}>
+                {item.title}
+              </option>
+            ))}
+        </select>
       </div>
       <Btn className="w-full mt-4" onClick={handleSubmit}>
         ثبت درخواست
