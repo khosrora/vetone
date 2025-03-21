@@ -54,15 +54,11 @@ export const deleteDataAPI = async (url: string, token?: string) => {
 };
 
 
-export const getDataApib = async ({ url }: { url: string }) => {
-  try {
-    const res = await axios.get(`${base_api}${url}`);
-    return res.data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw new Error("Failed to fetch data");
-  }
-};
+export const getDataApib = async (url:string) => {
+    const res = await axios.get(`${base_api}${url}`)
+    return res;
+  }; 
+
 
 export const getDataAPI2 = async ({
   url,

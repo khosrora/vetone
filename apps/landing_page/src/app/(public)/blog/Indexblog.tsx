@@ -11,10 +11,7 @@ function Indexblog() {
  useEffect(() => {
     const fetchBlogs = async () => {
         try {
-          const response = await getDataApib({
-            url: "/blog/blogs/",
-          });
-      
+          const response = await getDataApib("/blog/blogs/");
           console.log(`data:`, response);
         } catch (error) {
           console.error("Error fetching blogs:", error);

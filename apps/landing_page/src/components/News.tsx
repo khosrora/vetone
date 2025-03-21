@@ -12,7 +12,7 @@ function News() {
     const fetchBlog = async () => {
       try {
         console.log("Request URL:", `${base_api}/blog/latest-blogs-list/`);
-        const data = await getDataApib({ url: "/blog/latest-blogs-list/" });
+        const data = await getDataApib("/blog/latest-blogs-list/");
         console.log(data);
       } catch (error) {
         console.error(error);
