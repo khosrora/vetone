@@ -52,7 +52,7 @@ export default function Page() {
       </div>
 
       <div className="px-4 lg:px-0">
-        <TitleLink title="اخبار مقالات" />
+        <TitleLink title="اخبار مقالات" linkText="مشاهده همه" address="/blog" />
         <News />
       </div>
       </div>
