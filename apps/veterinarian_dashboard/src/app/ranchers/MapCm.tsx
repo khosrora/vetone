@@ -24,11 +24,11 @@ function MapCm({
       "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
   });
 
-//   useEffect(() => {
-//     if (!!latlong) {
-//       setMarkerPosition(latlong);
-//     }
-//   }, [latlong]);
+  //   useEffect(() => {
+  //     if (!!latlong) {
+  //       setMarkerPosition(latlong);
+  //     }
+  //   }, [latlong]);
 
   const MapEvents = () => {
     useMapEvents({
@@ -43,7 +43,7 @@ function MapCm({
 
   return (
     <MapContainer
-      className="h-full"
+      className="h-60"
       style={{ borderRadius: "10px" }}
       center={markerPosition}
       zoom={5}

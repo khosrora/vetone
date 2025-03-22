@@ -53,7 +53,7 @@ function MapCm({
         subdomains={["mt0", "mt1", "mt2", "mt3"]}
       />
       <Marker position={markerPosition} draggable={true}></Marker>
-      {/* <MapEvents /> */}
+      <MapEvents />
     </MapContainer>
   );
 }

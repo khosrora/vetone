@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   cities,
@@ -11,6 +11,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import dynamic from "next/dynamic";
 import { Btn } from "@repo/ui/btn";
+import { getAddressWithLatLong } from "@/lib/utils/getAddressUser";
 
 const MapCm = dynamic(() => import("./MapCm"), {
   ssr: false,
@@ -43,7 +44,11 @@ function FormAddress() {
     formState: { errors },
   } = useForm<any>();
 
-  const onSubmit: SubmitHandler<any> = (data) => {};
+  const onSubmit: SubmitHandler<any> = (data) => {
+    console.log(provinceId);
+    console.log(citiesId);
+    console.log(latlong);
+  };
 
   const handleSetCities = (province: ProvinceType) => {
     setCitiesList([]);
@@ -53,6 +58,23 @@ function FormAddress() {
     );
     setCitiesList(res);
   };
+
+  useEffect(() => {
+    if (latlong) {
+      setLoadGetLatLong(true);
+      (async () => {
+        const res = await getAddressWithLatLong({
+          lat: latlong[0],
+          long: latlong[1],
+        });
+        setStreet_address_2(res.display_name);
+        reset({
+          street_address_1: res.display_name,
+        });
+      })();
+      setLoadGetLatLong(false);
+    }
+  }, [latlong]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4">
@@ -150,13 +172,39 @@ function FormAddress() {
             )}
           </div>
         )}
+        <div className="col-span-2">
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text-alt">
+                آدرس (نام روستا و خیابان ..)
+              </span>
+            </div>
+            <textarea
+              className="input input-bordered p-4 w-full focus:outline-none"
+              placeholder="به عنوان مثال : روستا آب اسک خیابان سیران"
+              {...register("street_address_1", {
+                required: {
+                  value: true,
+                  message: "وارد کردن این فیلد الزامی است",
+                },
+              })}
+            ></textarea>
+          </label>
+        </div>
       </div>
 
       <div className="divider">ثبت آدرس</div>
       <div className="h-80 w-full">
         <MapCm setLatlong={setLatlong} />
       </div>
-      <Btn className="w-full"> ثبت آدرس </Btn>
+      {!citiesId ? (
+        <></>
+      ) : (
+        <Btn type="submit" className="w-full">
+          {" "}
+          ثبت آدرس جدید{" "}
+        </Btn>
+      )}
     </form>
   );
 }
