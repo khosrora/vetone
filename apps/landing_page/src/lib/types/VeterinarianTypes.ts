@@ -1,0 +1,22 @@
+export type VeterinarianCardType = {
+  id: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+  clinic_name: string;
+  medical_license: string;
+  license_type: string;
+  license_image: string;
+  national_id_image: string;
+  issuance_date: string;
+  bio: null | string;
+  state: string;
+  background_image: null | string;
+  rate: number;
+  surgery: number;
+  experience: number;
+  user: number;
+  medical_center: number;
+  province: null | string;
+  city: null | string;
+};

@@ -52,26 +52,3 @@ export const deleteDataAPI = async (url: string, token?: string) => {
   });
   return res;
 };
-
-
-export const getDataApib = async (url:string) => {
-    const res = await axios.get(`${base_api}${url}`)
-    return res;
-  }; 
-
-
-export const getDataAPI2 = async ({
-  url,
-  page = 1,
-  limit = 10,
-}: { url: string; page?: number; limit?: number }) => {
-  try {
-    const res = await axios.get(`${base_api}${url}`, {
-      params: { page, limit }, // اضافه کردن پارامترهای صفحه‌بندی
-    });
-    return res.data;
-  } catch (error: any) {
-    console.error("Error fetching data:", error.response?.data || error.message);
-    throw new Error("Failed to fetch data");
-  }
-};

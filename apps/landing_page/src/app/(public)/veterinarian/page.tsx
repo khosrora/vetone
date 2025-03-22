@@ -1,8 +1,9 @@
+import VetCard from "@/components/VetCard";
 import { base_api } from "@/lib/fetch/base_api";
+import { Alert } from "@repo/ui/alert";
 import FilterBtns from "./FilterBtns";
 import FilterItems from "./FilterItems";
-import InfiniteScrollWrapper from "./InfiniteScrollWrapper";
-import { Alert } from "@repo/ui/alert";
+import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 
 async function getInitialVetData(page: number = 1) {
   const res = await fetch(
@@ -16,7 +17,7 @@ async function getInitialVetData(page: number = 1) {
 
 async function page() {
   const initialData = await getInitialVetData(1);
-
+  
   return (
     <div className=" my-2 lg:p-0 grid grid-cols-12 gap-4 lg:my-12 max-w-7xl mx-auto">
       <div className="hidden lg:flex lg:col-span-3">
@@ -30,7 +31,11 @@ async function page() {
             type="info"
           />
         ) : (
-          <InfiniteScrollWrapper initialData={initialData.results} />
+          <>
+            {initialData.results.map((item: VeterinarianCardType) => (
+              <VetCard key={item.id} item={item} />
+            ))}
+          </>
         )}
       </div>
     </div>

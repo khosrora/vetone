@@ -1,26 +1,10 @@
 "use client";
-import { getDataApib } from "@/lib/fetch/fetch_axios";
 import { IconChevronLeft } from "@tabler/icons-react";
 import Link from "next/link";
 import "swiper/css";
-import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { base_api } from "@/lib/fetch/base_api";
 
 function News() {
-  useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        console.log("Request URL:", `${base_api}/blog/latest-blogs-list/`);
-        const data = await getDataApib("/blog/latest-blogs-list/");
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchBlog();
-  }, []);
-
 
   return (
     <div className="pb-4">
