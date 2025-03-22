@@ -1,20 +1,30 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Btn } from "@repo/ui/btn";
+import dynamic from "next/dynamic";
+
+const MapCm = dynamic(() => import("./MapCm"), {
+  ssr: false,
+});
+
 type Inputs = {
-  example: string;
-  exampleRequired: string;
+  fullName: string;
+  phone: string;
+  village_name: string;
 };
 
 function AddRancher() {
+  const [latlong, setLatlong] = useState<[number, number] | undefined>();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  console.log(watch("example"));
+
   return (
     <dialog id="my_modal_2" className="modal">
       <div className="modal-box">
@@ -28,8 +38,13 @@ function AddRancher() {
               type="text"
               placeholder="نام خود را وارد نمایید"
               className="input input-bordered w-full"
+              {...register("fullName", {
+                required: {
+                  value: true,
+                  message: "وارد کردن این فیلد الزامی است",
+                },
+              })}
             />
-         
           </label>
           <label className="form-control w-full sapce-y-2">
             <div className="label">
@@ -39,9 +54,15 @@ function AddRancher() {
               type="text"
               placeholder="شماره تماس خود را وارد نمایید"
               className="input input-bordered w-full"
+              {...register("phone", {
+                required: {
+                  value: true,
+                  message: "وارد کردن این فیلد الزامی است",
+                },
+              })}
             />
-          
           </label>
+          <MapCm setLatlong={setLatlong} />
           <Btn className="w-full">ثبت دامدار</Btn>
         </form>
       </div>

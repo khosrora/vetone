@@ -101,6 +101,6 @@ export async function checkAuth() {
 declare module "next-auth" {
   interface Session {
     user: IUser;
-    token: string;
+    token: { token: string };
   }
 }

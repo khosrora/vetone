@@ -8,8 +8,8 @@ import Provider from "@/app/Provider";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "داشبورد دامدار",
-  description: "داشبورد دامدار | پت دار |داشبورد",
+  title: "پنل کاربری | دامدار",
+  description: "پنل کاربری دامدار | پت دار |داشبورد",
 };
 
 export default function RootLayout({
