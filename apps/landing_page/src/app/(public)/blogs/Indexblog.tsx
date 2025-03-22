@@ -15,7 +15,6 @@ async function getInitialVetData(page: number = 1) {
 
 async function Indexblog() {
   const initialData = await getInitialVetData(1);
-  console.log(initialData.results);
 
   return (
     <div className="max-w-7xl mx-auto my-12 p-4 md:p-0">
