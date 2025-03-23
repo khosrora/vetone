@@ -1,11 +1,10 @@
 "use client"
-
 import IndexSingle from "./IndexSingle"
 
-function page(){
+function page({ params }: { params: { slug: string } }){
 return(
     <>
-      <IndexSingle/>
+      <IndexSingle params={params}/>
     </>
 )
 }

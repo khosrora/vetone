@@ -1,4 +1,5 @@
 import UserComments from "@/components/UserComments";
+import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import { Btn } from "@repo/ui/btn";
 import { Img } from "@repo/ui/img";
 import {
@@ -11,20 +12,19 @@ import {
   IconThumbUpFilled
 } from "@tabler/icons-react";
 import Link from "next/link";
-
+import { base_api } from "@/lib/fetch/base_api";
 function page({ params: { slug } }: { params: { slug: string } }) {
-  const name_doctor = slug[0];
-
+ 
   return (
     <div className="mx-auto max-w-7xl px-4 lg:px-0">
     <div className="grid grid-cols-12">
       <div className="col-span-12  mb-12 lg:col-span-8">
         <div className="relative">
           <Img
-            src="/test/Looking-for-a-vet.webp"
+            src="https://imageserver.petsbest.com/marketing/blog/increased-vet-demand.jpg"
             width={500}
             height={500}
-            alt={name_doctor!}
+            alt="تصویر پزشک"
             className="rounded-lg max-h-64 object-cover w-full lg:max-h-96"
           />
           <div className="absolute -bottom-12 left-0 right-0 px-8">

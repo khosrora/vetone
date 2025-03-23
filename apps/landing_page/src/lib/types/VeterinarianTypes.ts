@@ -19,4 +19,6 @@ export type VeterinarianCardType = {
   medical_center: number;
   province: null | string;
   city: null | string;
+  fullName:string;
+  slug:string;
 };

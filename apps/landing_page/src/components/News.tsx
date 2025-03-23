@@ -3,8 +3,18 @@ import { IconChevronLeft } from "@tabler/icons-react";
 import Link from "next/link";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { base_api } from "@/lib/fetch/base_api";
+import { blogCardType } from "@/lib/types/BlogsTypes";
+async function getInitialVetData(page: number = 1) {
+  const res = await fetch(`${base_api}/blog/latest-blogs-list`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
 
-function News() {
+async function News() {
+  const initialData = await getInitialVetData(1);
 
   return (
     <div className="pb-4">
@@ -17,19 +27,19 @@ function News() {
           900: { slidesPerView: 4, spaceBetween: 16 },
         }}
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item: number) => (
-          <SwiperSlide key={item}>
+        {initialData.map((item: blogCardType) => (
+          <SwiperSlide key={item.id}>
             <Link href={"/"} className="card bg-white">
               <figure>
                 <img
-                  src="https://images.kojaro.com/2019/4/09eab0ba-ce8c-49ef-8d6b-0d24f3296da2.jpg"
-                  alt="Shoes"
+                  src={item.image.image}
+                  alt={item.image_alt}
                 />
               </figure>
               <div className="card-body p-4 space-y-2">
-                <h2 className="card-title text-base font-bold">راه درمانی با جراحی</h2>
+                <h2 className="card-title text-base font-bold">{item.title}</h2>
                 <p className="text-[12px] lg:text-sm">
-                  به عنوان فردی که برای اولین بار از وت وان
+                  {item.short_desc}
                 </p>
               </div>
               <div className="flex justify-between items-center p-4 text-[12px]">

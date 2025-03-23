@@ -1,25 +1,37 @@
+"use client"
 import Back from "@/components/Back"
-import { Btn } from "@repo/ui/btn"
-import Link from "next/link"
-function IndexSingle(){
-    return(
+import { base_api } from "@/lib/fetch/base_api";
+import { blogCardType } from "@/lib/types/BlogsTypes";
+import { Btn } from "@repo/ui/btn";
+import Link from "next/link";
+
+async function IndexSingle({ params }: { params: { slug: string } }) {
+    const res = await fetch(`${base_api}/blog/${params.slug}/`, { cache: "no-store" });
+    if (!res.ok) {
+        throw new Error("Failed to fetch data");
+    }
+    const data: blogCardType = await res.json();
+
+        return(
         <div className="max-w-7xl mx-auto my-8 lg:my-20 p-4 md:p-0">
            <Back title="بازگشت"/>
            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-6">
+           
            <div className="card md:col-span-2 lg:col-span-3">
                                     <div>
                                         <img
-                                            src="https://images.kojaro.com/2019/4/09eab0ba-ce8c-49ef-8d6b-0d24f3296da2.jpg"
-                                            alt="Shoes"
+                                            src={data.image.image}
+                                            alt={data.image_alt}
                                             className="object-cover w-full rounded-lg"
                                         />
                                     </div>
                                     <div className="card-body py-4 px-0 space-y-2">
-                                        <h2 className="card-title text-base font-bold">راه درمانی با جراحی</h2>
+                                        <h2 className="card-title text-base font-bold">{data.title}</h2>
                                         <p className="text-[12px] lg:text-sm">
-                                            به عنوان فردی که برای اولین بار از وت وان
+                                            {data.desc}
                                         </p>
                                     </div>
+                                    
                                 </div>
                                 <div className="rounded-lg">
                     <div className="space-y-6">

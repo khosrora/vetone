@@ -13,7 +13,7 @@ function TitleLink({
 }) {
   return (
     <div className="flex justify-between items-center py-4  lg:px-0 lg:py-6 cursor-pointer">
-      <p className="font-bold text-base lg:text-2xl flex items-center gap-x-2">
+      <p className="font-bold text-lg lg:text-2xl flex items-center gap-x-2">
         {title}
       </p>
       {!!address && (

@@ -24,23 +24,23 @@ async function Indexblog() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 md:gap-6">
             {initialData.results.map((item: blogCardType) => (
               <div key={item.id}>
-                <Link href={"/blog/1"} className="card bg-white">
+                <Link href={`/blogs/${item.slug}`} className="card bg-white">
                   <figure>
                     <img src={item.image.image} alt="Shoes" />
                   </figure>
                   <div className="card-body p-4 space-y-2">
                     <h2 className="card-title text-base font-bold">
-                      راه درمانی با جراحی
+                      {item.title}
                     </h2>
                     <p className="text-[12px] lg:text-sm">
-                      به عنوان فردی که برای اولین بار از وت وان
+                     {item.short_desc}
                     </p>
                   </div>
                   <div className="flex justify-between items-center p-4 text-[12px]">
                     <small className="text-sm">28 / 11 / 1403</small>
                     <div className="flex justify-end items-center gap-x-2">
                       <small className="text-blue-500 text-sm">
-                        {" "}
+                        {""}
                         بیشتر بخوانید{" "}
                       </small>
                       <IconChevronLeft className="text-blue-500" />
