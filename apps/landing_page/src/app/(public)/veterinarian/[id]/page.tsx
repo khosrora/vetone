@@ -13,7 +13,12 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { base_api } from "@/lib/fetch/base_api";
-function page({ params: { slug } }: { params: { slug: string } }) {
+async function page({ params: { id } }: { params: { id: string } }) {
+ const res = await fetch(`${base_api}/veterinary/${id}/`);
+     if (!res.ok) {
+         throw new Error("Failed to fetch data");
+     }
+     const data: VeterinarianCardType = await res.json();
  
   return (
     <div className="mx-auto max-w-7xl px-4 lg:px-0">
@@ -21,7 +26,7 @@ function page({ params: { slug } }: { params: { slug: string } }) {
       <div className="col-span-12  mb-12 lg:col-span-8">
         <div className="relative">
           <Img
-            src="https://imageserver.petsbest.com/marketing/blog/increased-vet-demand.jpg"
+            src={data.license_image}
             width={500}
             height={500}
             alt="تصویر پزشک"

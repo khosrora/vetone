@@ -71,7 +71,7 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
         <div className="col-span-2">
           <div
             className="bg-none text-green-700 hover:text-green-600 cursor-pointer flex gap-x-2"
-            onClick={() => push(`/veterinarian/${item.slug}`)}
+            onClick={() => push(`/veterinarian/${item.id}`)}
           >
             <p className="">مشاهده پروفایل</p>
             <IconCaretLeftFilled />
