@@ -6,9 +6,7 @@ import FilterItems from "./FilterItems";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 
 async function getInitialVetData(page: number = 1) {
-  const res = await fetch(
-    `${base_api}/veterinary/search_veterinarian/?page=${page}`
-  );
+  const res = await fetch(`${base_api}/veterinary/search_veterinarian/`);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -17,7 +15,6 @@ async function getInitialVetData(page: number = 1) {
 
 async function page() {
   const initialData = await getInitialVetData(1);
-  
   return (
     <div className=" my-2 lg:p-0 grid grid-cols-12 gap-4 lg:my-12 max-w-7xl mx-auto">
       <div className="hidden lg:flex lg:col-span-3">

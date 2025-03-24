@@ -12,12 +12,22 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import { Btn } from "@repo/ui/btn";
 import { getAddressWithLatLong } from "@/lib/utils/getAddressUser";
+import { postDataAPI } from "@/lib/fetch/fetch_axios";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 const MapCm = dynamic(() => import("./MapCm"), {
   ssr: false,
 });
 
-function FormAddress() {
+type Inputs = {
+  street: string;
+};
+
+function FormAddress({ closeModal }: { closeModal: any }) {
+  const { data: session } = useSession();
+  const token: string = session?.token.token!;
+
   const [search, setSearch] = useState<string>("");
   const [searchCity, setSearchCity] = useState<string>("");
 
@@ -33,21 +43,34 @@ function FormAddress() {
   const [provinceId, setProvinceId] = useState<null | number>(null);
 
   const [latlong, setLatlong] = useState<[number, number] | undefined>();
-  const [loadGetLatLong, setLoadGetLatLong] = useState<boolean>(false);
-
-  const [street_address_2, setStreet_address_2] = useState<string>("");
+  // const [loadGetLatLong, setLoadGetLatLong] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<any>();
+  } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<any> = (data) => {
-    console.log(provinceId);
-    console.log(citiesId);
-    console.log(latlong);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      if (!latlong) return;
+      const payload = {
+        street: data.street,
+        city: citiesId,
+        latitude: latlong[0],
+        longitude: latlong[1],
+      };
+      const res = await postDataAPI(`/province/addresses/`, payload, token);
+      if (res.status === 201) {
+        toast.success("آدرس با موفقیت ثبت شد.");
+        closeModal?.current?.click();
+      }
+    } catch (error) {
+      console.log(error);
+      closeModal?.current?.click();
+      toast.error("دوباره امتحان کنید");
+    }
   };
 
   const handleSetCities = (province: ProvinceType) => {
@@ -59,22 +82,22 @@ function FormAddress() {
     setCitiesList(res);
   };
 
-  useEffect(() => {
-    if (latlong) {
-      setLoadGetLatLong(true);
-      (async () => {
-        const res = await getAddressWithLatLong({
-          lat: latlong[0],
-          long: latlong[1],
-        });
-        setStreet_address_2(res.display_name);
-        reset({
-          street_address_1: res.display_name,
-        });
-      })();
-      setLoadGetLatLong(false);
-    }
-  }, [latlong]);
+  // useEffect(() => {
+  //   if (latlong) {
+  //     setLoadGetLatLong(true);
+  //     (async () => {
+  //       const res = await getAddressWithLatLong({
+  //         lat: latlong[0],
+  //         long: latlong[1],
+  //       });
+  //       setStreet_address_2(res.display_name);
+  //       reset({
+  //         street: res.display_name,
+  //       });
+  //     })();
+  //     setLoadGetLatLong(false);
+  //   }
+  // }, [latlong]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4">
@@ -182,7 +205,7 @@ function FormAddress() {
             <textarea
               className="input input-bordered p-4 w-full focus:outline-none"
               placeholder="به عنوان مثال : روستا آب اسک خیابان سیران"
-              {...register("street_address_1", {
+              {...register("street", {
                 required: {
                   value: true,
                   message: "وارد کردن این فیلد الزامی است",

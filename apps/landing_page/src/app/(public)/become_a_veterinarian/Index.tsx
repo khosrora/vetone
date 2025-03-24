@@ -1,10 +1,16 @@
 "use client";
 import { IconChevronRight } from "@tabler/icons-react";
 import { useState } from "react";
+import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
+import Steps from "./Steps";
+import { BasicInformationType } from "@/lib/types/register_veterinarianTypes";
 
 function Index() {
   const [step, setStep] = useState<number>(1);
+  const [basicInformation, setBasicInformation] =
+    useState<BasicInformationType>();
+
   return (
     <div className="mb-12 max-w-lg m-auto">
       {step === 1 ? (
@@ -21,13 +27,16 @@ function Index() {
           <p className="font-bold">دریافت مدارک</p>
         </div>
       )}
-      {/* <Steps step={step} setStep={setStep} /> */}
+      <Steps step={step} setStep={setStep} />
       <div className="p-4">
-        {/* {step === 1 ? (
-          <StepOne setStep={setStep} />
+        {step === 1 ? (
+          <StepOne
+            setStep={setStep}
+            setBasicInformation={setBasicInformation}
+          />
         ) : (
-        )} */}
-        <StepTwo setStep={setStep} />
+          <StepTwo setStep={setStep} basicInformation={basicInformation} />
+        )}
       </div>
     </div>
   );

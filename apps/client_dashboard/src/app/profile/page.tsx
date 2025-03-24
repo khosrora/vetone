@@ -1,7 +1,7 @@
 import TitleBack from "@/components/TitleBack";
 import UserTitle from "@/components/UserTitle";
 import React from "react";
-import FormProfile from "./FormProfile";
+import FormProfile from "@/app/profile/FormProfile";
 
 function page() {
   return (

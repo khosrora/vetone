@@ -1,15 +1,19 @@
 export type VeterinarianCardType = {
   id: number;
+  fullName: string;
+  phone: string;
+  image: string;
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  slug: string;
   clinic_name: string;
   medical_license: string;
   license_type: string;
   license_image: string;
   national_id_image: string;
   issuance_date: string;
-  bio: null | string;
+  bio: string;
   state: string;
   background_image: null | string;
   rate: number;
@@ -17,8 +21,6 @@ export type VeterinarianCardType = {
   experience: number;
   user: number;
   medical_center: number;
-  province: null | string;
-  city: null | string;
-  fullName:string;
-  slug:string;
+  province: number;
+  city: number;
 };

@@ -2,17 +2,13 @@
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import { Btn } from "@repo/ui/btn";
 import {
-  IconBubbleFilled,
   IconCarambolaFilled,
-  IconHexagonPlusFilled,
+  IconCaretLeftFilled,
   IconHeart,
   IconMapPinFilled,
-  IconPhoneFilled,
   IconShare,
-  IconCaretLeftFilled,
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 function VetCard({ item }: { item: VeterinarianCardType }) {
   const { push } = useRouter();
@@ -21,8 +17,8 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
       <div className="flex justify-between items-center">
         <div className="flex justify-start items-center gap-x-2">
           <img
-            src={item.license_image}
-            className="w-12 h-12 lg:w-24 lg:h-24"
+            src={item.image}
+            className="w-12 h-12 rounded-full lg:w-24 lg:h-24"
           />
           <div className="space-y-2 lg:space-y-3 px-4">
             <p className="font-bold text-base lg:text-xl block">
@@ -60,10 +56,7 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
       <div className="flex items-center gap-x-2 ml-8 bg-gray-100 w-full p-4 rounded-md">
         <IconMapPinFilled size={20} color="gray" />
         <div className="text-[10px] lg:text-sm flex truncate w-10/12 ">
-          <p>{item.city}</p>
-          <p>
-            {item.city}
-          </p>
+          <p>{item.province}</p>-<p>{item.city}</p>
         </div>
       </div>
       <div className="divider"></div>
@@ -77,7 +70,12 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
             <IconCaretLeftFilled />
           </div>
         </div>
-        <Btn className="col-span-1">نوبت مشاوره</Btn>
+        <Btn
+          className="col-span-1"
+          onClick={() => push(`/receive_services?veterinarian=${item.id}`)}
+        >
+          نوبت مشاوره
+        </Btn>
       </div>
     </div>
   );

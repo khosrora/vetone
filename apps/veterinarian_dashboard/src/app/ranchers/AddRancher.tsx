@@ -1,8 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Btn } from "@repo/ui/btn";
 import dynamic from "next/dynamic";
+import { ErrorMessage } from "@repo/ui/errorMessage";
+import { postDataAPI } from "@/lib/fetch/fetch_axios";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 const MapCm = dynamic(() => import("./MapCm"), {
   ssr: false,
@@ -11,10 +15,12 @@ const MapCm = dynamic(() => import("./MapCm"), {
 type Inputs = {
   fullName: string;
   phone: string;
-  village_name: string;
 };
 
 function AddRancher() {
+  const closeModal = useRef<HTMLButtonElement | null>(null);
+  const { data: session } = useSession();
+  const token: string = session?.token.token!;
   const [latlong, setLatlong] = useState<[number, number] | undefined>();
   const {
     register,
@@ -23,7 +29,25 @@ function AddRancher() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      if (!latlong) return;
+      const payload = {
+        fullName: data.fullName,
+        phone: data.phone,
+        latitude: latlong[0],
+        longitude: latlong[1],
+      };
+      const res = await postDataAPI(`/veterinary/add_rancher/`, payload, token);
+      if (res.status === 201) {
+        toast.success("کاربر با موفقیت ثبت شد.");
+        closeModal?.current?.click();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("دوباره امتحان کنید");
+    }
+  };
 
   return (
     <dialog id="my_modal_2" className="modal">
@@ -46,6 +70,11 @@ function AddRancher() {
               })}
             />
           </label>
+          <span className="label-text">
+            {errors.fullName && (
+              <ErrorMessage message={"این فیلد ضروری است."} />
+            )}
+          </span>
           <label className="form-control w-full sapce-y-2">
             <div className="label">
               <span className="label-text-alt text-sm">شماره تماس</span>
@@ -62,12 +91,15 @@ function AddRancher() {
               })}
             />
           </label>
+          <span className="label-text">
+            {errors.phone && <ErrorMessage message={"این فیلد ضروری است."} />}
+          </span>
           <MapCm setLatlong={setLatlong} />
-          <Btn className="w-full">ثبت دامدار</Btn>
+          {!!latlong && <Btn className="w-full">ثبت دامدار</Btn>}
         </form>
       </div>
       <form method="dialog" className="modal-backdrop">
-        <button>close</button>
+        <button ref={closeModal}>close</button>
       </form>
     </dialog>
   );

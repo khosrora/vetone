@@ -17,7 +17,7 @@ function AddAddress() {
             }}
           />
         </div>
-        <FormAddress />
+        <FormAddress closeModal={closeModal}  />
       </div>
       <form method="dialog" className="modal-backdrop">
         <button ref={closeModal}>close</button>

@@ -1,3 +1,4 @@
+import Moment from "@/components/Moment";
 import TitleLink from "@/components/TitleLink";
 import { base_api } from "@/lib/fetch/base_api";
 import { blogCardType } from "@/lib/types/BlogsTypes";
@@ -26,25 +27,25 @@ async function Indexblog() {
               <div key={item.id}>
                 <Link href={`/blogs/${item.slug}`} className="card bg-white">
                   <figure>
-                    <img src={item.image.image} alt="Shoes" />
+                    <img src={item.image.image} alt={item.title} />
                   </figure>
                   <div className="card-body p-4 space-y-2">
                     <h2 className="card-title text-base font-bold">
                       {item.title}
                     </h2>
-                    <p className="text-[12px] lg:text-sm">
-                     {item.short_desc}
-                    </p>
+                    <p className="text-[12px] lg:text-sm">{item.short_desc}</p>
                   </div>
                   <div className="flex justify-between items-center p-4 text-[12px]">
-                    <small className="text-sm">28 / 11 / 1403</small>
-                    <div className="flex justify-end items-center gap-x-2">
+                    <Moment time={item.updated_at} />
+                    <Link
+                      href={`/blogs/${item.slug}`}
+                      className="flex justify-end items-center gap-x-2"
+                    >
                       <small className="text-blue-500 text-sm">
-                        {""}
-                        بیشتر بخوانید{" "}
+                        بیشتر بخوانید
                       </small>
                       <IconChevronLeft className="text-blue-500" />
-                    </div>
+                    </Link>
                   </div>
                 </Link>
               </div>

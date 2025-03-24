@@ -13,8 +13,15 @@ import { useSession } from "next-auth/react";
 import useSWR from "swr";
 import { CentersType } from "@/lib/types/CentersTypes";
 import { useRouter } from "next/navigation";
+import { BasicInformationType } from "@/lib/types/register_veterinarianTypes";
 
-function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
+function StepTwo({
+  setStep,
+  basicInformation,
+}: {
+  setStep: Dispatch<SetStateAction<number>>;
+  basicInformation: BasicInformationType | undefined;
+}) {
   const { push } = useRouter();
   const { data, isLoading } = useSWR(["/veterinary/centers/"], fetcher);
   const { data: session } = useSession();
@@ -29,6 +36,9 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
 
   const [idCardImage, setIdCardImage] = useState<File | null>(null);
   const [idCardPreview, setIdCardPreview] = useState<string | null>(null);
+
+  const [userImage, setUserImage] = useState<File | null>(null);
+  const [userImagePreview, setUserImagePreview] = useState<string | null>(null);
 
   const handleLicenseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -48,9 +58,21 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
     }
   };
 
+  const handleUserImageChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setUserImage(file);
+      const previewUrl = URL.createObjectURL(file);
+      setUserImagePreview(previewUrl);
+    }
+  };
+
   const handleSubmit = async () => {
-    if (!licenseImage || !idCardImage || !medicalLicense || !date)
+    if (!licenseImage || !idCardImage || !medicalLicense || !date || !userImage)
       return toast.error("تمام اطلاعات را وارد کنید.");
+
     const formData = new FormData();
     const issuance_date = date
       ?.toDate()
@@ -58,9 +80,16 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
       .replaceAll("/", "-");
     formData.append("license_image", licenseImage);
     formData.append("national_id_image", idCardImage);
+    formData.append("image", userImage);
     formData.append("issuance_date", issuance_date);
     formData.append("medical_license", medicalLicense);
     formData.append("medical_center", data[0].id);
+    formData.append("fullName", basicInformation?.fullName!);
+    formData.append("city", basicInformation?.city!);
+    formData.append("province", basicInformation?.province!);
+    formData.append("latitude", basicInformation?.latitude!);
+    formData.append("longitude", basicInformation?.longitude!);
+    formData.append("street", basicInformation?.street!);
 
     try {
       const res = await postDataAPI(
@@ -80,7 +109,31 @@ function StepTwo({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-x-2">
+      <div className="grid grid-cols-2 gap-4">
+        <div className="col-span-2">
+          <div className="flex flex-col justify-center items-center">
+            <p className="text-[14px] font-bold mb-2">تصویر کاربری</p>
+            <div className="border-2 border-dashed rounded-full min-h-32 w-32 overflow-hidden space-y-3 flex flex-col justify-center items-center relative">
+              {userImagePreview ? (
+                <img
+                  src={userImagePreview}
+                  alt="ID Card Preview"
+                  className="max-h-32"
+                />
+              ) : (
+                <>
+                  <IconPhotoFilled size={36} />
+                  <p className="text-[10px] lg:text-sm">افزودن عکس</p>
+                </>
+              )}
+              <input
+                className="absolute top-0 right-0 bottom-0 left-0 opacity-0 cursor-pointer"
+                type="file"
+                onChange={handleUserImageChange}
+              />
+            </div>
+          </div>
+        </div>
         <div className="">
           <p className="text-[14px] font-bold mb-2">تصویر مجوز</p>
           <div className="border-2 border-dashed rounded-md min-h-32 space-y-3 flex flex-col justify-center items-center relative">

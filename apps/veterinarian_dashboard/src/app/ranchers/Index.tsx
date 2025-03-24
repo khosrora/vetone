@@ -7,6 +7,7 @@ import useSWR from "swr";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { useSession } from "next-auth/react";
 import { Alert } from "@repo/ui/alert";
+import { RanchersCardTypes } from "@/lib/types/ranchers.type";
 
 function Index() {
   const { data: session } = useSession();
@@ -16,7 +17,9 @@ function Index() {
     !!token ? ["/veterinary/ranchers", token] : null,
     fetcher
   );
+
   if (isLoading || !token) return <>please wait ...</>;
+  console.log(ranchers.results);
   return (
     <div className="p-4 space-y-4">
       <div className="flex justify-between items-center">
@@ -53,11 +56,17 @@ function Index() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="text-black text-xs font-bold">محمد صابری</td>
-                <td className="text-black text-xs font-bold">09365483987</td>
-                <td className="text-black text-xs font-bold">تهران - تهران</td>
-              </tr>
+              {ranchers.results.map((item: RanchersCardTypes) => (
+                <tr>
+                  <td className="text-black text-xs font-bold">
+                    {item.fullName}
+                  </td>
+                  <td className="text-black text-xs font-bold">{item.phone}</td>
+                  <td className="text-black text-xs font-bold">
+                    {item.address}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         )}
