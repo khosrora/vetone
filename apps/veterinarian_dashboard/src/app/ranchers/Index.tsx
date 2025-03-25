@@ -8,18 +8,18 @@ import { fetcher } from "@/lib/fetch/fetch_axios";
 import { useSession } from "next-auth/react";
 import { Alert } from "@repo/ui/alert";
 import { RanchersCardTypes } from "@/lib/types/ranchers.type";
+import Link from "next/link";
 
 function Index() {
   const { data: session } = useSession();
   const token = session?.token.token;
 
   const { data: ranchers, isLoading } = useSWR(
-    !!token ? ["/veterinary/ranchers", token] : null,
+    !!token ? ["/veterinary/ranchers/", token] : null,
     fetcher
   );
 
   if (isLoading || !token) return <>please wait ...</>;
-  console.log(ranchers.results);
   return (
     <div className="p-4 space-y-4">
       <div className="flex justify-between items-center">
@@ -62,8 +62,14 @@ function Index() {
                     {item.fullName}
                   </td>
                   <td className="text-black text-xs font-bold">{item.phone}</td>
-                  <td className="text-black text-xs font-bold">
-                    {item.address}
+                  <td className="text-blue-400 text-xs font-bold">
+                    <Link
+                      href={`https://www.google.com/maps/dir/?api=1&origin=&destination=${item.latitude},${item.longitude}&travelmode=driving`}
+                      target="_blank"
+                    >
+                      {" "}
+                      مسیریابی{" "}
+                    </Link>
                   </td>
                 </tr>
               ))}

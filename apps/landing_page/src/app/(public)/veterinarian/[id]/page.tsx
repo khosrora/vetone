@@ -13,7 +13,9 @@ import {
 import Link from "next/link";
 
 async function getInitialVetData(id: number) {
-  const res = await fetch(`${base_api}/veterinary/${id}`);
+  const res = await fetch(`${base_api}/veterinary/${id}`, {
+    cache: "no-cache",
+  });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }

@@ -6,7 +6,9 @@ import FilterItems from "./FilterItems";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 
 async function getInitialVetData(page: number = 1) {
-  const res = await fetch(`${base_api}/veterinary/search_veterinarian/`);
+  const res = await fetch(`${base_api}/veterinary/search_veterinarian/`, {
+    cache: "no-cache",
+  });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
