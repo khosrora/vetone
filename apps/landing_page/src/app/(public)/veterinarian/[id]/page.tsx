@@ -34,8 +34,8 @@ async function page({ params: { id } }: { params: { id: string } }) {
                   ? data.background_image
                   : data.license_image
               }
-              width={500}
-              height={500}
+              width={1000}
+              height={1000}
               alt="تصویر پزشک"
               className="rounded-lg max-h-64 object-cover w-full lg:max-h-96"
             />
