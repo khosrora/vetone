@@ -1,6 +1,6 @@
 "use client";
 import TitleBack from "@/components/TitleBack";
-import { fetcher } from "@/lib/fetch/fetch_axios";
+import { deleteDataAPI, fetcher } from "@/lib/fetch/fetch_axios";
 import { AddressCardType } from "@/lib/types/addresses.type";
 import { Alert } from "@repo/ui/alert";
 import { Btn } from "@repo/ui/btn";
@@ -14,15 +14,17 @@ function Index() {
   const { data: session } = useSession();
   const token = session?.token.token;
 
-  const {
-    data: addresses,
-    isLoading,
-    mutate,
-  } = useSWR(!!token ? ["/province/addresses", token] : null, fetcher);
+  const { data: addresses, isLoading } = useSWR(
+    !!token ? ["/province/addresses", token] : null,
+    fetcher
+  );
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: number) => {
     try {
+      const res = await deleteDataAPI(`province/addresses/${id}/`, token);
+      console.log(res.status);
     } catch (error) {
+      console.log(error)
       toast.error("دوباره امتحان کنید");
     }
   };
@@ -66,10 +68,10 @@ function Index() {
                     <IconMapPin />
                     <p>{item.city}</p>
                   </div>
-                  <div className="flex justify-start items-center gap-x-2">
+                  {/* <div className="flex justify-start items-center gap-x-2">
                     <IconMail />
                     <p>9910438081</p>
-                  </div>
+                  </div> */}
                   {/* <div className="flex justify-start items-center gap-x-2">
                     <IconPhone />
                     <p>09338974567</p>
@@ -83,8 +85,8 @@ function Index() {
               <div className="divider"></div>
               <div className="flex justify-start items-center gap-x-6 text-sm">
                 <div
-                  className="flex justify-start items-center text-red-600 gap-x-2"
-                  // onClick={() => handleDelete(item.id)}
+                  className="flex justify-start items-center text-red-600 gap-x-2 cursor-pointer"
+                  onClick={() => handleDelete(item.id)}
                 >
                   <IconTrash />
                   <p>حذف آدرس</p>

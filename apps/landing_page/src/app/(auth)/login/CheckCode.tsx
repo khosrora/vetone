@@ -20,41 +20,26 @@ function CheckCode({
 
   useEffect(() => {
     if (otp.length === 6) {
+      setLoad(true);
       signIn("credentials", {
         phoneNumber,
         otp: otp,
         redirect: false,
       })
         .then((res) => {
-          setLoad(false);
-
           if (res?.ok === false || res?.status === 401) {
+            setLoad(false);
             return toast.error("کد وارد شده صحیح نمی باشد");
           } else {
             push("/");
             toast.success("خوش آمدید .");
+            setLoad(false);
           }
         })
         .catch((err) => {
           toast.error("کد وارد شده صحیح نمی باشد");
           setLoad(false);
         });
-      // (async () => {
-      //   try {
-      //     setLoad(true);
-      //     const res = await postDataAPI("/account/token/", {
-      //       phone: phoneNumber,
-      //       password: otp,
-      //     });
-      //     if (res.status === 200) {
-      //       toast.success("پیامک حاوی کد تایید برای شما ارسال شد");
-      //       setLoad(false);
-      //     }
-      //   } catch (error) {
-      //     setLoad(false);
-      //     toast.error("دوباره امتحان کنید.");
-      //   }
-      // })();
     }
   }, [otp]);
 
@@ -89,11 +74,7 @@ function CheckCode({
           ویرایش شماره موبایل
         </span>
       </div>
-      <Btn
-        loading={load}
-        className={"w-full"}
-        disabled={otp.length === 6 ? false : true}
-      >
+      <Btn loading={load} className={"w-full"} disabled={true}>
         تایید کد
       </Btn>
     </div>

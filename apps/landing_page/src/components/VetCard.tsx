@@ -8,9 +8,12 @@ import {
   IconMapPinFilled,
   IconShare,
 } from "@tabler/icons-react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 function VetCard({ item }: { item: VeterinarianCardType }) {
+  const { status } = useSession();
   const { push } = useRouter();
   return (
     <div className="p-4  lg:p-6 bg-white rounded-md space-y-2">
@@ -72,7 +75,11 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
         </div>
         <Btn
           className="col-span-1"
-          onClick={() => push(`/receive_services?veterinarian=${item.id}`)}
+          onClick={() => {
+            if (status === "unauthenticated")
+              return toast.error("ابتدا وارد شوید.");
+            push(`/receive_services?veterinarian=${item.id}`);
+          }}
         >
           نوبت مشاوره
         </Btn>
