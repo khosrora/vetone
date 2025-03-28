@@ -40,7 +40,7 @@ export const constantsItemsNavigation: navigationBottomType[] = [
   {
     id: 2,
     title: "دامپزشکان",
-    link: "/veterinarian",
+    link: "/veterinarians",
     icon: <IconBuildingHospital />,
   },
 ];

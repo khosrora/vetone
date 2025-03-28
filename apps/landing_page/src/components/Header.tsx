@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { useSession } from "next-auth/react";
-import { LINK_DASHBOARD_CLIENT, LINK_DASHBOARD_VET } from "@repo/lib/links";
+import { LINK_DASHBOARD_CLIENT, LINK_DASHBOARD_VET, LINK_LANDINGPAGE } from "@repo/lib/links";
 import { IUser } from "@/lib/auth/auth";
 import { toast } from "sonner";
 
@@ -38,7 +38,7 @@ function Header() {
 
   return (
     <div className="flex justify-between items-center bg-white mb-4 lg:my-8 p-4 lg:bg-white lg:rounded-md max-w-7xl mx-auto">
-      <Link href="/" className="flex justify-start items-center gap-x-4">
+      <Link href={LINK_LANDINGPAGE} className="flex justify-start items-center gap-x-4">
         <Img src="/images/logo.png" width={50} height={50} alt={name_project} />
         <small className="font-black text-green_vetone">{name_project}</small>
       </Link>
