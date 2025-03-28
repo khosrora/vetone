@@ -12,7 +12,7 @@ const LINK_DASHBOARD_CLIENT: string =
     : "https://vetone.cafesiran.ir/client";
 
 const DOMAIN: string =
-  process.env.NODE_ENV === "development" ? "vetone.test" : "vetone.cafesiran";
+  process.env.NODE_ENV === "development" ? "vetone.test" : "vetone.cafesiran.ir";
 
 const IMAGE_PLACEHOLDER: string = "https://avatar.iran.liara.run/public";
 
