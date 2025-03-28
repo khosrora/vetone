@@ -3,7 +3,7 @@ import Index from "./Index";
 function page() {
   return (
     <>
-    <Index/>
+      <Index />
     </>
   );
 }

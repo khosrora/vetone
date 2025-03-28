@@ -17,6 +17,7 @@ async function getInitialVetData(page: number = 1) {
 
 async function page() {
   const initialData = await getInitialVetData(1);
+  
   return (
     <div className=" my-2 lg:p-0 grid grid-cols-12 gap-4 lg:my-12 max-w-7xl mx-auto">
       <div className="hidden lg:flex lg:col-span-3">

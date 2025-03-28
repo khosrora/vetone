@@ -7,7 +7,15 @@ import React, { useContext, useState } from "react";
 import { AudioRecorder } from "react-audio-voice-recorder";
 import { toast } from "sonner";
 
-function StepTwo() {
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import "react-multi-date-picker/styles/layouts/mobile.css";
+
+function StepTwo({ id }: { id: string }) {
+  const [date, setDate] = useState<any>();
+  const [dateValue, setDateValue] = useState<string[]>([]);
+
   const { push } = useRouter();
   const { animals } = useContext(AnimalsContext);
   const { data: session } = useSession();
@@ -38,31 +46,38 @@ function StepTwo() {
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    setImage(file!); // Set the image URL for preview
+    setImage(file!);
     setImagePreview(URL.createObjectURL(file!));
   };
   const handleVideoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVideoPreview(null);
     const file = event.target.files?.[0];
-    setVideo(file!); // Set the image URL for preview
+    setVideo(file!);
     setVideoPreview(URL.createObjectURL(file!));
   };
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextContent(event.target.value); // Update state with textarea value
+    setTextContent(event.target.value);
   };
 
   const handleSendRequest = async () => {
     setLoad(true);
     const formData = new FormData();
+    const dateRequest = date
+      ?.toDate()
+      .toLocaleDateString("zh-Hans-CN")
+      .replaceAll("/", "-");
+    if (!!image) formData.append("date", dateRequest!);
     if (!!image) formData.append("image", image!);
     if (!!video) formData.append("video", video!);
     if (!!voice) formData.append("voice", voice!);
     if (!!textContent) formData.append("description", textContent!);
+    if (!!textContent) formData.append("veterinarian", id!);
+    if (!!textContent) formData.append("animals", JSON.stringify(animals)!);
 
     try {
       const { status } = await postDataAPI(
-        `veterinary/request/`,
+        `/veterinary/request/`,
         formData,
         token
       );
@@ -77,6 +92,31 @@ function StepTwo() {
 
   return (
     <div className="space-y-4">
+      <div className="form-control col-span-2 lg:col-span-1">
+        <div className="label">
+          <span className="label-text-alt">زمان انجام درخواست</span>
+        </div>
+        <DatePicker
+          value={date}
+          onChange={setDate}
+          key={`${1}`}
+          calendar={persian}
+          locale={persian_fa}
+          calendarPosition="bottom-right"
+          style={{
+            width: "100%",
+            boxSizing: "border-box",
+            padding: "1.3rem",
+            marginTop: ".5rem",
+            border: "1px solid rgb(226 232 240)",
+          }}
+          containerStyle={{
+            width: "100%",
+          }}
+          placeholder="مثال :‌ 1 / 2 / 1400"
+          className="rmdp-mobile"
+        />
+      </div>
       {/* <Back title="انتخاب مجدد" /> */}
       <div className="border-2 border-dashed border-zinc-200 bg-white rounded-md relative flex flex-col justify-center items-center py-8 lg:py-16">
         <input

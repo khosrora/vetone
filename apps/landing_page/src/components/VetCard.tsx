@@ -1,5 +1,6 @@
 "use client";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
+import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
 import { Btn } from "@repo/ui/btn";
 import {
   IconCarambolaFilled,
@@ -20,7 +21,7 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
       <div className="flex justify-between items-center">
         <div className="flex justify-start items-center gap-x-2">
           <img
-            src={item.image}
+            src={!!item.image ? item.image : IMAGE_PLACEHOLDER}
             className="w-12 h-12 rounded-full lg:w-24 lg:h-24"
           />
           <div className="space-y-2 lg:space-y-3 px-4">
@@ -67,7 +68,7 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
         <div className="col-span-2">
           <div
             className="bg-none text-green-700 hover:text-green-600 cursor-pointer flex gap-x-2"
-            onClick={() => push(`/veterinarian/${item.id}`)}
+            onClick={() => push(`/veterinarian/${item.slug}`)}
           >
             <p className="">مشاهده پروفایل</p>
             <IconCaretLeftFilled />

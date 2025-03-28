@@ -53,13 +53,11 @@ function Header() {
             </Link>
           </li>
         ))}
-        <li>
-          <div
-            className="text-[14px] text-gray-800 cursor-pointer hover:text-green_vetone"
-            onClick={() => handleRequestVest()}
-          >
-            دامپزشک شوید
-          </div>
+        <li
+          className="text-[14px] text-gray-800 cursor-pointer hover:text-green_vetone mt-[3px]"
+          onClick={() => handleRequestVest()}
+        >
+          دامپزشک شوید
         </li>
       </ul>
       {status === "authenticated" ? (

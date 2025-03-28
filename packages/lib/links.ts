@@ -14,4 +14,12 @@ const LINK_DASHBOARD_CLIENT: string =
 const DOMAIN: string =
   process.env.NODE_ENV === "development" ? "vetone.test" : "";
 
-export { LINK_LANDINGPAGE, DOMAIN, LINK_DASHBOARD_VET, LINK_DASHBOARD_CLIENT };
+const IMAGE_PLACEHOLDER: string = "https://avatar.iran.liara.run/public";
+
+export {
+  LINK_LANDINGPAGE,
+  DOMAIN,
+  LINK_DASHBOARD_VET,
+  LINK_DASHBOARD_CLIENT,
+  IMAGE_PLACEHOLDER,
+};

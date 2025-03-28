@@ -12,8 +12,8 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 
-async function getInitialVetData(id: number) {
-  const res = await fetch(`${base_api}/veterinary/${id}`, {
+async function getInitialVetData(slug: string) {
+  const res = await fetch(`${base_api}/veterinary/${slug}`, {
     cache: "no-cache",
   });
   if (!res.ok) {
@@ -22,8 +22,8 @@ async function getInitialVetData(id: number) {
   return res.json();
 }
 
-async function page({ params: { id } }: { params: { id: string } }) {
-  const data: VeterinarianCardType = await getInitialVetData(Number(id));
+async function page({ params: { slug } }: { params: { slug: string } }) {
+  const data: VeterinarianCardType = await getInitialVetData(slug);
 
   return (
     <div className="mx-auto max-w-7xl px-4 lg:px-0">
@@ -36,8 +36,8 @@ async function page({ params: { id } }: { params: { id: string } }) {
                   ? data.background_image
                   : data.license_image
               }
-              width={1000}
-              height={1000}
+              width={500}
+              height={500}
               alt="تصویر پزشک"
               className="rounded-lg max-h-64 object-cover w-full lg:max-h-96"
             />
