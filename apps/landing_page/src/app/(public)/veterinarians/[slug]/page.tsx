@@ -51,7 +51,7 @@ async function page({ params: { slug } }: { params: { slug: string } }) {
           </div>
           <div className="w-full mt-20 lg:hidden">
             <Link
-              href={`/receive_services?veterinarian=${data.id}`}
+              href={`/receive_services?veterinarians=${data.id}`}
               className="block bg-green_vetone rounded-md text-white text-center py-3"
             >
               دریافت نوبت مشاوره
@@ -128,7 +128,7 @@ async function page({ params: { slug } }: { params: { slug: string } }) {
               </div> */}
               <div className="w-full mt-4">
                 <Link
-                  href={`/receive_services?veterinarian=${data.id}`}
+                  href={`/receive_services?veterinarians=${data.id}`}
                   className="block bg-green_vetone rounded-md text-white text-center py-3"
                 >
                   دریافت نوبت مشاوره
