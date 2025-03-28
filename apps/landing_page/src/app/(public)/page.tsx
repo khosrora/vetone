@@ -26,7 +26,7 @@ export default function Page() {
           <TitleLink
             title="دامپزشکان"
             linkText="مشاهده همه"
-            address="/veterinarians"
+            address="/search_veterinarians"
           />
           <VeterinarianSlider />
         </div>
