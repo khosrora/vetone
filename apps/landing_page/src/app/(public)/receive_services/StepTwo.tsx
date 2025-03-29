@@ -11,8 +11,10 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/layouts/mobile.css";
+import { transformData } from "@/lib/utils/functions";
+import { LINK_DASHBOARD_CLIENT } from "@repo/lib/links";
 
-function StepTwo({ id }: { id: string }) {
+function StepTwo({ veterinarianId }: { veterinarianId: string }) {
   const [date, setDate] = useState<any>();
   const [dateValue, setDateValue] = useState<string[]>([]);
 
@@ -31,7 +33,6 @@ function StepTwo({ id }: { id: string }) {
   const [videoPreview, setVideoPreview] = useState<string | null>(null);
 
   const addAudioElement = (blob: Blob) => {
-    // console.log(blob as File);
     toast.success("فایل صوتی با موفقیت ذخیره شد.");
     setVoice(blob as File);
     const audio = document.createElement("audio");
@@ -67,13 +68,15 @@ function StepTwo({ id }: { id: string }) {
       ?.toDate()
       .toLocaleDateString("zh-Hans-CN")
       .replaceAll("/", "-");
+
+    const animalsNewData = transformData(animals);
     if (!!image) formData.append("date", dateRequest!);
     if (!!image) formData.append("image", image!);
     if (!!video) formData.append("video", video!);
     if (!!voice) formData.append("voice", voice!);
     if (!!textContent) formData.append("description", textContent!);
-    if (!!textContent) formData.append("veterinarian", id!);
-    if (!!textContent) formData.append("animals", JSON.stringify(animals)!);
+    if (!!veterinarianId) formData.append("veterinarian", veterinarianId!);
+    if (!!animals) formData.append("animals", JSON.stringify(animalsNewData)!);
 
     try {
       const { status } = await postDataAPI(
@@ -83,8 +86,9 @@ function StepTwo({ id }: { id: string }) {
       );
       if (status === 201) {
         toast.success("درخواست شما با موفقیت ثبت شد.");
+        push(`${LINK_DASHBOARD_CLIENT}/my_requests`);
+        setLoad(false);
       }
-      setLoad(false);
     } catch (error) {
       setLoad(false);
     }
@@ -196,7 +200,12 @@ function StepTwo({ id }: { id: string }) {
         />
         <div className="" id="list"></div>
       </div>
-      <Btn className="w-full" onClick={() => handleSendRequest()}>
+      <Btn
+        className="w-full"
+        onClick={() => handleSendRequest()}
+        loading={load}
+        disabled={load}
+      >
         ثبت درخواست
       </Btn>
     </div>

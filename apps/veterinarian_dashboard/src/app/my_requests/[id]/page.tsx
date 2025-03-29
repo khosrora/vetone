@@ -1,12 +1,8 @@
-import React from 'react'
-import Indexreqdetail from './Indexreqdetail'
+import React from "react";
+import Indexreqdetail from "./Indexreqdetail";
 
-function page() {
-  return (
-    <div>
-      <Indexreqdetail/>
-    </div>
-  )
+function page({ params: { id } }: { params: { id: string } }) {
+  return <Indexreqdetail id={id} />;
 }
 
-export default page
+export default page;

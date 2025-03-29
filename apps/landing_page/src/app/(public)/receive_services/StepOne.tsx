@@ -22,8 +22,6 @@ function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
     useContext(AnimalsContext);
 
   if (isLoading || !data) return <p>please wait ...</p>;
-  console.log(data.results);
-  console.log(animals);
   return (
     <div className="space-y-4">
       <Back title="نوع جاندار" />
@@ -31,7 +29,7 @@ function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
         {data.results.map((item: AnimalsCardType) => (
           <div
             key={item.id}
-            className="flex flex-col justify-center items-center bg-white rounded-md py-2"
+            className="flex flex-col justify-center items-center bg-white rounded-md py-2 cursor-pointer hover:bg-zinc-100"
             onClick={() => addAnimal({ id: item.id, name: item.name })}
           >
             <Image

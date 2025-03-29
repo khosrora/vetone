@@ -5,13 +5,13 @@ import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import { AnimalsProvider } from "@/lib/context/animals.context";
 
-function Index({ id }: { id: string }) {
+function Index({ veterinarianId }: { veterinarianId: string }) {
   const [step, setStep] = useState<number>(1);
 
   return (
     <AnimalsProvider>
       <div className="px-4 mb-4 max-w-lg m-auto">
-        {step === 1 ? <StepOne setStep={setStep} /> : <StepTwo id={id} />}
+        {step === 1 ? <StepOne setStep={setStep} /> : <StepTwo veterinarianId={veterinarianId} />}
       </div>
     </AnimalsProvider>
   );

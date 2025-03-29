@@ -1,8 +1,12 @@
 import React from "react";
 import Index from "./Index";
 
-function page({ params: { id } }: { params: { id: string } }) {
-  return <Index id={id} />;
+function page({
+  searchParams: { veterinarian },
+}: {
+  searchParams: { veterinarian: string };
+}) {
+  return <Index veterinarianId={veterinarian} />;
 }
 
 export default page;
