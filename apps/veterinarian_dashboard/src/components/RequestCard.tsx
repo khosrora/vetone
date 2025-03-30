@@ -58,7 +58,7 @@ function RequestCard({ request }: { request: requestCardType }) {
               <p className="text-[12px] lg:text-xs text-gray-600 font-regular">
                 کدرهگیری:
               </p>
-              <p className="text-[12px] lg:text-sm font-semibold">1234454</p>
+              <p className="text-[12px] lg:text-sm font-semibold">{request.tracking_code}</p>
             </div>
           </div>
         </div>

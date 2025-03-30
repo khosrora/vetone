@@ -7,16 +7,22 @@ import React, { useContext, useState } from "react";
 import { AudioRecorder } from "react-audio-voice-recorder";
 import { toast } from "sonner";
 
-import DatePicker from "react-multi-date-picker";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import "react-multi-date-picker/styles/layouts/mobile.css";
 import { transformData } from "@/lib/utils/functions";
 import { LINK_DASHBOARD_CLIENT } from "@repo/lib/links";
+import dynamic from "next/dynamic";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import DatePicker from "react-multi-date-picker";
+import "react-multi-date-picker/styles/layouts/mobile.css";
+
+const MapCm = dynamic(() => import("./MapCm"), {
+  ssr: false,
+});
 
 function StepTwo({ veterinarianId }: { veterinarianId: string }) {
   const [date, setDate] = useState<any>();
   const [dateValue, setDateValue] = useState<string[]>([]);
+  const [latlong, setLatlong] = useState<[number, number] | undefined>();
 
   const { push } = useRouter();
   const { animals } = useContext(AnimalsContext);
@@ -70,13 +76,15 @@ function StepTwo({ veterinarianId }: { veterinarianId: string }) {
       .replaceAll("/", "-");
 
     const animalsNewData = transformData(animals);
-    if (!!image) formData.append("date", dateRequest!);
-    if (!!image) formData.append("image", image!);
-    if (!!video) formData.append("video", video!);
-    if (!!voice) formData.append("voice", voice!);
-    if (!!textContent) formData.append("description", textContent!);
-    if (!!veterinarianId) formData.append("veterinarian", veterinarianId!);
-    if (!!animals) formData.append("animals", JSON.stringify(animalsNewData)!);
+    if (!!image) formData.append("date", dateRequest);
+    if (!!image) formData.append("image", image);
+    if (!!video) formData.append("video", video);
+    if (!!voice) formData.append("voice", voice);
+    if (!!textContent) formData.append("description", textContent);
+    if (!!latlong) formData.append("latitude", String(latlong[0]));
+    if (!!latlong) formData.append("longitude", String(latlong[1]));
+    if (!!veterinarianId) formData.append("veterinarian", veterinarianId);
+    if (!!animals) formData.append("animals", JSON.stringify(animalsNewData));
 
     try {
       const { status } = await postDataAPI(
@@ -200,6 +208,7 @@ function StepTwo({ veterinarianId }: { veterinarianId: string }) {
         />
         <div className="" id="list"></div>
       </div>
+      <MapCm setLatlong={setLatlong} />
       <Btn
         className="w-full"
         onClick={() => handleSendRequest()}

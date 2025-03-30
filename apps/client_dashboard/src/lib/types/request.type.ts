@@ -56,5 +56,5 @@ export type requestCardType = {
   veterinarian: veterinarianType;
   animals: animalType[];
   image: null | string;
-  tracking_code : string
+  tracking_code: string;
 };
