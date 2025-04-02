@@ -9,7 +9,6 @@ import { Img } from "@repo/ui/img";
 import { IconUser } from "@tabler/icons-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import { useSession } from "next-auth/react";
 import { LINK_DASHBOARD_CLIENT, LINK_DASHBOARD_VET, LINK_LANDINGPAGE } from "@repo/lib/links";
 import { IUser } from "@/lib/auth/auth";
@@ -53,13 +52,15 @@ function Header() {
             </Link>
           </li>
         ))}
-        <li
-          className="text-[14px] text-gray-800 cursor-pointer hover:text-green_vetone mt-[3px]"
+      </ul>
+      <div className="flex items-center gap-x-4">
+      <button
+          className="text-[14px] bg-white text-green_vetone border border-green_vetone block btn hover:text-white-800 cursor-pointer hover:text-green_vetone mt-[3px]"
           onClick={() => handleRequestVest()}
         >
           دامپزشک شوید
-        </li>
-      </ul>
+        </button>
+        <div className="hidden md:block">
       {status === "authenticated" ? (
         <Btn onClick={() => handleRoute()}>
           <IconUser />
@@ -70,7 +71,11 @@ function Header() {
           <IconUser />
           ورود
         </Btn>
+        
       )}
+      </div>
+     </div>
+
     </div>
   );
 }

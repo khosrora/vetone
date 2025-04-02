@@ -43,6 +43,7 @@ export const constantsItemsNavigation: navigationBottomType[] = [
     link: "/search_veterinarians",
     icon: <IconBuildingHospital />,
   },
+ 
 ];
 
 
