@@ -1,10 +1,19 @@
 "use client";
 
+import { fetcher } from "@/lib/fetch/fetch_axios";
+import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import Link from "next/link";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import useSWR from "swr";
 
 function VeterinarianSlider() {
+  const { data: veterinarians, isLoading } = useSWR(
+    [`/veterinary/search_veterinarian/`],
+    fetcher
+  );
+
+  if (isLoading) return <p>please wait ...</p>;
   return (
     <div className="pb-4">
       <Swiper
@@ -16,22 +25,24 @@ function VeterinarianSlider() {
           900: { slidesPerView: 8.5, spaceBetween: 16 },
         }}
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
-          (item: number) => (
-            <SwiperSlide key={item}>
-              <Link
-                href={`/`}
-                className="flex flex-col items-center rounded-md gap-y-2"
-              >
-                <img
-                  src="https://imageserver.petsbest.com/marketing/blog/increased-vet-demand.jpg"
-                  className="rounded-md"
-                />
-                <p className="">دکتر نوری</p>
-              </Link>
-            </SwiperSlide>
-          )
-        )}
+        {veterinarians.results.map((item: VeterinarianCardType) => (
+          <SwiperSlide key={item.id}>
+            <Link
+              href={`/`}
+              className="flex flex-col items-center rounded-md gap-y-2"
+            >
+              <img
+                src={
+                  !!item.image
+                    ? item.image
+                    : "https://imageserver.petsbest.com/marketing/blog/increased-vet-demand.jpg"
+                }
+                className="rounded-md"
+              />
+              <p className="">{item.fullName}</p>
+            </Link>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
