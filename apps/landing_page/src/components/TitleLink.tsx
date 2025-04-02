@@ -18,7 +18,7 @@ function TitleLink({
       </p>
       {!!address && (
         <Link href={address} className="flex justify-end items-center gap-x-2">
-          <p className="text-green_vetone texxt-sm">{linkText}</p>
+          <p className="text-green_vetone text-sm">{linkText}</p>
           <IconChevronLeft className="text-green_vetone" />
         </Link>
       )}

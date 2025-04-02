@@ -64,18 +64,18 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
         </div>
       </div>
       <div className="divider"></div>
-      <div className="grid grid-cols-3 gap-x-2 items-center">
-        <div className="col-span-2">
+      <div className="grid grid-cols-4 md:grid-cols-3 gap-x-2 items-center">
+        <div className="col-span-2 md:col-span-2">
           <div
-            className="bg-none text-green-700 hover:text-green-600 cursor-pointer flex gap-x-2"
-            onClick={() => push(`/veterinarian/${item.slug}`)}
+            className="bg-none items-center text-green-700 hover:text-green-600 cursor-pointer flex gap-x-2"
+            onClick={() => push(`/search_veterinarians/${item.slug}`)}
           >
-            <p className="">مشاهده پروفایل</p>
+            <p className="text-xs md:text-sm">مشاهده پروفایل</p>
             <IconCaretLeftFilled />
           </div>
         </div>
         <Btn
-          className="col-span-1"
+          className="col-span-2 md:col-span-1 text-sm"
           onClick={() => {
             if (status === "unauthenticated")
               return toast.error("ابتدا وارد شوید.");

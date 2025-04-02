@@ -23,10 +23,10 @@ function SearchBox() {
 
   return (
     <div className="px-4">
-      <div className="w-full flex justify-between items-center bg-white p-2 lg:p-4 rounded-md max-w-2xl m-auto">
+      <div className="w-full grid grid-cols-2 justify-between items-center bg-white p-2 lg:p-4 rounded-md max-w-2xl m-auto">
         <input
           placeholder="جستجو دامپزشک"
-          className="p-4 focus:outline-none text-sm placeholder:text-sm"
+          className="p-4 focus:outline-none text-sm placeholder:text-[10px] md:placeholder:text-sm "
           onChange={(e) => setSearchText(e.target.value)}
         />
         {searchText ? (
@@ -34,8 +34,8 @@ function SearchBox() {
             <IconSearch /> جستجو
           </Btn>
         ) : (
-          <Btn onClick={() => setOpen(true)}>
-            <IconMapPin /> انتخاب استان
+          <Btn onClick={() => setOpen(true)} >
+            <IconMapPin className="md:block" size={16} /> انتخاب استان
           </Btn>
         )}
 

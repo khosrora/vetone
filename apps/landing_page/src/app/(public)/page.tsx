@@ -6,11 +6,11 @@ import UserComments from "@/components/UserComments";
 import VeterinarianSlider from "@/components/VeterinarianSlider";
 import { name_project } from "@repo/lib/titles";
 import { IconBubbleText } from "@tabler/icons-react";
-
+import Emptydata from "@/lib/icon/Emptydata";
 export default function Page() {
   return (
     <div className="space-y-12 lg:space-y-24 py-6 lg:py-12">
-      <div className="max-w-7xl mx-auto">
+      <div className="lg:max-w-7xl mx-auto">
         <div className="flex flex-col justify-center items-center space-y-6 p-4">
           <p className="text-4xl text-green_vetone font-extrabold">
             {name_project}

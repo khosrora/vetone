@@ -35,7 +35,7 @@ function FilterBtns() {
             onClick={() => handleOpenModal(filterEnum.filter)}
           >
             <IconAdjustmentsAlt />
-            <p className="font-bold">فیلترها</p>
+            <p className="font-bold text-sm lg:text-lg">فیلترها</p>
           </div>
           <div className="divider divider-horizontal"></div>
           <div
@@ -43,7 +43,7 @@ function FilterBtns() {
             onClick={() => handleOpenModal(filterEnum.sort)}
           >
             <IconSortAscendingShapes />
-            <p className="font-bold">مرتب سازی</p>
+            <p className="font-bold text-sm lg:text-lg">مرتب سازی</p>
           </div>
         </div>
       </div>

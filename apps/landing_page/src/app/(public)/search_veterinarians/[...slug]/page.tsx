@@ -71,20 +71,20 @@ async function page({ params: { slug } }: { params: { slug: string } }) {
               </div>
             </div>
             <div className="divider"></div>
-            <div className="flex justify-between items-center">
-              <div className="flex justify-between items-center gap-x-2">
+            <div className="grid grid-cols-2 gap-x-2 lg:flex lg:justify-between items-center">
+              <div className="flex items-center gap-x-2">
                 <IconMapPinFilled />
-                <p className="text-[12px] lg:text-base">
+                <p className="text-[10px] lg:text-base">
                   {data.city} , {data.province}
                 </p>
               </div>
-              <div className="flex justify-between items-center gap-x-2">
-                <IconZoomScanFilled />
-                <p className="font-light text-[12px] lg:text-sm">
+              <div className="flex items-center gap-x-2">
+                <IconZoomScanFilled/>
+                <p className="font-light text-[10px] lg:text-sm">
                   {" "}
                   کدنظام پزشکی:{" "}
                 </p>
-                <p className="font-bold">{data.medical_license}</p>
+                <p className="font-bold text-[10px]">{data.medical_license}</p>
               </div>
             </div>
             <div className="divider"></div>

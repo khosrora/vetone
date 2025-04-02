@@ -9,7 +9,7 @@ function UserComments() {
   const swiperRef = useRef<any>(null);
 
   return (
-    <div className="mr-4 lg:mr-4 lg:px-2 lg:py-6">
+    <div className=" lg:mr-4 lg:px-2 lg:py-6">
       <Swiper
         spaceBetween={30}
         slidesPerView={1.2}
@@ -31,7 +31,7 @@ function UserComments() {
                 />
                 <p className="font-bold text-base lg:text-lg">دکتر نوری</p>
               </div>
-              <p className="font-light leading-6 lg:leading-8 text-xs lg:text-sm">
+              <p className="font-light leading-6 lg:leading-8 text-xs lg:text-sm h-24 md:h-auto overflow-hidden text-ellipsis">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ لورم
                 ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
               </p>
