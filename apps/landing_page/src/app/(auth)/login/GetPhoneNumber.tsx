@@ -42,7 +42,7 @@ function GetPhoneNumber({
       className="w-full flex flex-col justify-start items-start space-y-6"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <p className="font-bold text-xl">ورود / ثبت نام</p>
+      <p className="font-bold text-xl lg:text-2xl">ورود / ثبت نام</p>
       <small className="text-sm lg:text-base">لطفا شماره موبایل خود را وارد نمایید</small>
       <label className="form-control w-full">
         <div className="label">
@@ -53,7 +53,7 @@ function GetPhoneNumber({
         </div>
         <input
           type="text"
-          className="input input-bordered w-full bg-zinc-100"
+          className="input input-bordered w-full bg-zinc-100 focus:outline-none focus:ring-1 focus:ring-green-500"
           autoFocus
           {...register("phone", {
             required: { value: true, message: "this field is required" },

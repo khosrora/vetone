@@ -23,10 +23,10 @@ function SearchBox() {
 
   return (
     <div className="px-4">
-      <div className="w-full grid grid-cols-2 justify-between items-center bg-white p-2 lg:p-4 rounded-md max-w-2xl m-auto">
+      <div className="w-full grid grid-cols-2 lg:grid-cols-4 justify-between items-center bg-white p-2 lg:p-4 rounded-md max-w-2xl m-auto">
         <input
           placeholder="جستجو دامپزشک"
-          className="p-4 focus:outline-none text-sm placeholder:text-[10px] md:placeholder:text-sm "
+          className="p-4 lg:col-span-3 focus:outline-none text-sm placeholder:text-[10px] md:placeholder:text-sm "
           onChange={(e) => setSearchText(e.target.value)}
         />
         {searchText ? (

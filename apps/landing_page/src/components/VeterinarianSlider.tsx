@@ -6,14 +6,18 @@ import Link from "next/link";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import useSWR from "swr";
-
+import Loader from "./Loader";
 function VeterinarianSlider() {
   const { data: veterinarians, isLoading } = useSWR(
     [`/veterinary/search_veterinarian/`],
     fetcher
   );
 
-  if (isLoading) return <p>please wait ...</p>;
+  if (isLoading){
+    return (
+        <Loader/>
+        );
+      }
   return (
     <div className="pb-4">
       <Swiper
