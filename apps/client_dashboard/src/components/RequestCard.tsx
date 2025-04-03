@@ -3,8 +3,9 @@ import Link from "next/link";
 import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { requestCardType } from "@/lib/types/request.type";
 import { IMAGE_PLACEHOLDER, LINK_DASHBOARD_CLIENT } from "@repo/lib/links";
+import { requestsEnum } from "@repo/lib/types";
+
 function RequestCard({ request }: { request: requestCardType }) {
-  console.log(request);
   return (
     <div className="p-4 bg-white rounded-md space-y-2">
       <div className="p-0  lg:p-6 bg-white rounded-md space-y-2">
@@ -27,9 +28,15 @@ function RequestCard({ request }: { request: requestCardType }) {
               </p>
             </div>
           </div>
-          <div className="justify-self-end badge  bg-green-50 text-green-00  p-4 text-[10px] lg:text-xs text-green-600">
-            حضوری
-          </div>
+          {request.type === requestsEnum.InPerson ? (
+            <div className="justify-self-end badge  bg-green-50 text-green-600  p-4 text-[10px] lg:text-xs">
+              حضوری
+            </div>
+          ) : (
+            <div className="justify-self-end badge  bg-yellow-400 text-yellow-600  p-4 text-[10px] lg:text-xs">
+              تماس
+            </div>
+          )}
         </div>
         <div className="divider"></div>
         <div className="grid grid-cols-1">

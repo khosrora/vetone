@@ -10,7 +10,11 @@ import { IconUser } from "@tabler/icons-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { LINK_DASHBOARD_CLIENT, LINK_DASHBOARD_VET, LINK_LANDINGPAGE } from "@repo/lib/links";
+import {
+  LINK_DASHBOARD_CLIENT,
+  LINK_DASHBOARD_VET,
+  LINK_LANDINGPAGE,
+} from "@repo/lib/links";
 import { IUser } from "@/lib/auth/auth";
 import { toast } from "sonner";
 
@@ -37,7 +41,10 @@ function Header() {
 
   return (
     <div className="flex justify-between items-center bg-white mb-4 lg:my-8 p-4 lg:bg-white lg:rounded-md max-w-7xl mx-auto">
-      <Link href={LINK_LANDINGPAGE} className="flex justify-start items-center gap-x-4">
+      <Link
+        href={LINK_LANDINGPAGE}
+        className="flex justify-start items-center gap-x-4"
+      >
         <Img src="/images/logo.png" width={50} height={50} alt={name_project} />
         <small className="font-black text-green_vetone">{name_project}</small>
       </Link>
@@ -54,28 +61,28 @@ function Header() {
         ))}
       </ul>
       <div className="flex items-center gap-x-4">
-      <button
-          className="text-[14px] bg-white text-green_vetone border border-green_vetone block btn hover:text-white-800 cursor-pointer hover:text-green_vetone mt-[3px]"
-          onClick={() => handleRequestVest()}
-        >
-          دامپزشک شوید
-        </button>
+        {user && user.is_veterinarian ? null : (
+          <button
+            className="text-[14px] bg-white text-green_vetone border border-green_vetone block btn hover:text-white-800 cursor-pointer hover:text-green_vetone mt-[3px]"
+            onClick={() => handleRequestVest()}
+          >
+            دامپزشک شوید
+          </button>
+        )}
         <div className="hidden md:block">
-      {status === "authenticated" ? (
-        <Btn onClick={() => handleRoute()}>
-          <IconUser />
-          پنل کاربری
-        </Btn>
-      ) : (
-        <Btn onClick={() => push("/login")}>
-          <IconUser />
-          ورود
-        </Btn>
-        
-      )}
+          {status === "authenticated" ? (
+            <Btn onClick={() => handleRoute()}>
+              <IconUser />
+              پنل کاربری
+            </Btn>
+          ) : (
+            <Btn onClick={() => push("/login")}>
+              <IconUser />
+              ورود
+            </Btn>
+          )}
+        </div>
       </div>
-     </div>
-
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
 import { Alert } from "@repo/ui/alert";
 import { IconPhone, IconRadar2 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import MediaThemeTailwindAudio from "player.style/tailwind-audio/react";
 import useSWR from "swr";
 
@@ -20,6 +21,7 @@ function Indexreqdetail({ id }: { id: string }) {
 
   if (isLoading || !data) return <p> please wait ... </p>;
   const request: requestCardType = data;
+
   return (
     <div>
       <div className="p-4 space-y-4 ">
@@ -62,11 +64,15 @@ function Indexreqdetail({ id }: { id: string }) {
                   <div className="lg:flex lg:items-center lg:space-y-0 lg:gap-x-4 space-y-3">
                     <p className="text-[12px] lg:text-xs text-gray-600 font-regular flex gap-x-2 items-center">
                       <IconRadar2 size={20} color="blue" />
-                      آدرس:
                     </p>
-                    <p className="text-[12px] lg:text-sm font-semibold">
-                      {request.rancher.address}
-                    </p>
+                    <Link
+                      href={`https://www.google.com/maps/dir/?api=1&origin=&destination=${request.latitude},${request.longitude}&travelmode=driving`}
+                      target="_blank"
+                      className="text-blue-700"
+                    >
+                      {" "}
+                      مسیریابی{" "}
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -116,11 +122,7 @@ function Indexreqdetail({ id }: { id: string }) {
           <div>
             <h1 className="font-bold py-4 text-sm">تصویر و ویدیو</h1>
             <div className="grid grid-cols-2 gap-4">
-              <img
-                src={request.image!}
-                alt="image animal"
-                className="h-full"
-              />
+              <img src={request.image!} alt="image animal" className="h-full" />
               <video controls className="h-full">
                 <source src={request.video!} />
                 Your browser does not support HTML video.

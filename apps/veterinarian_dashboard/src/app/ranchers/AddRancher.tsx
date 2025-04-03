@@ -18,6 +18,7 @@ type Inputs = {
 };
 
 function AddRancher() {
+  const [isLoad, setIsLoad] = useState<boolean>(false);
   const closeModal = useRef<HTMLButtonElement | null>(null);
   const { data: session } = useSession();
   const token: string = session?.token.token!;
@@ -32,6 +33,7 @@ function AddRancher() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       if (!latlong) return;
+      setIsLoad(true);
       const payload = {
         fullName: data.fullName,
         phone: data.phone,
@@ -42,10 +44,13 @@ function AddRancher() {
       if (res.status === 201) {
         toast.success("کاربر با موفقیت ثبت شد.");
         closeModal?.current?.click();
+        window.location.reload()
       }
+      setIsLoad(false);
     } catch (error) {
-      console.log(error);
       toast.error("دوباره امتحان کنید");
+      closeModal?.current?.click();
+      setIsLoad(false);
     }
   };
 
@@ -95,7 +100,11 @@ function AddRancher() {
             {errors.phone && <ErrorMessage message={"این فیلد ضروری است."} />}
           </span>
           <MapCm setLatlong={setLatlong} />
-          {!!latlong && <Btn className="w-full">ثبت دامدار</Btn>}
+          {!!latlong && (
+            <Btn className="w-full" loading={isLoad}>
+              ثبت دامدار
+            </Btn>
+          )}
         </form>
       </div>
       <form method="dialog" className="modal-backdrop">

@@ -7,6 +7,7 @@ import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
 import { Alert } from "@repo/ui/alert";
 import { IconPhone, IconRadar2 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import MediaThemeTailwindAudio from "player.style/tailwind-audio/react";
 import useSWR from "swr";
 
@@ -25,8 +26,8 @@ function Indexreqdetail({ id }: { id: string }) {
       <div className="p-4 space-y-4 ">
         <div className="flex justify-between items-center">
           <TitleBack text="جزئیات درخواست" />
-          <div className="justify-self-end   bg-yellow-50 text-green-00  p-4 text-[10px] lg:text-xs text-yellow-600">
-            در انتظار پرداخت
+          <div className="justify-self-end  bg-yellow-50 text-green-00  p-4 text-[10px] lg:text-xs text-yellow-600">
+            در انتظار تایید
           </div>
         </div>
 
@@ -64,9 +65,14 @@ function Indexreqdetail({ id }: { id: string }) {
                       <IconRadar2 size={20} color="blue" />
                       آدرس:
                     </p>
-                    <p className="text-[12px] lg:text-sm font-semibold">
-                      {request.rancher.address}
-                    </p>
+                    <Link
+                      href={`https://www.google.com/maps/dir/?api=1&origin=&destination=${request.latitude},${request.longitude}&travelmode=driving`}
+                      target="_blank"
+                      className="text-blue-700"
+                    >
+                      {" "}
+                      مسیریابی{" "}
+                    </Link>
                   </div>
                 </div>
               </div>

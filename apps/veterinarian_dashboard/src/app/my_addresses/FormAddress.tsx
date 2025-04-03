@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   cities,
@@ -9,11 +9,10 @@ import {
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import dynamic from "next/dynamic";
-import { Btn } from "@repo/ui/btn";
-import { getAddressWithLatLong } from "@/lib/utils/getAddressUser";
 import { postDataAPI } from "@/lib/fetch/fetch_axios";
+import { Btn } from "@repo/ui/btn";
 import { useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
 import { toast } from "sonner";
 
 const MapCm = dynamic(() => import("./MapCm"), {
@@ -25,6 +24,7 @@ type Inputs = {
 };
 
 function FormAddress({ closeModal }: { closeModal: any }) {
+  const [isLoad, setIsLoad] = useState<boolean>(false);
   const { data: session } = useSession();
   const token: string = session?.token.token!;
 
@@ -55,6 +55,7 @@ function FormAddress({ closeModal }: { closeModal: any }) {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       if (!latlong) return;
+      setIsLoad(true);
       const payload = {
         street: data.street,
         city: citiesId,
@@ -65,11 +66,13 @@ function FormAddress({ closeModal }: { closeModal: any }) {
       if (res.status === 201) {
         toast.success("آدرس با موفقیت ثبت شد.");
         closeModal?.current?.click();
+        window.location.reload();
       }
+      setIsLoad(false);
     } catch (error) {
-      console.log(error);
       closeModal?.current?.click();
       toast.error("دوباره امتحان کنید");
+      setIsLoad(false);
     }
   };
 
@@ -223,8 +226,7 @@ function FormAddress({ closeModal }: { closeModal: any }) {
       {!citiesId ? (
         <></>
       ) : (
-        <Btn type="submit" className="w-full">
-          {" "}
+        <Btn type="submit" className="w-full" loading={isLoad}>
           ثبت آدرس جدید{" "}
         </Btn>
       )}

@@ -1,4 +1,4 @@
-export enum typeRequest {}
+import { requestsEnum } from "@repo/lib/types";
 
 export type animalType = {
   id: number;
@@ -49,7 +49,7 @@ export type requestCardType = {
   description: string;
   voice: null | string;
   video: null | string;
-  type: typeRequest;
+  type: requestsEnum;
   date: string;
   time: string;
   rancher: rancherType;
@@ -57,4 +57,6 @@ export type requestCardType = {
   animals: animalType[];
   image: null | string;
   tracking_code: string;
+  latitude: string;
+  longitude: string;
 };

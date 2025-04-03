@@ -21,6 +21,7 @@ export const Btn: FC<BtnProps> = ({
   return (
     <button
       className={`${outline ? `ui-btn ui-btn-outline ui-btn-lg ${!!bgColor ? bgColor : "ui-btn-success"}` : `ui-btn ${!!bgColor ? bgColor : "ui-bg-green_vetone hover:ui-bg-green-600 ui-text-white"} ui-border-none ${className}`} `}
+      disabled={loading}
       {...props}
     >
       {loading ? (

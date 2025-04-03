@@ -2,9 +2,9 @@
 import { requestCardType } from "@/lib/types/request.type";
 import {
   IMAGE_PLACEHOLDER,
-  LINK_DASHBOARD_CLIENT,
-  LINK_DASHBOARD_VET,
+  LINK_DASHBOARD_VET
 } from "@repo/lib/links";
+import { requestsEnum } from "@repo/lib/types";
 import { Btn } from "@repo/ui/btn";
 import { IconCaretLeftFilled } from "@tabler/icons-react";
 import Link from "next/link";
@@ -30,9 +30,15 @@ function RequestCard({ request }: { request: requestCardType }) {
               </p>
             </div>
           </div>
-          <div className="justify-self-end badge  bg-green-50 text-green-600  p-4 text-[10px] lg:text-xs">
-            حضوری
-          </div>
+          {request.type === requestsEnum.InPerson ? (
+            <div className="justify-self-end badge  bg-green-50 text-green-600  p-4 text-[10px] lg:text-xs">
+              حضوری
+            </div>
+          ) : (
+            <div className="justify-self-end badge  bg-yellow-400 text-yellow-600  p-4 text-[10px] lg:text-xs">
+              تماس
+            </div>
+          )}
         </div>
         <div className="divider"></div>
         <div className="grid grid-cols-1">
@@ -58,13 +64,18 @@ function RequestCard({ request }: { request: requestCardType }) {
               <p className="text-[12px] lg:text-xs text-gray-600 font-regular">
                 کدرهگیری:
               </p>
-              <p className="text-[12px] lg:text-sm font-semibold">{request.tracking_code}</p>
+              <p className="text-[12px] lg:text-sm font-semibold">
+                {request.tracking_code}
+              </p>
             </div>
           </div>
         </div>
         <div className="divider"></div>
         <div className="flex justify-between items-center">
-          <Btn>تایید درخواست</Btn>
+          <div className="flex gap-x-2">
+            <Btn>تایید درخواست</Btn>
+            <Btn bgColor="ui-bg-red-600">رد درخواست</Btn>
+          </div>
           <Link
             href={`${LINK_DASHBOARD_VET}/my_requests/${request.id}`}
             className="text-[11px] lg:text-sm font-bold text-green-700 flex items-center gap-x-2"

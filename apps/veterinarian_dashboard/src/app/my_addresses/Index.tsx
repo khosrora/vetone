@@ -4,11 +4,11 @@ import { deleteDataAPI, fetcher } from "@/lib/fetch/fetch_axios";
 import { AddressCardType } from "@/lib/types/addresses.type";
 import { Alert } from "@repo/ui/alert";
 import { Btn } from "@repo/ui/btn";
-import { IconEdit, IconMail, IconMapPin, IconTrash } from "@tabler/icons-react";
+import { IconMapPin, IconTrash } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 import useSWR from "swr";
 import AddAddress from "./AddAddress";
-import { toast } from "sonner";
 
 function Index() {
   const { data: session } = useSession();
@@ -21,10 +21,12 @@ function Index() {
 
   const handleDelete = async (id: number) => {
     try {
-      const res = await deleteDataAPI(`province/addresses/${id}/`, token);
-      console.log(res.status);
+      const res = await deleteDataAPI(`/province/addresses/${id}/`, token);
+      if (res.status === 204) {
+        window.location.reload();
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("دوباره امتحان کنید");
     }
   };
@@ -91,10 +93,10 @@ function Index() {
                   <IconTrash />
                   <p>حذف آدرس</p>
                 </div>
-                <div className="flex justify-start items-center text-sky-600 gap-x-2">
+                {/* <div className="flex justify-start items-center text-sky-600 gap-x-2">
                   <IconEdit />
                   <p>ویرایش آدرس</p>
-                </div>
+                </div> */}
               </div>
             </div>
           ))
