@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
 import Provider from "@/app/Provider";
 import { Toaster } from "sonner";
+import NavigationBottom from "@/components/NavigationBottom";
 
 export const metadata: Metadata = {
   title: "پنل کاربری | دامدار",
@@ -39,6 +40,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
+          <NavigationBottom/>
         </Provider>
       </body>
     </html>

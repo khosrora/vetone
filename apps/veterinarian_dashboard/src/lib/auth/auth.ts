@@ -13,6 +13,7 @@ export interface IUser {
   is_superuser: boolean;
   last_login: string;
   password: string;
+  is_veterinarian:string;
   groups: number[];
   user_permissions: number[];
 }

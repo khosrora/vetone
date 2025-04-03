@@ -1,3 +1,4 @@
+import NavigationBottom from "@/components/NavigationBottom";
 import { LinkItems, linksDashboad } from "@/lib/constants/DashboardItems";
 import { IconChevronLeft, IconLogout } from "@tabler/icons-react";
 import Link from "next/link";
@@ -37,6 +38,7 @@ function PhonePage() {
             <p>خروج</p>
           </div>
         </div>
+         <NavigationBottom/>
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ export interface IUser {
   password: string;
   groups: number[];
   user_permissions: number[];
+  is_veterinarian:string;
 }
 
 export type UserType = {
