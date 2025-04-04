@@ -1,4 +1,5 @@
 "use client";
+import { postDataAPI } from "@/lib/fetch/fetch_axios";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
 import { Btn } from "@repo/ui/btn";
@@ -14,8 +15,30 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 function VetCard({ item }: { item: VeterinarianCardType }) {
+  const { data: session } = useSession();
+  const token: string | undefined = session?.token.token;
   const { status } = useSession();
   const { push } = useRouter();
+
+  const handleAddFav = async (id: number) => {
+    try {
+      if (!!token) {
+        const res = await postDataAPI(
+          `/veterinary/favorites/add/`,
+          { veterinarian_id: id },
+          token
+        );
+        if (res.status === 201) {
+          toast.success("دامپزشک به لیست علاقه مندی ها اضافه شد.");
+        }
+      } else {
+        toast.warning("ابتدا وارد وب سایت شوید.");
+      }
+    } catch (error) {
+      toast.error("قبلا به لیست اضافه شده است");
+    }
+  };
+
   return (
     <div className="p-4  lg:p-6 bg-white rounded-md space-y-2">
       <div className="flex justify-between items-center">
@@ -39,7 +62,10 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
             </div>
           </div>
           <IconShare />
-          <IconHeart />
+          <IconHeart
+            className="cursor-pointer"
+            onClick={() => handleAddFav(item.id)}
+          />
         </div>
       </div>
       <div className="divider"></div>

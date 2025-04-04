@@ -3,7 +3,8 @@ import Link from "next/link";
 import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { requestCardType } from "@/lib/types/request.type";
 import { IMAGE_PLACEHOLDER, LINK_DASHBOARD_CLIENT } from "@repo/lib/links";
-import { requestsEnum } from "@repo/lib/types";
+import { requestsEnum, requestsStateEnum } from "@repo/lib/types";
+import Moment from "./Moment";
 
 function RequestCard({ request }: { request: requestCardType }) {
   return (
@@ -46,17 +47,30 @@ function RequestCard({ request }: { request: requestCardType }) {
                 {" "}
                 تاریخ:
               </p>
-              <p className="text-[10px] lg:text-sm font-semibold">
-                {request.date}
-              </p>
+              <Moment time={request.date} />
             </div>
             <div className="flex items-center gap-x-3 justify-self-end md:justify-self-start">
               <p className="text-[11px] lg:text-xs text-gray-600 font-regular">
                 وضعیت:
               </p>
-              <p className="text-[11px] lg:text-sm text-yellow-500 font-semibold">
-                درانتطار تایید
-              </p>
+              <div className="flex items-center gap-x-3 justify-self-end  md:justify-self-center">
+                <p className="text-[12px] lg:text-xs text-gray-600 font-regular">
+                  وضعیت:
+                </p>
+                {request.state === requestsStateEnum.Reject ? (
+                  <p className="text-[12px] lg:text-sm text-red-500 font-semibold">
+                    رد شده
+                  </p>
+                ) : request.state === requestsStateEnum.New ? (
+                  <p className="text-[12px] lg:text-sm text-yellow-500 font-semibold">
+                    درانتطار تایید
+                  </p>
+                ) : (
+                  <p className="text-[12px] lg:text-sm text-green-600 font-semibold">
+                    تایید شده
+                  </p>
+                )}
+              </div>
             </div>
             <div className="flex items-center gap-x-3">
               <p className="text-[11px] lg:text-xs text-gray-600 font-regular">

@@ -17,7 +17,7 @@ export enum typeQuery {
 function Index({ type }: { type: string }) {
   const { data: session } = useSession();
   const token: string = session?.token.token!;
-  const { data: requests, isLoading } = useSWR(
+  const { data: requests, isLoading , mutate } = useSWR(
     !!token ? [`/veterinary/requests/`, token] : null,
     fetcher
   );
@@ -46,7 +46,7 @@ function Index({ type }: { type: string }) {
           </div>
           <div className="grid gap-4 grid-cols-1 ">
             {requests.results.map((item: requestCardType) => (
-              <RequestCard key={item.id} request={item} />
+              <RequestCard key={item.id} request={item} token={token} mutate={mutate} />
             ))}
           </div>
         </>

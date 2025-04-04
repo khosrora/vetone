@@ -1,4 +1,4 @@
-import { requestsEnum } from "@repo/lib/types";
+import { requestsEnum, requestsStateEnum } from "@repo/lib/types";
 
 export type animalType = {
   id: number;
@@ -50,6 +50,7 @@ export type requestCardType = {
   voice: null | string;
   video: null | string;
   type: requestsEnum;
+  state: requestsStateEnum;
   date: string;
   time: string;
   rancher: rancherType;

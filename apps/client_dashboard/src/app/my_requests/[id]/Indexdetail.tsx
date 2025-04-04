@@ -4,6 +4,7 @@ import TitleBack from "@/components/TitleBack";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { animalType, requestCardType } from "@/lib/types/request.type";
 import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
+import { requestsStateEnum } from "@repo/lib/types";
 import { Alert } from "@repo/ui/alert";
 import { IconPhone, IconRadar2 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
@@ -26,9 +27,19 @@ function Indexreqdetail({ id }: { id: string }) {
       <div className="p-4 space-y-4 ">
         <div className="flex justify-between items-center">
           <TitleBack text="جزئیات درخواست" />
-          <div className="justify-self-end  bg-yellow-50 text-green-00  p-4 text-[10px] lg:text-xs text-yellow-600">
-            در انتظار تایید
-          </div>
+          {request.state === requestsStateEnum.Reject ? (
+            <div className="justify-self-end   bg-red-50 text-green-00  p-4 text-[10px] lg:text-xs text-red-600">
+              رد شده
+            </div>
+          ) : request.state === requestsStateEnum.New ? (
+            <div className="justify-self-end   bg-yellow-50 text-green-00  p-4 text-[10px] lg:text-xs text-yellow-600">
+              در انتظار تایید
+            </div>
+          ) : (
+            <div className="justify-self-end   bg-green-50 text-green-00  p-4 text-[10px] lg:text-xs text-green-600">
+              تایید شده
+            </div>
+          )}
         </div>
 
         <div className="space-y-4">
