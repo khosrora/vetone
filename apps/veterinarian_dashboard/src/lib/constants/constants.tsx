@@ -1,9 +1,10 @@
 import {
   IconBuildingHospital,
   IconHomeFilled,
+  IconUser
 } from "@tabler/icons-react";
 import { JSX } from "react";
-import { LINK_DASHBOARD_CLIENT, LINK_DASHBOARD_VET, LINK_LANDINGPAGE } from "@repo/lib/links";
+import {LINK_LANDINGPAGE } from "@repo/lib/links";
 export type navigationBottomType = {
   id: number;
   title: string;
@@ -32,8 +33,13 @@ export const constantsItemsNavigation: navigationBottomType[] = [
   {
     id: 2,
     title: "دامپزشکان",
-    link: "/search_veterinarians",
+    link: `${LINK_LANDINGPAGE}search_veterinarians`,
     icon: <IconBuildingHospital />,
   },
- 
+  {
+    id: 3,
+    title: "پنل کاربری",
+    link: "/",
+    icon: <IconUser />,
+  },
 ];

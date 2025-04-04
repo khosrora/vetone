@@ -40,7 +40,6 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-          <NavigationBottom/>
         </Provider>
       </body>
     </html>
