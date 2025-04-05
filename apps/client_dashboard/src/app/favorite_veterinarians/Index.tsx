@@ -6,7 +6,7 @@ import { Alert } from "@repo/ui/alert";
 import { useSession } from "next-auth/react";
 import React from "react";
 import useSWR from "swr";
-
+import Loader from "@/components/Loader";
 function Index() {
   const { data: session } = useSession();
   const token: string = session?.token.token!;
@@ -16,7 +16,11 @@ function Index() {
     mutate,
   } = useSWR(!!token ? [`/veterinary/favorites/`, token] : null, fetcher);
 
-  if (isLoading || !cards) return <p> please wait ... </p>;
+  if (isLoading || !cards) {
+     return (
+    <Loader/>
+    )
+  }
   console.log(cards);
   return (
     <div className="grid gap-4 grid-cols-1 ">

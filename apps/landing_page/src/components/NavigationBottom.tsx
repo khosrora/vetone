@@ -35,7 +35,7 @@ function NavigationBottom() {
   };
 
   return (
-    <div className="fixed bottom-0 bg-white left-0 right-0 z-[1] rounded-t-2xl shadow-2xl lg:hidden">
+    <div className="fixed bottom-0 bg-white left-0 right-0 z-[999] rounded-t-2xl shadow-2xl lg:hidden">
       <div className="grid grid-cols-3">
         
         {constantsItemsNavigation.map((item: navigationBottomType) => (

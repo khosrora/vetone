@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { requestCardType } from "@/lib/types/request.type";
-
+import Loader from "@/components/Loader";
 export enum typeQuery {
   all = "all",
   inPerson = "inPerson",
@@ -20,7 +20,11 @@ function Index({ type }: { type: string }) {
     fetcher
   );
 
-  if (isLoading || !requests) return <p> please wait ... </p>;
+  if (isLoading || !requests) {
+  return (
+    <Loader/>
+    )
+  }
 
   return (
     <div className="p-4 space-y-4">

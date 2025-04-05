@@ -8,7 +8,7 @@ import { IconDownload } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import React from "react";
 import useSWR from "swr";
-
+import Loader from "@/components/Loader";
 function Index() {
   const { data: session } = useSession();
   const token = session?.token.token;
@@ -17,7 +17,11 @@ function Index() {
     !!token ? ["/wallet/transactions", token] : null,
     fetcher
   );
-  if (isLoading || !token) return <>please wait ...</>;
+  if (isLoading || !token) {
+    return (
+    <Loader/>
+    );
+  }
   console.log(wallets.results);
   return (
     <div className="p-4">

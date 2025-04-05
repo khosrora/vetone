@@ -8,7 +8,7 @@ import { requestCardType } from "@/lib/types/request.type";
 import { Alert } from "@repo/ui/alert";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
-
+import Loader from "@/components/Loader";
 export enum typeQuery {
   all = "all",
   inPerson = "inPerson",
@@ -22,7 +22,11 @@ function Index({ type }: { type: string }) {
     fetcher
   );
 
-  if (isLoading || !requests) return <p> please wait ... </p>;
+  if (isLoading || !requests) {
+    return (
+    <Loader/>
+    );
+  }
   return (
     <div className="p-4 space-y-4">
       <TitleBack text="درخواست های من" />

@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import { Alert } from "@repo/ui/alert";
 import { RanchersCardTypes } from "@/lib/types/ranchers.type";
 import Link from "next/link";
-
+import Loader from "@/components/Loader";
 function Index() {
   const { data: session } = useSession();
   const token = session?.token.token;
@@ -19,7 +19,11 @@ function Index() {
     fetcher
   );
 
-  if (isLoading || !token) return <>please wait ...</>;
+  if (isLoading || !token) {
+    return (
+    <Loader/>
+    );
+  }
   return (
     <div className="p-4 space-y-4">
       <div className="flex justify-between items-center">

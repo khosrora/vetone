@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/Loader";
 import Rasitem from "@/components/Rasitem";
 import TitleBack from "@/components/TitleBack";
 import { fetcher } from "@/lib/fetch/fetch_axios";
@@ -20,7 +21,11 @@ function Indexreqdetail({ id }: { id: string }) {
     fetcher
   );
 
-  if (isLoading || !data) return <p> please wait ... </p>;
+  if (isLoading || !data) {
+    return(
+      <Loader/>
+    )
+  }
   const request: requestCardType = data;
   return (
     <div>
@@ -71,7 +76,7 @@ function Indexreqdetail({ id }: { id: string }) {
               <div className="divider"></div>
               <div className="grid grid-cols-1">
                 <div className="flex lg:grid-cols-4 gap-4 gap-x-8 items-center py-3 ">
-                  <div className="lg:flex lg:items-center lg:space-y-0 lg:gap-x-4 space-y-3">
+                  <div className="flex items-center lg:space-y-0 lg:gap-x-4 justify-between">
                     <p className="text-[12px] lg:text-xs text-gray-600 font-regular flex gap-x-2 items-center">
                       <IconRadar2 size={20} color="blue" />
                       آدرس:

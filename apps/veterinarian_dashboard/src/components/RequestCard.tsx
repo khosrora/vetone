@@ -127,7 +127,7 @@ function RequestCard({
           )}
           <Link
             href={`${LINK_DASHBOARD_VET}/my_requests/${request.id}`}
-            className="text-[11px] lg:text-sm font-bold text-green-700 flex items-center gap-x-2"
+            className="text-[10px] lg:text-sm font-bold text-green-700 flex items-center gap-x-2"
           >
             جزئیات درخواست
             <IconCaretLeftFilled />

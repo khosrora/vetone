@@ -5,7 +5,7 @@ function Moment({ time }: { time: string }) {
   return (
     <>
       {!!time && (
-        <p>{moment(time, "YYYY/MM/DD").locale("fa").format("YYYY/MM/DD")}</p>
+        <p className="text-[12px] lg:text-sm">{moment(time, "YYYY/MM/DD").locale("fa").format("YYYY/MM/DD")}</p>
       )}
     </>
   );
