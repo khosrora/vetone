@@ -32,9 +32,9 @@ export default function RootLayout({
           />
           <div className="max-w-7xl m-auto lg:py-4">
             <Header />
-            <div className="grid grid-cols-7 gap-x-6 lg:mt-4">
+            <div className="grid grid-cols-7 lg:grid-cols-8 gap-x-6 lg:mt-6">
               <SideBar />
-              <div className="col-span-7 lg:col-span-5">
+              <div className="col-span-7 lg:col-span-6">
                 <div className="mb-32">{children}</div>
               </div>
             </div>

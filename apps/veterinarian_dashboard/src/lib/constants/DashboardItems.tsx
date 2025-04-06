@@ -18,7 +18,7 @@ export const linksDashboad: LinkItems[] = [
   {
     id: 1,
     icon: <IconStethoscope/>,
-    title: "اطلاعات دامپزشک",
+    title: "داشبورد دامپزشک",
     link: "/",
   },
   {
