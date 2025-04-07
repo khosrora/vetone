@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import useSWR from "swr";
 import AddAddress from "./AddAddress";
-import Loader from "@/components/Loader";
+import VeterinarianLoading from "@/components/VeterinarianLoading";
 function Index() {
   const { data: session } = useSession();
   const token = session?.token.token;
@@ -33,7 +33,7 @@ function Index() {
 
   if (isLoading || !token) {
       return (
-      <Loader/>
+      <VeterinarianLoading/>
       );
     }
   return (

@@ -8,7 +8,8 @@ import { requestCardType } from "@/lib/types/request.type";
 import { Alert } from "@repo/ui/alert";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
-import Loader from "@/components/Loader";
+
+import VeterinarianLoading from "../../components/VeterinarianLoading";
 export enum typeQuery {
   all = "all",
   inPerson = "inPerson",
@@ -24,7 +25,7 @@ function Index({ type }: { type: string }) {
 
   if (isLoading || !requests) {
     return (
-    <Loader/>
+    <VeterinarianLoading/>
     );
   }
   return (

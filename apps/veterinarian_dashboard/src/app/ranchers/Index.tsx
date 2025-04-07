@@ -10,6 +10,7 @@ import { Alert } from "@repo/ui/alert";
 import { RanchersCardTypes } from "@/lib/types/ranchers.type";
 import Link from "next/link";
 import Loader from "@/components/Loader";
+import VeterinarianLoading from "@/components/VeterinarianLoading";
 function Index() {
   const { data: session } = useSession();
   const token = session?.token.token;
@@ -21,7 +22,7 @@ function Index() {
 
   if (isLoading || !token) {
     return (
-    <Loader/>
+    <VeterinarianLoading/>
     );
   }
   return (
