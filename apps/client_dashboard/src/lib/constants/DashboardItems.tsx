@@ -18,6 +18,12 @@ export const linksDashboad: LinkItems[] = [
   {
     id: 1,
     icon: <IconUser size={20}/>,
+    title: "داشبورد دامدار",
+    link: "/dashboard",
+  },
+  {
+    id: 1,
+    icon: <IconUser size={20}/>,
     title: "ویرایش پروفایل",
     link: "/profile",
   },

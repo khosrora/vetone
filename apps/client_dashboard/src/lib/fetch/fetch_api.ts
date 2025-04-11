@@ -106,3 +106,19 @@ export const get_method = async (
 
   return res.json();
 };
+
+export const authFetcher = async ([url, token]: [string, string]) => {
+  const res = await fetch(`${base_api}${url}`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: !!token ? "Token " + token : "",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch " + url);
+  }
+
+  return res.json();
+};
