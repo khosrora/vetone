@@ -11,6 +11,7 @@ import Error from "./Error";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { authFetcher } from "@/lib/fetch/fetch_api";
+import VeterinarianLoading from "./VeterinarianLoading";
 export default function Desktop() {
     const { data: session } = useSession();
     const token: string = session?.token.token!;
@@ -29,7 +30,7 @@ export default function Desktop() {
         return { user: info, favorites }; 
     });
 
-       if (isLoading) return <Loader />;
+       if (isLoading) return <VeterinarianLoading />;
        if (error) return <Error/>;
        if (!data) return null;
 

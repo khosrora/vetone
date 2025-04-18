@@ -2,6 +2,7 @@
 import Loader from "@/components/Loader";
 import Rasitem from "@/components/Rasitem";
 import TitleBack from "@/components/TitleBack";
+import VeterinarianLoading from "@/components/VeterinarianLoading";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { animalType, requestCardType } from "@/lib/types/request.type";
 import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
@@ -23,7 +24,7 @@ function Indexreqdetail({ id }: { id: string }) {
 
   if (isLoading || !data) {
     return(
-      <Loader/>
+      <VeterinarianLoading/>
     )
   }
   const request: requestCardType = data;

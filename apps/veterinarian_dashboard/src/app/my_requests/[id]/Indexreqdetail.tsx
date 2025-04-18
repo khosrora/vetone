@@ -1,6 +1,7 @@
 "use client";
 import Rasitem from "@/components/Rasitem";
 import TitleBack from "@/components/TitleBack";
+import VeterinarianLoading from "@/components/VeterinarianLoading";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { animalType, requestCardType } from "@/lib/types/request.type";
 import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
@@ -20,7 +21,9 @@ function Indexreqdetail({ id }: { id: string }) {
     fetcher
   );
 
-  if (isLoading || !data) return <p> please wait ... </p>;
+  if (isLoading || !data) return (
+    <VeterinarianLoading/>
+  )
   const request: requestCardType = data;
 
   return (

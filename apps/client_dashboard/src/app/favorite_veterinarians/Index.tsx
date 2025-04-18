@@ -6,7 +6,7 @@ import { Alert } from "@repo/ui/alert";
 import { useSession } from "next-auth/react";
 import React from "react";
 import useSWR from "swr";
-import Loader from "@/components/Loader";
+import VeterinarianLoading from "@/components/VeterinarianLoading";
 function Index() {
   const { data: session } = useSession();
   const token: string = session?.token.token!;
@@ -18,7 +18,7 @@ function Index() {
 
   if (isLoading || !cards) {
      return (
-    <Loader/>
+    <VeterinarianLoading/>
     )
   }
   console.log(cards);

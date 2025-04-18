@@ -1,5 +1,5 @@
 "use client";
-import { IconChevronLeft , IconClipboardTextFilled } from "@tabler/icons-react";
+import { IconChevronLeft, IconClipboardTextFilled } from "@tabler/icons-react";
 import Link from "next/link";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,12 +15,12 @@ function News() {
 
   if (isLoading) {
     return (
-    <Loader/>
+      <Loader />
     );
   }
   // نمایش پیام هنگام بارگذاری
   if (!news || !news.results || news.results.length === 0)
-    return <Datanull/>
+    return <Datanull />
   return (
     <div className="pb-4">
       <Swiper
@@ -46,7 +46,7 @@ function News() {
                 <Moment time={item.created_at} />
                 <div className="flex justify-end items-center gap-x-2">
                   <small className="text-blue-500 text-[10px] md:text-sm">
-                 مطالعه بیشتر
+                    مطالعه بیشتر
                   </small>
                   <IconChevronLeft className="text-blue-500 hidden md:block" />
                 </div>
