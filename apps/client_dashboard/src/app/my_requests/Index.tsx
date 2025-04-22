@@ -7,6 +7,7 @@ import useSWR from "swr";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { requestCardType } from "@/lib/types/request.type";
 import Loader from "@/components/Loader";
+import VeterinarianLoading from "@/components/VeterinarianLoading";
 export enum typeQuery {
   all = "all",
   inPerson = "inPerson",
@@ -22,7 +23,7 @@ function Index({ type }: { type: string }) {
 
   if (isLoading || !requests) {
   return (
-    <Loader/>
+    <VeterinarianLoading/>
     )
   }
 

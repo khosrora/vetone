@@ -1,5 +1,6 @@
 "use client";
 import Back from "@/components/Back";
+import Loader from "@/components/Loader";
 import { AnimalsContext, AnimalCard } from "@/lib/context/animals.context";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { AnimalsCardType } from "@/lib/types/AnimalsTypes";
@@ -21,7 +22,7 @@ function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
   const { animals, addAnimal, incrementQuantity, decrementQuantity } =
     useContext(AnimalsContext);
 
-  if (isLoading || !data) return <p>please wait ...</p>;
+  if (isLoading || !data) return (<Loader/>);
   return (
     <div className="space-y-4">
       <Back title="نوع جاندار" />

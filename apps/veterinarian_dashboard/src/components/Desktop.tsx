@@ -14,6 +14,7 @@ import { Alert } from "@repo/ui/alert";
 import { LINK_DASHBOARD_VET } from "@repo/lib/links";
 import Link from "next/link";
 import { requestsStateEnum } from "@repo/lib/types";
+import VeterinarianLoading from "./VeterinarianLoading";
 export default function Desktop() {
     const { data: session } = useSession();
     const token: string = session?.token.token!;
@@ -32,7 +33,7 @@ export default function Desktop() {
             return { user: info, request };
         });
 
-    if (isLoading) return <Loader />;
+    if (isLoading) return <VeterinarianLoading />;
     if (error) return <Error />;
     if (!data) return null;
     const { user, request } = data;
