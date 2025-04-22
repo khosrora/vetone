@@ -17,7 +17,7 @@ export function Alert({ message, icon, type = "info", onDismiss }: AlertProps) {
   }[type];
 
   return (
-    <div role="alert" className={`ui-alert ${alertTypeClass} ui-mx-auto`}>
+    <div role="alert" className={`ui-alert ${alertTypeClass} ui-mx-auto ui-flex ui-flex-col ui-w-full`}>
 
       {/* Icon */}
       {icon || (

@@ -34,7 +34,7 @@ function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
             onClick={() => addAnimal({ id: item.id, name: item.name })}
           >
             <Image
-              src={"/images/animals/goat.png"}
+              src={item?.image}
               width={70}
               height={70}
               alt="goat"

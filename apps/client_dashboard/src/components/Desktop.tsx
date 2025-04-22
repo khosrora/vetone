@@ -102,6 +102,12 @@ export default function Desktop() {
                 <div>
                     <div>
                         <h3 className="text-lg font-bold my-4">دامپزشکان مورد علاقه</h3>
+                        {favorites?.length === 0 ? (
+                                    <Alert
+                                      message="در حال حاضر اطلاعاتی جهت نمایش وجود ندارد."
+                                      type="info"
+                                    />
+                                  ) : (
                         <div className="overflow-x-auto">
                             <table className="table table-zebra text-right">
                                 <thead>
@@ -119,13 +125,7 @@ export default function Desktop() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                             {favorites?.length === 0 ? (
-                                    <Alert
-                                      message="در حال حاضر اطلاعاتی جهت نمایش وجود ندارد."
-                                      type="info"
-                                    />
-                                  ) : (
-                                    favorites.map((item: FavoriteCardType) => (
+                                    {favorites.map((item: FavoriteCardType) => (
                                     <tr key={item.id}>
                                         <th>{item.fullName}</th>
                                         <td>{item.phone}</td>
@@ -133,12 +133,12 @@ export default function Desktop() {
                                         <td className="text-green_vetone"><Link href={`${LINK_LANDINGPAGE}/search_veterinarians/${item.slug}`}>مشاهده دامپزشک</Link></td>
                                     </tr>
                                 
-                            ))
-                        )}
-
+                            ))}
+                     
                                 </tbody>
                             </table>
                         </div>
+                           )}
                     </div>
                 </div>
             </div>
