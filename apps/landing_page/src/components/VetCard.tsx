@@ -1,7 +1,7 @@
 "use client";
 import { postDataAPI } from "@/lib/fetch/fetch_axios";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
-import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
+import { IMAGE_PLACEHOLDER, LINK_LANDINGPAGE } from "@repo/lib/links";
 import { Btn } from "@repo/ui/btn";
 import {
   IconCarambolaFilled,
@@ -13,8 +13,16 @@ import {
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Share from "./Share";
+import { Dispatch, SetStateAction } from "react";
 
-function VetCard({ item }: { item: VeterinarianCardType }) {
+function VetCard({
+  item,
+  setItemId,
+}: {
+  item: VeterinarianCardType;
+  setItemId?: Dispatch<SetStateAction<string | undefined>>;
+}) {
   const { data: session } = useSession();
   const token: string | undefined = session?.token.token;
   const { status } = useSession();
@@ -51,7 +59,10 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
             <p className="font-bold text-base lg:text-xl block">
               {item.fullName}
             </p>
-            <p className="text-[11px] texxt-gray-500  ">{item.experience}</p>
+            <p className="text-[11px] texxt-gray-500  ">
+              {" "}
+              <span>سابقه کاری :</span> {item.experience}
+            </p>
           </div>
         </div>
         <div className="flex justify-end items-center gap-x-4 lg:gap-x-4">
@@ -61,7 +72,9 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
               <p>{item.rate}</p>
             </div>
           </div>
-          <IconShare />
+          <Share
+            link={`${LINK_LANDINGPAGE}search_veterinarians/${item.slug}`}
+          />
           <IconHeart
             className="cursor-pointer"
             onClick={() => handleAddFav(item.id)}
@@ -103,9 +116,16 @@ function VetCard({ item }: { item: VeterinarianCardType }) {
         <Btn
           className="col-span-2 md:col-span-1 text-sm"
           onClick={() => {
+            if (!!setItemId) {
+              setItemId(String(item.id));
+            }
             if (status === "unauthenticated")
               return toast.error("ابتدا وارد شوید.");
-            push(`/receive_services?veterinarian=${item.id}`);
+            if (document) {
+              (
+                document.getElementById("my_modal_2") as HTMLFormElement
+              ).showModal();
+            }
           }}
         >
           نوبت مشاوره

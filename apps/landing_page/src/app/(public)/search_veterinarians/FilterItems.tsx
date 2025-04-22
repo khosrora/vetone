@@ -2,26 +2,45 @@
 import SearchBoxName from "@/components/SearchBoxName";
 import { province, ProvinceType } from "@/lib/constants/cities";
 import {
+  IconAdjustmentsAlt,
   IconChevronDown,
   IconChevronUp,
-  IconAdjustmentsAlt,
 } from "@tabler/icons-react";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-function FilterItems() {
-  const [type, setType] = useState<boolean>(false);
-  const [category, setCategory] = useState<boolean>(false);
-  const [activity, setActivity] = useState<boolean>(false);
+function FilterItems({ onDismiss }: { onDismiss?: any }) {
+  const router = useRouter();
+  // const [type, setType] = useState<boolean>(false);
+  // const [category, setCategory] = useState<boolean>(false);
+  const [activity, setActivity] = useState<boolean>(true);
   const [searchProvince, setSearchProvince] = useState<string>("");
+
+  const handleRoute = (provinceValue: string): void => {
+    let url = "/search_veterinarians/?";
+
+    const currentQuery = new URLSearchParams(window.location.search);
+
+    if (provinceValue) {
+      currentQuery.set("province", provinceValue);
+    }
+
+    url += currentQuery.toString();
+
+    router.push(url);
+    if (!!onDismiss) {
+      onDismiss();
+    }
+  };
 
   return (
     <div className="bg-white rounded-md w-full p-4 lg:p-6 space-y-6 sticky top-0">
       <div className="flex gap-x-2">
         <IconAdjustmentsAlt />
-        <p>فیلتره</p>
+        <p>فیلتر</p>
       </div>
-      <SearchBoxName bgColor="bg-zinc-100 py-3" />
-      <div className="">
+      <SearchBoxName bgColor="bg-zinc-100 py-3" onDismiss={onDismiss} />
+      {/* <div className="">
         <div
           className={`label flex justify-between items-center cursor-pointer border-b-2 border-solid border-b-gray-100 py-3 ${!!type && "border-b-2 border-solid border-b-gray-100 py-3 my-2"}`}
           onClick={() => {
@@ -74,7 +93,7 @@ function FilterItems() {
             ))}
           </div>
         )}
-      </div>
+      </div> */}
       <div className="">
         <div
           className={`label flex justify-between items-center cursor-pointer border-b-2 border-solid border-b-gray-100 py-3 ${!!activity && "border-b-2 border-solid border-b-gray-200 py-3 my-2"}`}
@@ -101,6 +120,11 @@ function FilterItems() {
                           type="radio"
                           name="activity"
                           className="radio radio-success"
+                          value={item.pk}
+                          // defaultChecked={provinceId === item.pk ? true : false}
+                          onChange={(e) => {
+                            handleRoute(e.target.value as string);
+                          }}
                         />
                         <span className="label-text">{item.fields.name}</span>
                       </label>
@@ -112,10 +136,10 @@ function FilterItems() {
           </div>
         )}
       </div>
-      <div className="flex justify-between items-center">
+      {/* <div className="flex justify-between items-center">
         <p>فقط دامپزشکان دارای نوبت باز</p>
         <input type="checkbox" className="toggle toggle-success" />
-      </div>
+      </div> */}
     </div>
   );
 }

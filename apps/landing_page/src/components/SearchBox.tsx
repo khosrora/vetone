@@ -21,6 +21,20 @@ function SearchBox() {
     setOpen(false);
   }
 
+  const handleRoute = (fullName: string): void => {
+    let url = "/search_veterinarians/?";
+
+    const currentQuery = new URLSearchParams(window.location.search);
+
+    if (fullName) {
+      currentQuery.set("fullName", fullName);
+    }
+
+    url += currentQuery.toString();
+
+    push(url);
+  };
+
   return (
     <div className="px-4">
       <div className="w-full grid grid-cols-2 lg:grid-cols-4 justify-between items-center bg-white p-2 lg:p-4 rounded-md max-w-2xl m-auto">
@@ -30,11 +44,13 @@ function SearchBox() {
           onChange={(e) => setSearchText(e.target.value)}
         />
         {searchText ? (
-          <Btn onClick={() => push(`/veterinarian?name=${searchText}`)}>
+          <Btn
+            onClick={() => push(`/search_veterinarians?fullName=${searchText}`)}
+          >
             <IconSearch /> جستجو
           </Btn>
         ) : (
-          <Btn onClick={() => setOpen(true)} >
+          <Btn onClick={() => setOpen(true)}>
             <IconMapPin className="md:block" size={16} /> انتخاب استان
           </Btn>
         )}
@@ -52,16 +68,18 @@ function SearchBox() {
               <div className="h-full overflow-y-scroll mt-2 space-y-2">
                 <input
                   type="text"
-                  placeholder="نام استان مورد نظر را بنویسید"
+                  placeholder="نام دامپزشک مورد نظر را بنویسید"
                   className="w-full focus:outline-none bg-zinc-100 rounded-md p-2 text-xs"
-                  onChange={(e) => setSearchProvince(e.target.value)}
+                  onChange={(e) => handleRoute(e.target.value)}
                 />
                 {province.map((item: ProvinceType) => {
                   return item.fields.name.includes(searchProvince) ? (
                     <div
                       key={item.pk}
                       className="bg-zinc-100 px-4 py-3 lg:p-3 rounded-md cursor-pointer"
-                      onClick={() => push(`/veterinarian?province=${item.pk}`)}
+                      onClick={() =>
+                        push(`/search_veterinarians?province=${item.pk}`)
+                      }
                     >
                       <p>{item.fields.name}</p>
                     </div>

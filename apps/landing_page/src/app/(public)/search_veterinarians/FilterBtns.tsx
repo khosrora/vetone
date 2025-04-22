@@ -1,6 +1,9 @@
 "use client";
 import SearchBoxName from "@/components/SearchBoxName";
-import { IconAdjustmentsAlt, IconSortAscendingShapes } from "@tabler/icons-react";
+import {
+  IconAdjustmentsAlt,
+  IconSortAscendingShapes,
+} from "@tabler/icons-react";
 import Tags from "./Tags";
 import { useState } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
@@ -37,19 +40,19 @@ function FilterBtns() {
             <IconAdjustmentsAlt />
             <p className="font-bold text-sm lg:text-lg">فیلترها</p>
           </div>
-          <div className="divider divider-horizontal"></div>
+          {/* <div className="divider divider-horizontal"></div>
           <div
             className="flex justify-center items-center gap-x-4"
             onClick={() => handleOpenModal(filterEnum.sort)}
           >
             <IconSortAscendingShapes />
             <p className="font-bold text-sm lg:text-lg">مرتب سازی</p>
-          </div>
+          </div> */}
         </div>
       </div>
-      <div className="lg:hidden">
+      {/* <div className="lg:hidden">
         <Tags />
-      </div>
+      </div> */}
       <BottomSheet
         onDismiss={onDismiss}
         snapPoints={({ minHeight, maxHeight }) => [
@@ -58,7 +61,7 @@ function FilterBtns() {
         ]}
         open={open}
       >
-        <>{type === filterEnum.filter ? <FilterItems /> : <SortItems />}</>
+        <>{type === filterEnum.filter ? <FilterItems onDismiss={onDismiss} /> : <SortItems />}</>
       </BottomSheet>
     </>
   );
