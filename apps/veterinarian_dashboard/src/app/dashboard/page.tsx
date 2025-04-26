@@ -1,7 +1,5 @@
 import Desktop from "@/components/Desktop";
 
-export default function page(){
-    return(
-        <Desktop/>
-    )
+export default function page() {
+  return <Desktop />;
 }

@@ -1,13 +1,12 @@
 "use client";
 import RequestCard from "@/components/RequestCard";
 import TitleBack from "@/components/TitleBack";
-import Tabs from "./Tabs";
-import { useSession } from "next-auth/react";
-import useSWR from "swr";
+import VeterinarianLoading from "@/components/VeterinarianLoading";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { requestCardType } from "@/lib/types/request.type";
-import Loader from "@/components/Loader";
-import VeterinarianLoading from "@/components/VeterinarianLoading";
+import { useSession } from "next-auth/react";
+import useSWR from "swr";
+import Tabs from "./Tabs";
 export enum typeQuery {
   all = "all",
   inPerson = "inPerson",
@@ -21,17 +20,11 @@ function Index({ type }: { type: string }) {
     fetcher
   );
 
-  if (isLoading || !requests) {
-  return (
-    <VeterinarianLoading/>
-    )
-  }
-
+  if (isLoading || !requests) return <VeterinarianLoading />;
   return (
     <div className="p-4 space-y-4">
       <TitleBack text="درخواست های من" />
       <Tabs type={type} />
-
       <div className="flex justify-between items-center py-1 lg:py-3" dir="rtl">
         <p className="font-bold text-sm lg:text-lg">وضعیت درخواست:</p>
         <select className="select select-bordered max-w-xs border-none focus:outline-none text-xs lg:text-sm">
@@ -40,7 +33,7 @@ function Index({ type }: { type: string }) {
         </select>
       </div>
       <div className="grid gap-4 grid-cols-1">
-        {requests.results.map((item: requestCardType) => (
+        {requests.map((item: requestCardType) => (
           <RequestCard key={item.id} request={item} />
         ))}
       </div>

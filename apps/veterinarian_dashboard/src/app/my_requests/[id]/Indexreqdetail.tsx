@@ -7,7 +7,11 @@ import { animalType, requestCardType } from "@/lib/types/request.type";
 import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
 import { requestsStateEnum } from "@repo/lib/types";
 import { Alert } from "@repo/ui/alert";
-import { IconPhone, IconRadar2 } from "@tabler/icons-react";
+import {
+  IconMessageChatbotFilled,
+  IconPhone,
+  IconRadar2,
+} from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import MediaThemeTailwindAudio from "player.style/tailwind-audio/react";
@@ -21,11 +25,8 @@ function Indexreqdetail({ id }: { id: string }) {
     fetcher
   );
 
-  if (isLoading || !data) return (
-    <VeterinarianLoading/>
-  )
+  if (isLoading || !data) return <VeterinarianLoading />;
   const request: requestCardType = data;
-
   return (
     <div>
       <div className="p-4 space-y-4 ">
@@ -47,6 +48,19 @@ function Indexreqdetail({ id }: { id: string }) {
         </div>
 
         <div className="space-y-4">
+          <div className="bg-white border-l-4 border-green-600 shadow-md rounded-xl p-4 my-6 flex items-start gap-4">
+            <div className="bg-green-100 text-green-700 p-2 rounded-full">
+              <IconMessageChatbotFilled />
+            </div>
+            <div>
+              <p className="text-sm text-black mb-1 font-black">
+                نظر هوش مصنوعی درباره این درخواست:
+              </p>
+              <p className="text-gray-700 leading-relaxed text-sm">
+                {request.analysis_result}
+              </p>
+            </div>
+          </div>
           {/* مشخصات دامدار*/}
           <div>
             <h1 className="font-bold py-4 text-sm">دامدار </h1>

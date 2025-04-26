@@ -8,7 +8,7 @@ import Image from "next/image";
 function ChoiceTypeRequest({ id }: { id: string }) {
   const { push } = useRouter();
   const handleTypeRequest = (type: requestsEnum) => {
-    push(`/receive_services?veterinarian=${id}?type=${type}`);
+    push(`/receive_services?veterinarian=${id}&type=${type}`);
   };
 
   return (

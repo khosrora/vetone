@@ -21,23 +21,33 @@ function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
 
   const { animals, addAnimal, incrementQuantity, decrementQuantity } =
     useContext(AnimalsContext);
-
-  if (isLoading || !data) return (<Loader/>);
+  console.log(animals);
+  if (isLoading || !data) return <Loader />;
   return (
     <div className="space-y-4">
       <Back title="نوع جاندار" />
       <div className="grid grid-cols-3 gap-4">
-        {data.results.map((item: AnimalsCardType) => (
+        {data.map((item: AnimalsCardType) => (
           <div
             key={item.id}
             className="flex flex-col justify-center items-center bg-white rounded-md py-2 cursor-pointer hover:bg-zinc-100"
-            onClick={() => addAnimal({ id: item.id, name: item.name })}
+            onClick={() =>
+              addAnimal({
+                id: item.id,
+                name: item.name,
+                image: item.image.image,
+              })
+            }
           >
             <Image
-              src={item?.image}
+              src={
+                !!item.image.image
+                  ? item.image.image
+                  : "/images/animals/goat.png"
+              }
               width={70}
               height={70}
-              alt="goat"
+              alt={item.name}
             />
             <span className="font-bold">{item.name}</span>
           </div>
@@ -46,12 +56,7 @@ function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
 
       {animals.map((item: AnimalCard) => (
         <div className="flex justify-between items-center bg-white rounded-md p-4">
-          <Image
-            src={"/images/animals/goat.png"}
-            width={50}
-            height={50}
-            alt="goat"
-          />
+          <Image src={item.image} width={50} height={50} alt={item.name} />
 
           <div className="flex justify-between items-center gap-x-3">
             <div

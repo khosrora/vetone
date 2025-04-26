@@ -13,11 +13,7 @@ function VeterinarianSlider() {
     fetcher
   );
 
-  if (isLoading){
-    return (
-        <Loader/>
-        );
-      }
+  if (isLoading) return <Loader />;
   return (
     <div className="pb-4">
       <Swiper
@@ -29,7 +25,7 @@ function VeterinarianSlider() {
           900: { slidesPerView: 8.5, spaceBetween: 16 },
         }}
       >
-        {veterinarians.results.map((item: VeterinarianCardType) => (
+        {veterinarians.map((item: VeterinarianCardType) => (
           <SwiperSlide key={item.id}>
             <Link
               href={`/`}

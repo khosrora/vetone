@@ -21,9 +21,7 @@ function Index() {
   );
 
   if (isLoading || !token) {
-    return (
-    <VeterinarianLoading/>
-    );
+    return <VeterinarianLoading />;
   }
   return (
     <div className="p-4 space-y-4">
@@ -42,7 +40,7 @@ function Index() {
         </Btn>
       </div>
       <div className="overflow-x-auto ">
-        {ranchers.results.length === 0 ? (
+        {ranchers.length === 0 ? (
           <Alert
             message="در حال حاضر اطلاعاتی جهت نمایش وجود ندارد."
             type="info"
@@ -61,7 +59,7 @@ function Index() {
               </tr>
             </thead>
             <tbody>
-              {ranchers.results.map((item: RanchersCardTypes) => (
+              {ranchers.map((item: RanchersCardTypes) => (
                 <tr>
                   <td className="text-black text-xs font-bold">
                     {item.fullName}

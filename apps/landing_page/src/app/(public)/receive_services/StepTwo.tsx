@@ -19,7 +19,7 @@ const MapCm = dynamic(() => import("./MapCm"), {
   ssr: false,
 });
 
-function StepTwo({ veterinarianId }: { veterinarianId: string }) {
+function StepTwo({ veterinarianId , type }: { veterinarianId: string , type : string }) {
   const [date, setDate] = useState<any>();
   const [dateValue, setDateValue] = useState<string[]>([]);
   const [latlong, setLatlong] = useState<[number, number] | undefined>();
@@ -85,6 +85,7 @@ function StepTwo({ veterinarianId }: { veterinarianId: string }) {
     if (!!latlong) formData.append("longitude", String(latlong[1]));
     if (!!veterinarianId) formData.append("veterinarian", veterinarianId);
     if (!!animals) formData.append("animals", JSON.stringify(animalsNewData));
+    if (!!type) formData.append("type", type);
 
     try {
       const { status } = await postDataAPI(

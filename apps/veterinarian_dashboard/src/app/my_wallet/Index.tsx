@@ -19,11 +19,8 @@ function Index() {
     fetcher
   );
   if (isLoading || !token) {
-    return (
-    <VeterinarianLoading/>
-    );
+    return <VeterinarianLoading />;
   }
-  console.log(wallets.results);
   return (
     <div className="p-4">
       <TitleBack text="کیف پول" />
@@ -40,7 +37,7 @@ function Index() {
       </div>
       <div className="divider"></div>
       <p className="font-bold my-4 text-lg">تراکنشات من</p>
-      {wallets.results.length === 0 ? (
+      {wallets.length === 0 ? (
         <Alert
           message="در حال حاضر اطلاعاتی جهت نمایش وجود ندارد."
           type="info"

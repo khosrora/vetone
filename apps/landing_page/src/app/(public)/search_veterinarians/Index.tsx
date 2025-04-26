@@ -35,14 +35,14 @@ function Index({
         <FilterBtns />
         {!!isLoading ? (
           <> </>
-        ) : initialData.results.length === 0 ? (
+        ) : initialData.length === 0 ? (
           <Alert
             message="در حال حاضر اطلاعاتی جهت نمایش وجود ندارد."
             type="info"
           />
         ) : (
           <>
-            {initialData.results.map((item: VeterinarianCardType) => (
+            {initialData.map((item: VeterinarianCardType) => (
               <VetCard key={item.id} item={item} setItemId={setItemId} />
             ))}
           </>

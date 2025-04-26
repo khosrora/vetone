@@ -14,13 +14,10 @@ function News() {
   const { data: news, isLoading } = useSWR([`/blog/blogs`], fetcher);
 
   if (isLoading) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
-  // نمایش پیام هنگام بارگذاری
-  if (!news || !news.results || news.results.length === 0)
-    return <Datanull />
+
+  if (!news || news.length === 0) return <Datanull />;
   return (
     <div className="pb-4">
       <Swiper
@@ -32,14 +29,16 @@ function News() {
           900: { slidesPerView: 4, spaceBetween: 16 },
         }}
       >
-        {news.results.map((item: blogCardType) => (
+        {news.map((item: blogCardType) => (
           <SwiperSlide key={item.id}>
             <Link href={"/blogs"} className="card bg-white">
               <figure>
                 <img src={item.image.image} alt={item.image_alt} />
               </figure>
               <div className="card-body p-4 space-y-2">
-                <h2 className="card-title text-sm md:text-base font-bold truncate">{item.title}</h2>
+                <h2 className="card-title text-sm md:text-base font-bold truncate">
+                  {item.title}
+                </h2>
                 <p className="text-xs lg:text-sm truncate">{item.short_desc}</p>
               </div>
               <div className="flex justify-between items-center pb-4 px-4 md:p-4 text-[10px]">

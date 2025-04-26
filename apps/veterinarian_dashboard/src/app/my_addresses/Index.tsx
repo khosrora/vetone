@@ -26,16 +26,13 @@ function Index() {
         window.location.reload();
       }
     } catch (error) {
-      console.log(error);
       toast.error("دوباره امتحان کنید");
     }
   };
 
   if (isLoading || !token) {
-      return (
-      <VeterinarianLoading/>
-      );
-    }
+    return <VeterinarianLoading />;
+  }
   return (
     <>
       <div className="flex justify-between items-center">

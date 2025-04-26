@@ -4,5 +4,11 @@ export type AnimalsCardType = {
   created_at: string;
   updated_at: string;
   name: string;
-  image: string;
+  image: {
+    id: number;
+    title: null | string;
+    image: string;
+    is_show: boolean;
+    url: string;
+  };
 };

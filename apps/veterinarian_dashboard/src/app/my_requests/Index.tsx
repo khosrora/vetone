@@ -18,21 +18,20 @@ export enum typeQuery {
 function Index({ type }: { type: string }) {
   const { data: session } = useSession();
   const token: string = session?.token.token!;
-  const { data: requests, isLoading , mutate } = useSWR(
-    !!token ? [`/veterinary/requests/`, token] : null,
-    fetcher
-  );
+  const {
+    data: requests,
+    isLoading,
+    mutate,
+  } = useSWR(!!token ? [`/veterinary/requests/`, token] : null, fetcher);
 
   if (isLoading || !requests) {
-    return (
-    <VeterinarianLoading/>
-    );
+    return <VeterinarianLoading />;
   }
   return (
     <div className="p-4 space-y-4">
       <TitleBack text="درخواست های من" />
       <Tabs type={type} />
-      {requests.results.length === 0 ? (
+      {requests.length === 0 ? (
         <Alert
           message="در حال حاضر اطلاعاتی جهت نمایش وجود ندارد."
           type="info"
@@ -50,8 +49,13 @@ function Index({ type }: { type: string }) {
             </select>
           </div>
           <div className="grid gap-4 grid-cols-1 ">
-            {requests.results.map((item: requestCardType) => (
-              <RequestCard key={item.id} request={item} token={token} mutate={mutate} />
+            {requests.map((item: requestCardType) => (
+              <RequestCard
+                key={item.id}
+                request={item}
+                token={token}
+                mutate={mutate}
+              />
             ))}
           </div>
         </>

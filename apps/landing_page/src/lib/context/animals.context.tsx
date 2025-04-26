@@ -6,6 +6,7 @@ export interface AnimalCard {
   id: number;
   name: string;
   quantity: number;
+  image: string;
 }
 
 // Define the type for the context value
