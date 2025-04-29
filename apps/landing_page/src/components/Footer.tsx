@@ -36,6 +36,9 @@ function Footer() {
             <li className="text-xs font-semibold">
               <Link href={`/aboutus`}>درباره ما</Link>
             </li>
+            <li className="text-xs font-semibold">
+              <Link href={`/question`}>قوانین مقررات</Link>
+            </li>
           </ul>
         </li>
         <li className="w-full lg:w-1/4">
