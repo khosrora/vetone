@@ -63,7 +63,7 @@ function Footer() {
           <p className="font-bold mb-2">همراه ما باشید</p>
           <ul className="flex justify-start items-center gap-4">
             <li className="text-xs font-semibold">
-              <Link href={"https://www.instagram.com/sirangco/"}>
+              <Link href={"https://www.instagram.com/Vetone.ir/"}>
                 <Image
                   src={`/shared/Instagram.png`}
                   width={24}
@@ -73,7 +73,7 @@ function Footer() {
               </Link>
             </li>
             <li className="text-xs font-semibold">
-              <Link href={"https://www.aparat.com/sirangco"}>
+              <Link href={"https://www.aparat.com/"}>
                 <Image
                   src={`/shared/aparat.png`}
                   width={24}
@@ -83,7 +83,7 @@ function Footer() {
               </Link>
             </li>
             <li className="text-xs font-semibold">
-              <Link href={"https://ir.linkedin.com/in/sirang"}>
+              <Link href={"https://ir.linkedin.com/in/"}>
                 <Image
                   src={`/shared/linkdin.png`}
                   width={24}
