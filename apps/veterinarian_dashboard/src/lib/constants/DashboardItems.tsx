@@ -5,6 +5,9 @@ import {
   IconWallet,
   IconPaw,
   IconStethoscope,
+  IconUser,
+  IconEdit,
+  IconRobot,
 } from "@tabler/icons-react";
 
 export type LinkItems = {
@@ -17,31 +20,43 @@ export type LinkItems = {
 export const linksDashboad: LinkItems[] = [
   {
     id: 1,
-    icon: <IconStethoscope/>,
+    icon: <IconStethoscope />,
     title: "داشبورد دامپزشک",
     link: "/dashboard",
   },
   {
     id: 2,
-    icon: <IconClipboardList size={20}/>,
+    icon: <IconUser />,
+    title: "ویرایش پروفایل",
+    link: "/profile",
+  },
+  {
+    id: 3,
+    icon: <IconRobot />,
+    title: "هوش مصنوعی دارو",
+    link: "/medicine",
+  },
+  {
+    id: 4,
+    icon: <IconClipboardList size={20} />,
     title: "درخواست های من",
     link: "/my_requests",
   },
   {
-    id: 3,
-    icon: <IconWallet size={20}/>,
+    id: 5,
+    icon: <IconWallet size={20} />,
     title: "کیف پول",
     link: "/my_wallet",
   },
   {
-    id: 5,
-    icon: <IconPaw size={20}/>,
+    id: 6,
+    icon: <IconPaw size={20} />,
     title: "دامدار ها",
     link: "/ranchers",
   },
   {
-    id: 6,
-    icon: <IconBrandGoogleMaps size={20}/>,
+    id: 7,
+    icon: <IconBrandGoogleMaps size={20} />,
     title: "آدرس محل کار",
     link: "/my_addresses",
   },

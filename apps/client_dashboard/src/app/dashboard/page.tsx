@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
-import Desktop from "@/components/Desktop"
-import { FavoriteCardType } from "@/lib/types/favoriteCard.type"
+import Desktop from "@/components/Desktop";
 
-export default function page(){
-    return(
-        <>
-        <Desktop />
-        </>
-    )
+export default function page() {
+  return (
+    <>
+      <Desktop />
+    </>
+  );
 }

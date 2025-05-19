@@ -1,5 +1,4 @@
 "use client";
-import Loader from "@/components/Loader";
 import Rasitem from "@/components/Rasitem";
 import TitleBack from "@/components/TitleBack";
 import VeterinarianLoading from "@/components/VeterinarianLoading";
@@ -8,7 +7,10 @@ import { animalType, requestCardType } from "@/lib/types/request.type";
 import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
 import { requestsStateEnum } from "@repo/lib/types";
 import { Alert } from "@repo/ui/alert";
-import { IconPhone, IconRadar2, IconMessageChatbotFilled } from "@tabler/icons-react";
+import {
+  IconPhone,
+  IconRadar2
+} from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import MediaThemeTailwindAudio from "player.style/tailwind-audio/react";
@@ -23,9 +25,7 @@ function Indexreqdetail({ id }: { id: string }) {
   );
 
   if (isLoading || !data) {
-    return (
-      <VeterinarianLoading />
-    )
+    return <VeterinarianLoading />;
   }
   const request: requestCardType = data;
   return (

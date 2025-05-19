@@ -1,4 +1,5 @@
 "use client";
+import ParsedText from "@/components/ParsedText";
 import Rasitem from "@/components/Rasitem";
 import TitleBack from "@/components/TitleBack";
 import VeterinarianLoading from "@/components/VeterinarianLoading";
@@ -52,12 +53,12 @@ function Indexreqdetail({ id }: { id: string }) {
             <div className="bg-green-100 text-green-700 p-2 rounded-full">
               <IconMessageChatbotFilled />
             </div>
-            <div>
+            <div className="max-h-64 overflow-y-scroll">
               <p className="text-sm text-black mb-1 font-black">
                 نظر هوش مصنوعی درباره این درخواست:
               </p>
               <p className="text-gray-700 leading-relaxed text-sm">
-                {request.analysis_result}
+                <ParsedText content={request.analysis_result} />
               </p>
             </div>
           </div>

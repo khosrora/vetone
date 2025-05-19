@@ -21,7 +21,6 @@ function Index() {
     <VeterinarianLoading/>
     )
   }
-  console.log(cards);
   return (
     <div className="grid gap-4 grid-cols-1 ">
       {cards.length === 0 ? (

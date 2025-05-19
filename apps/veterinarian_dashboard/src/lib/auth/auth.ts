@@ -11,9 +11,10 @@ export interface IUser {
   is_active: boolean;
   is_staff: boolean;
   is_superuser: boolean;
+  is_veterinarian: boolean;
   last_login: string;
   password: string;
-  is_veterinarian:string;
+  map: string;
   groups: number[];
   user_permissions: number[];
 }
@@ -73,12 +74,27 @@ export const authOptions: NextAuthOptions = {
     error: "/login",
   },
   callbacks: {
-    async jwt({ user, token }: any) {
-      if (user) {
-        token.user = user.user;
-        token.token = user.token;
+    async jwt({ token, user, trigger, session }: any) {
+      try {
+        if (trigger === "update") {
+          const res: AxiosResponse = await getDataAPI([
+            "/account/me/",
+            token.token.token,
+          ]);
+          if (res.status === 200) {
+            token.user = res.data;
+            // session = { ...session, ...(session.user = user.data) };
+          }
+        }
+
+        if (user) {
+          token.user = user.user;
+          token.token = user.token;
+        }
+        return token;
+      } catch (error) {
+        console.log(error);
       }
-      return token;
     },
     async session({ session, token }: any) {
       try {

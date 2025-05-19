@@ -9,9 +9,7 @@ import { Img } from "@repo/ui/img";
 import {
   IconBuildingHospital,
   IconCalendarMonthFilled,
-  IconCashBanknoteFilled,
   IconClipboardTextFilled,
-  IconStarFilled,
   IconStethoscope,
   IconUserFilled,
 } from "@tabler/icons-react";
@@ -21,6 +19,7 @@ import useSWR from "swr";
 import Error from "./Error";
 import TitleBack from "./TitleBack";
 import VeterinarianLoading from "./VeterinarianLoading";
+
 export default function Desktop() {
   const { data: session } = useSession();
   const token: string = session?.token.token!;
@@ -82,18 +81,18 @@ export default function Desktop() {
         </div>
         <div className="grid gap-4 lg:gap-x-6 grid-cols-1 lg:grid-cols-3">
           <div className="p-4 bg-white rounded-md space-y-4">
-            <div className="flex items-center gap-x-4">
+            <Link href={'/my_requests'} className="flex items-center gap-x-4 hover:text-blue-500">
               <div className="border border-1.5 border-green_vetone bg-green_vetone/10 p-3 rounded-md">
                 <IconClipboardTextFilled color="#1e7000" />
               </div>
               <p className="text-sm font-bold">درخواست های دریافتی</p>
-            </div>
+            </Link>
             <div className="gap-x-2 flex items-center">
               <p className="text-2xl font-bold">{request.length}</p>{" "}
               <p className="text-sm">درخواست</p>
             </div>
           </div>
-          <div className="bg-white p-4 rounded-md space-y-4">
+          {/* <div className="bg-white p-4 rounded-md space-y-4">
             <div className="flex items-center gap-x-4">
               <div className="border border-1.5 border-yellow-600 bg-yellow-600/10 p-3 rounded-md">
                 <IconUserFilled color="#ad7600" />
@@ -104,8 +103,8 @@ export default function Desktop() {
               <p className="text-2xl font-bold">5,000</p>{" "}
               <p className="text-sm">نفر</p>
             </div>
-          </div>
-          <div className="p-4 bg-white space-y-4 rounded-md">
+          </div> */}
+          {/* <div className="p-4 bg-white space-y-4 rounded-md">
             <div className="flex items-center gap-x-4">
               <div className="border border-1.5 border-blue-700 bg-blue-700/10 p-3 rounded-md">
                 <IconCashBanknoteFilled color="#040890" />
@@ -116,7 +115,7 @@ export default function Desktop() {
               <IconStarFilled color="yellow" />
               <p className="text-2xl font-black">{user.rate}</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div>
           <div>

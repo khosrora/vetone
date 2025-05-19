@@ -11,6 +11,7 @@ export interface IUser {
   is_active: boolean;
   is_staff: boolean;
   is_superuser: boolean;
+  is_veterinarian: boolean;
   last_login: string;
   password: string;
   map: string;
