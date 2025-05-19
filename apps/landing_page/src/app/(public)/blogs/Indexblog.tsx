@@ -22,7 +22,7 @@ async function Indexblog() {
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  lg:gap-x-6">
         <div className="md:col-span-2 lg:col-span-3">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 md:gap-6">
-            {initialData.results.map((item: blogCardType) => (
+            {initialData.results?.map((item: blogCardType) => (
               <div key={item.id} className="card bg-white">
                 <figure>
                   <img src={item.image.image} alt={item.title} />
