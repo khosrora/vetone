@@ -6,6 +6,9 @@ import { Btn } from "@repo/ui/btn";
 import { IconChevronLeft } from "@tabler/icons-react";
 import Link from "next/link";
 
+
+
+
 async function getInitialVetData(page: number = 1) {
   const res = await fetch(`${base_api}/blog/blogs`, {
     cache: "no-cache",
@@ -15,6 +18,16 @@ async function getInitialVetData(page: number = 1) {
   }
   return res.json();
 }
+
+
+
+const images = [
+  "/images/blog/1.png",
+  "/images/blog/2.png",
+  "/images/blog/3.png",
+  "/images/blog/4.png",
+  "/images/blog/5.png",
+];
 
 async function Indexblog() {
   const initialData = await getInitialVetData(1);
@@ -64,10 +77,10 @@ async function Indexblog() {
             <div className="bg-white p-6 space-y-4 rounded-xl">
               <div className="text-center items-center flex">
                 <div className="avatar-group -space-x-6 flex flex-row-reverse">
-                  {[1, 2, 3, 4].map((item: number) => (
-                    <div key={item} className="avatar">
+                  {images.map((src,index) => (
+                    <div key={index} className="avatar">
                       <div className="w-12">
-                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        <img src={src} />
                       </div>
                     </div>
                   ))}
@@ -84,20 +97,20 @@ async function Indexblog() {
 
               <div className="divider before:border-gray-600 after:border-gray-600 my-0"></div>
               <div className="mt-0">
-                {[1, 2, 3].map((item: number) => (
+                 {initialData?.slice(0, 4).map((item: blogCardType) => (
                   <Link
-                    key={item}
+                    key={item.id}
                     href={"/"}
-                    className="w-full py-3.5 rounded-lg text-sm block text-gray-600"
+                    className="w-full py-3.5 rounded-lg text-xs block text-gray-600"
                   >
-                    مقاله شماره 1 درباره بدبختی ها
+                    {item.title}
                   </Link>
                 ))}
               </div>
             </div>
             <div className="space-y-4">
               <Link
-                href={"/"}
+                href={"https://www.instagram.com/Vetone.ir/"}
                 className="w-full p-4 text-center text-white rounded-lg text-sm bg-gradient-to-r from-purple-500 to-pink-500 block"
               >
                 {" "}
