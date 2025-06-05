@@ -13,7 +13,7 @@ import useSWR from "swr";
 
 function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
   const { data, isLoading } = useSWR(
     !!token ? [`/veterinary/animals/`, token] : null,
     fetcher

@@ -27,7 +27,7 @@ function StepTwo({ veterinarianId , type }: { veterinarianId: string , type : st
   const { push } = useRouter();
   const { animals } = useContext(AnimalsContext);
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
 
   const [image, setImage] = useState<File | null>(null);
   const [video, setVideo] = useState<File | null>(null);

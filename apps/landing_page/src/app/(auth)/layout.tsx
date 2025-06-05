@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 // ! components
 
 export const metadata: Metadata = {
-  title: "ورود یه سایت",
+  title: "ورود به پنل کاربری",
   description: "ورود به وت وان",
 };
 

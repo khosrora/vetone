@@ -15,8 +15,7 @@ import useSWR from "swr";
 function Index() {
   const router = useRouter();
   const { data: session } = useSession();
-  const token = session?.token.token;
-
+  const token: string = session?.accessToken!;
   const { data: medicines, isLoading } = useSWR(
     !!token ? ["/veterinary/medicines/", token] : null,
     fetcher

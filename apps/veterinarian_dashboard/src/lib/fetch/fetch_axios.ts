@@ -4,7 +4,7 @@ import { base_api } from "@/lib/fetch/base_api";
 export const getDataAPI = async (array: [url: string, token?: string]) => {
   const res = await axios.get(`${base_api}${array[0]}`, {
     headers: {
-      Authorization: !!array[1] ? "token " + array[1] : null,
+      Authorization: !!array[1] ? "Bearer " + array[1] : null,
     },
   });
   return res;
@@ -12,7 +12,7 @@ export const getDataAPI = async (array: [url: string, token?: string]) => {
 export const getData = async (array: [url: string, token?: string]) => {
   const res = await axios.get(`${array[0]}`, {
     headers: {
-      Authorization: !!array[1] ? "token " + array[1] : null,
+      Authorization: !!array[1] ? "Bearer " + array[1] : null,
     },
   });
   return res;

@@ -10,7 +10,7 @@ import { toast } from "sonner";
 function Index() {
   const router = useRouter();
   const { data: session } = useSession();
-  const token = session?.token.token;
+  const token: string = session?.accessToken!;;
   const [userImage, setUserImage] = useState<File | null>(null);
   const [userImagePreview, setUserImagePreview] = useState<string | null>(null);
   const [desc, setDesc] = useState<string>("");

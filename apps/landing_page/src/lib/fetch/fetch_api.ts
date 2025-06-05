@@ -10,7 +10,7 @@ export const post_method = async (
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: !!token ? "Token " + token : "",
+      Authorization: !!token ? "Bearer " + token : "",
     },
     body: JSON.stringify(data),
   });
@@ -31,7 +31,7 @@ export const put_method = async (
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: !!token ? "Token " + token : "",
+      Authorization: !!token ? "Bearer " + token : "",
     },
     body: JSON.stringify(data),
   });
@@ -54,7 +54,7 @@ export const patch_method = async (
     headers: {
       // 'Accept': 'application/json',
       // "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: !!token ? "Token " + token : "",
+      Authorization: !!token ? "Bearer " + token : "",
     },
     body: data,
   });
@@ -74,7 +74,7 @@ export const delete_method = async (
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json; charset=UTF-8",
-        Authorization: !!token ? "Token " + token : "",
+        Authorization: !!token ? "Bearer " + token : "",
       },
     });
     if (!res.ok) {
@@ -96,7 +96,7 @@ export const get_method = async (
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: !!token ? "Token " + token : "",
+      Authorization: !!token ? "Bearer " + token : "",
     },
   });
   if (!res.ok) {

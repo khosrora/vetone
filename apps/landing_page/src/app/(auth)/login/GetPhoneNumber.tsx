@@ -26,7 +26,7 @@ function GetPhoneNumber({
       const res = await postDataAPI("/account/login_or_register/", {
         phone: data.phone,
       });
-      if (res.status === 201) {
+      if (res.status === 200) {
         setPhoneNumber(data.phone);
         toast.success("پیامک حاوی کد تایید برای شما ارسال شد");
         setLoad(false);

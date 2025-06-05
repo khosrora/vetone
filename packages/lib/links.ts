@@ -3,6 +3,11 @@ const LINK_LANDINGPAGE: string =
     ? "http://vetone.test:3010/"
     : "https://vetone.cafesiran.ir/";
 
+const LINK_LANDINGPAGE_LOGIN: string =
+  process.env.NODE_ENV === "development"
+    ? "http://vetone.test:3010/login"
+    : "https://vetone.cafesiran.ir/login";
+
 const LINK_DASHBOARD_VET: string =
   process.env.NODE_ENV === "development"
     ? "http://dashboard.vetone.test:3020/"
@@ -26,4 +31,5 @@ export {
   LINK_DASHBOARD_VET,
   LINK_DASHBOARD_CLIENT,
   IMAGE_PLACEHOLDER,
+  LINK_LANDINGPAGE_LOGIN,
 };

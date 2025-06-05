@@ -22,7 +22,7 @@ function FormProfile() {
   const { data: session, update } = useSession();
 
   const user: IUser = session?.user!;
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
 
   useEffect(() => {
     if (!!user) {

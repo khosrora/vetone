@@ -1,5 +1,5 @@
 "use client";
-import { authFetcher } from "@/lib/fetch/fetch_api";
+import { getDataAPI } from "@/lib/fetch/fetch_axios";
 import { requestCardType } from "@/lib/types/request.type";
 import { LINK_DASHBOARD_VET } from "@repo/lib/links";
 import { veterinarian } from "@repo/lib/titles";
@@ -11,7 +11,6 @@ import {
   IconCalendarMonthFilled,
   IconClipboardTextFilled,
   IconStethoscope,
-  IconUserFilled,
 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -22,16 +21,17 @@ import VeterinarianLoading from "./VeterinarianLoading";
 
 export default function Desktop() {
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+
+  const token: string = session?.accessToken!;
   const shouldFetch = !!token;
   const { data, isLoading, error } = useSWR(
     shouldFetch ? ["dashboar-data", token] : null,
     async ([_, token]) => {
       const [info, request] = await Promise.all([
-        authFetcher(["/veterinary/me/", token]),
-        authFetcher(["/veterinary/requests/", token]),
+        getDataAPI(["/veterinary/me/", token]),
+        getDataAPI(["/veterinary/requests/", token]),
       ]);
-      return { user: info, request };
+      return { user: info.data, request: request.data };
     }
   );
 
@@ -81,7 +81,10 @@ export default function Desktop() {
         </div>
         <div className="grid gap-4 lg:gap-x-6 grid-cols-1 lg:grid-cols-3">
           <div className="p-4 bg-white rounded-md space-y-4">
-            <Link href={'/my_requests'} className="flex items-center gap-x-4 hover:text-blue-500">
+            <Link
+              href={"/my_requests"}
+              className="flex items-center gap-x-4 hover:text-blue-500"
+            >
               <div className="border border-1.5 border-green_vetone bg-green_vetone/10 p-3 rounded-md">
                 <IconClipboardTextFilled color="#1e7000" />
               </div>

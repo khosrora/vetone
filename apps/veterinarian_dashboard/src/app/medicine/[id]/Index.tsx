@@ -9,7 +9,7 @@ import useSWR from "swr";
 
 function Index({ id }: { id: string }) {
   const { data: session } = useSession();
-  const token = session?.token.token;
+  const token: string = session?.accessToken!;;
   const { data: request, isLoading } = useSWR(
     !!token ? [`/veterinary/medicines/${id}`, token] : null,
     fetcher

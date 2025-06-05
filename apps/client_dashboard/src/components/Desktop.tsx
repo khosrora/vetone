@@ -3,32 +3,26 @@ import { authFetcher } from "@/lib/fetch/fetch_api";
 import { FavoriteCardType } from "@/lib/types/favoriteCard.type";
 import { LINK_LANDINGPAGE } from "@repo/lib/links";
 import { Alert } from "@repo/ui/alert";
-import {
-  IconCashBanknoteFilled,
-  IconClipboardTextFilled,
-  IconMap,
-  IconPhone,
-  IconUser,
-  IconUserFilled,
-} from "@tabler/icons-react";
+import { IconPhone, IconUser } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import useSWR from "swr";
 import Error from "./Error";
 import TitleBack from "./TitleBack";
 import VeterinarianLoading from "./VeterinarianLoading";
+import { getDataAPI } from "@/lib/fetch/fetch_axios";
 export default function Desktop() {
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
   const shouldFetch = !!token;
   const { data, isLoading, error } = useSWR(
     shouldFetch ? ["dashboar-data", token] : null,
     async ([_, token]) => {
       const [info, favorites] = await Promise.all([
-        authFetcher(["/account/me/", token]),
-        authFetcher(["/veterinary/favorites/", token]),
+        getDataAPI(["/account/me/", token]),
+        getDataAPI(["/veterinary/favorites/", token]),
       ]);
-      return { user: info, favorites };
+      return { user: info.data, favorites: favorites.data };
     }
   );
 

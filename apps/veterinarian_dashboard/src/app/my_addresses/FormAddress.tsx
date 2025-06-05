@@ -26,7 +26,7 @@ type Inputs = {
 function FormAddress({ closeModal }: { closeModal: any }) {
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
 
   const [search, setSearch] = useState<string>("");
   const [searchCity, setSearchCity] = useState<string>("");

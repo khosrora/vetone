@@ -13,7 +13,7 @@ import Loader from "@/components/Loader";
 import VeterinarianLoading from "@/components/VeterinarianLoading";
 function Index() {
   const { data: session } = useSession();
-  const token = session?.token.token;
+  const token: string = session?.accessToken!;;
 
   const { data: ranchers, isLoading } = useSWR(
     !!token ? ["/veterinary/ranchers/", token] : null,

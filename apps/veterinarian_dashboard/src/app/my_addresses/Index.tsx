@@ -12,7 +12,7 @@ import AddAddress from "./AddAddress";
 import VeterinarianLoading from "@/components/VeterinarianLoading";
 function Index() {
   const { data: session } = useSession();
-  const token = session?.token.token;
+  const token: string = session?.accessToken!;;
 
   const { data: addresses, isLoading } = useSWR(
     !!token ? ["/province/addresses", token] : null,

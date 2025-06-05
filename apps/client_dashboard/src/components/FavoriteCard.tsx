@@ -22,7 +22,7 @@ function FavoriteCard({
   mutate: any;
 }) {
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
   const { push } = useRouter();
 
   const handleRemove = async (id: number) => {

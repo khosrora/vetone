@@ -17,7 +17,7 @@ export enum typeQuery {
 
 function Index({ type }: { type: string }) {
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
   const {
     data: requests,
     isLoading,

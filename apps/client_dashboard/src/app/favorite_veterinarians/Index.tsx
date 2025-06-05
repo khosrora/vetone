@@ -9,7 +9,7 @@ import useSWR from "swr";
 import VeterinarianLoading from "@/components/VeterinarianLoading";
 function Index() {
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
   const {
     data: cards,
     isLoading,

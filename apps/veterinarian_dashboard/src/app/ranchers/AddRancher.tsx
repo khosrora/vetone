@@ -21,7 +21,7 @@ function AddRancher() {
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const closeModal = useRef<HTMLButtonElement | null>(null);
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
   const [latlong, setLatlong] = useState<[number, number] | undefined>();
   const {
     register,

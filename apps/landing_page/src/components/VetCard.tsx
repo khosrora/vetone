@@ -24,7 +24,7 @@ function VetCard({
   setItemId?: Dispatch<SetStateAction<string | undefined>>;
 }) {
   const { data: session } = useSession();
-  const token: string | undefined = session?.token.token;
+  const token: string | undefined = session?.accessToken;
   const { status } = useSession();
   const { push } = useRouter();
 

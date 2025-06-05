@@ -25,7 +25,7 @@ function StepTwo({
   const { push } = useRouter();
   const { data, isLoading } = useSWR(["/veterinary/centers/"], fetcher);
   const { data: session } = useSession();
-  const token: string = session?.token.token!;
+  const token: string = session?.accessToken!;
 
   const [date, setDate] = useState<any>();
 
