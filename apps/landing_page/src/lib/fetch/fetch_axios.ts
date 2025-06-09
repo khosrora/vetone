@@ -24,7 +24,7 @@ export const fetcher = (url: [url: string, token?: string]) =>
 export const postDataAPI = async (url: string, post: any, token?: string) => {
   const res = await axios.post(`${base_api}${url}`, post, {
     headers: {
-      Authorization: !!token ? "token " + token : null,
+      Authorization: !!token ? "Bearer " + token : null,
     },
   });
   return res;
@@ -39,7 +39,7 @@ export const putDataAPI = async (url: string, post: {}, token?: string) => {
 export const patchDataAPI = async (url: string, post: any, token?: string) => {
   const res = await axios.patch(`${base_api}${url}`, post, {
     headers: {
-      Authorization: !!token ? "token " + token : null,
+      Authorization: !!token ? "Bearer " + token : null,
     },
   });
   return res;
