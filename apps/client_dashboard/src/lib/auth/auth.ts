@@ -1,7 +1,7 @@
 import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { DOMAIN } from "@repo/lib/links";
+import { DOMAIN, LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 import { AxiosResponse } from "axios";
 import { getDataAPI, postDataAPI } from "../fetch/fetch_axios";
 
@@ -54,10 +54,6 @@ export const authOptions: NextAuthOptions = {
           }
 
           // Then verify the code and get tokens
-          console.log("credentials", {
-            phone: credentials.phoneNumber,
-            password: credentials.otp,
-          });
           const tokenResponse: AxiosResponse = await postDataAPI(
             "/account/token/",
             {
@@ -112,7 +108,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: LINK_LANDINGPAGE_LOGIN,
     signOut: "/logout",
     error: "/login",
   },
@@ -123,22 +119,45 @@ export const authOptions: NextAuthOptions = {
         token.user = user.user;
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
-        token.accessTokenExpires = Date.now() + 5 * 60 * 1000; // 5 minutes
+        token.accessTokenExpires = Date.now() + 60 * 1000; // 1 minute
       }
 
       // Return previous token if the access token has not expired yet
       if (Date.now() < token.accessTokenExpires) {
         return token;
-      }
+      } else {
+        if (!token.refreshToken) throw new TypeError("Missing refresh_token");
 
-      // Access token has expired, try to refresh it
-      return refreshAccessToken(token);
+        // Get new access token
+        try {
+          const response = await postDataAPI("/account/refresh/", {
+            refresh: token.refreshToken,
+          });
+
+          if (response.status !== 200) {
+            throw new Error("RefreshAccessTokenError");
+          }
+
+          // Update token with new access token
+          token.accessToken = response.data.access;
+          token.refreshToken = response.data.refresh ?? token.refreshToken;
+          token.accessTokenExpires = Date.now() + 60 * 1000; // 1 minute
+
+          return token;
+        } catch (error) {
+          return {
+            ...token,
+            error: "RefreshAccessTokenError",
+          };
+        }
+      }
     },
     async session({ session, token }: any) {
       try {
         session.user = token.user;
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
+        session.accessTokenExpires = token.accessTokenExpires;
         return session;
       } catch (error) {
         console.error("Session error:", error);

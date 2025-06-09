@@ -2,10 +2,12 @@
 import { LINK_LANDINGPAGE } from "@repo/lib/links";
 import { name_project } from "@repo/lib/titles";
 import { Img } from "@repo/ui/img";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 function Header() {
-  
+  const { data } = useSession();
+  console.log(data);
   return (
     <div className="flex justify-between items-center p-4 lg:bg-white lg:rounded-md">
       <Link

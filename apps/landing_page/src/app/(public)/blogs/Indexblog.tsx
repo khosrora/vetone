@@ -13,13 +13,12 @@ async function getInitialVetData(page: number = 1) {
   const res = await fetch(`${base_api}/blog/blogs`, {
     cache: "no-cache",
   });
+  
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
 }
-
-
 
 const images = [
   "/images/blog/1.png",

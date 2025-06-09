@@ -1,7 +1,7 @@
 import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { DOMAIN } from "@repo/lib/links";
+import { DOMAIN, LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 import { AxiosResponse } from "axios";
 import { getDataAPI, postDataAPI } from "../fetch/fetch_axios";
 
@@ -54,10 +54,6 @@ export const authOptions: NextAuthOptions = {
           }
 
           // Then verify the code and get tokens
-          console.log("credentials", {
-            phone: credentials.phoneNumber,
-            password: credentials.otp,
-          });
           const tokenResponse: AxiosResponse = await postDataAPI(
             "/account/token/",
             {
@@ -65,8 +61,6 @@ export const authOptions: NextAuthOptions = {
               password: credentials.otp,
             }
           );
-          console.log("tokenResponse", tokenResponse.status);
-          console.log("tokenResponse", tokenResponse.data);
           if (tokenResponse.status !== 201) {
             console.error("Token verification failed:", tokenResponse.data);
             return null;
@@ -77,8 +71,7 @@ export const authOptions: NextAuthOptions = {
             "/account/me/",
             tokenResponse.data.access,
           ]);
-          console.log("user", user.status);
-          console.log("user", user.data);
+
           if (user.status !== 200) {
             console.error("Failed to get user data:", user.data);
             return null;
@@ -115,7 +108,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: LINK_LANDINGPAGE_LOGIN,
     signOut: "/logout",
     error: "/login",
   },
@@ -126,23 +119,45 @@ export const authOptions: NextAuthOptions = {
         token.user = user.user;
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
-        token.accessTokenExpires = Date.now() + 5 * 60 * 1000; // 5 minutes
+        token.accessTokenExpires = Date.now() + 60 * 1000; // 1 minute
       }
 
       // Return previous token if the access token has not expired yet
       if (Date.now() < token.accessTokenExpires) {
         return token;
-      }
+      } else {
+        if (!token.refreshToken) throw new TypeError("Missing refresh_token");
+        
+        // Get new access token
+        try {
+          const response = await postDataAPI("/account/refresh/", {
+            refresh: token.refreshToken,
+          });
 
-      // Access token has expired, try to refresh it
-      return refreshAccessToken(token);
+          if (response.status !== 200) {
+            throw new Error("RefreshAccessTokenError");
+          }
+
+          // Update token with new access token
+          token.accessToken = response.data.access;
+          token.refreshToken = response.data.refresh ?? token.refreshToken;
+          token.accessTokenExpires = Date.now() + 60 * 1000; // 1 minute
+          
+          return token;
+        } catch (error) {
+          return {
+            ...token,
+            error: "RefreshAccessTokenError",
+          };
+        }
+      }
     },
     async session({ session, token }: any) {
       try {
         session.user = token.user;
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
-        session.error = token.error;
+        session.accessTokenExpires = token.accessTokenExpires;
         return session;
       } catch (error) {
         console.error("Session error:", error);
@@ -167,55 +182,12 @@ async function refreshAccessToken(token: any) {
       accessToken: response.data.access,
       refreshToken: response.data.refresh ?? token.refreshToken,
       accessTokenExpires: Date.now() + 5 * 60 * 1000, // 5 minutes
-      error: null,
     };
   } catch (error) {
     return {
       ...token,
       error: "RefreshAccessTokenError",
     };
-  }
-}
-
-// Add a function to handle API calls with automatic token refresh
-export async function fetchWithAuth(url: string, options: any = {}) {
-  const session = await getServerSession(authOptions);
-
-  if (!session?.accessToken) {
-    throw new Error("No access token available");
-  }
-
-  try {
-    const response = await fetch(url, {
-      ...options,
-      headers: {
-        ...options.headers,
-        Authorization: `Bearer ${session.accessToken}`,
-      },
-    });
-
-    // If we get a 401, try to refresh the token
-    if (response.status === 401) {
-      const refreshResponse = await postDataAPI("/account/refresh/", {
-        refresh: session.refreshToken,
-      });
-
-      if (refreshResponse.status === 200) {
-        // Retry the original request with the new token
-        return fetch(url, {
-          ...options,
-          headers: {
-            ...options.headers,
-            Authorization: `Bearer ${refreshResponse.data.access}`,
-          },
-        });
-      }
-    }
-
-    return response;
-  } catch (error) {
-    console.error("API call failed:", error);
-    throw error;
   }
 }
 
@@ -231,6 +203,5 @@ declare module "next-auth" {
     user: IUser;
     accessToken: string;
     refreshToken: string;
-    error?: string;
   }
 }

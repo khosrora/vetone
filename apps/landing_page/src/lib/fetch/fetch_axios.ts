@@ -1,5 +1,5 @@
-import axios from "axios";
 import { base_api } from "@/lib/fetch/base_api";
+import axios from "axios";
 
 export const getDataAPI = async (array: [url: string, token?: string]) => {
   const res = await axios.get(`${base_api}${array[0]}`, {

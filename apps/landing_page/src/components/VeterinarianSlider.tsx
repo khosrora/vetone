@@ -14,6 +14,7 @@ function VeterinarianSlider() {
   );
 
   if (isLoading) return <Loader />;
+  
   return (
     <div className="pb-4">
       <Swiper
