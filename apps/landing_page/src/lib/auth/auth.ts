@@ -119,7 +119,7 @@ export const authOptions: NextAuthOptions = {
         token.user = user.user;
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
-        token.accessTokenExpires = Date.now() + 60 * 1000; // 1 minute
+        token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 1 day
       }
 
       // Return previous token if the access token has not expired yet
@@ -141,7 +141,7 @@ export const authOptions: NextAuthOptions = {
           // Update token with new access token
           token.accessToken = response.data.access;
           token.refreshToken = response.data.refresh ?? token.refreshToken;
-          token.accessTokenExpires = Date.now() + 60 * 1000; // 1 minute
+          token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 1 day
           
           return token;
         } catch (error) {
