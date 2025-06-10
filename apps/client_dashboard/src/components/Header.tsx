@@ -2,9 +2,20 @@
 import { LINK_LANDINGPAGE } from "@repo/lib/links";
 import { name_project } from "@repo/lib/titles";
 import { Img } from "@repo/ui/img";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 function Header() {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session === null) {
+      signOut({ redirect: false });
+      window.location.href = LINK_LANDINGPAGE;
+    }
+  }, [session]);
+
   return (
     <div className="flex justify-between items-center p-4 lg:bg-white lg:rounded-md">
       <Link

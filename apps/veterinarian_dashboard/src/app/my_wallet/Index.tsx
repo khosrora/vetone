@@ -37,7 +37,7 @@ function Index() {
       </div>
       <div className="divider"></div>
       <p className="font-bold my-4 text-lg">تراکنشات من</p>
-      {wallets.length === 0 ? (
+      {!wallets || wallets.length === 0 ? (
         <Alert
           message="در حال حاضر اطلاعاتی جهت نمایش وجود ندارد."
           type="info"

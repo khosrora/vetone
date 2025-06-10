@@ -18,10 +18,14 @@ const LINK_DASHBOARD_CLIENT: string =
     ? "http://client.vetone.test:3030/"
     : "https://vet-one.ir/client";
 
+export const base_path_vet: string =
+  process.env.NODE_ENV === "development" ? "" : "/veterinarian_dashboard";
+
+export const base_path_client: string =
+  process.env.NODE_ENV === "development" ? "" : "/client";
+
 const DOMAIN: string =
-  process.env.NODE_ENV === "development"
-    ? "vetone.test"
-    : "vet-one.ir";
+  process.env.NODE_ENV === "development" ? "vetone.test" : "vet-one.ir";
 
 const IMAGE_PLACEHOLDER: string = "https://avatar.iran.liara.run/public";
 

@@ -39,7 +39,7 @@ function Index() {
       {medicines && medicines.length === 0 ? (
         <Alert message="پیامی جهت نمایش وجود ندارد." />
       ) : (
-        <div className="mt-4">
+        <div className="mt-4 space-y-4">
           {medicines.map((item: AiMedicineType) => (
             <div className="bg-white p-6 rounded-md space-y-2 ">
               <div className="flex justify-start items-center gap-x-2">

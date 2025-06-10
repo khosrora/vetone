@@ -1,7 +1,7 @@
 "use client";
 import { getDataAPI } from "@/lib/fetch/fetch_axios";
 import { requestCardType } from "@/lib/types/request.type";
-import { LINK_DASHBOARD_VET } from "@repo/lib/links";
+import { base_path_vet, LINK_DASHBOARD_VET } from "@repo/lib/links";
 import { veterinarian } from "@repo/lib/titles";
 import { requestsStateEnum } from "@repo/lib/types";
 import { Alert } from "@repo/ui/alert";
@@ -48,7 +48,7 @@ export default function Desktop() {
         <div className="bg-white block items-center lg:grid lg:grid-cols-10 rounded-lg ">
           <div className="col-span-2 rounded-lg p-4">
             <Img
-              src={user?.image || "/images/doctor.jpg"}
+              src={user?.image || `${base_path_vet}/images/doctor.jpg`}
               width={2000}
               height={2000}
               alt={veterinarian}

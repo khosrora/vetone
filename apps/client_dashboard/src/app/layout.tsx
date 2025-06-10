@@ -1,12 +1,11 @@
-import { estedad } from "@/lib/local_fonts";
-import type { Metadata } from "next";
 import "@/app/globals.css";
-import "@repo/ui/styles.css";
+import Provider from "@/app/Provider";
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
-import Provider from "@/app/Provider";
+import { estedad } from "@/lib/local_fonts";
+import "@repo/ui/styles.css";
+import type { Metadata } from "next";
 import { Toaster } from "sonner";
-import NavigationBottom from "@/components/NavigationBottom";
 
 export const metadata: Metadata = {
   title: "پنل کاربری | دامدار",

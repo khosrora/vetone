@@ -1,10 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { LinkItems, linksDashboad } from "@/lib/constants/DashboardItems";
 import { IconLogout } from "@tabler/icons-react";
-import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { LINK_LANDINGPAGE } from "@repo/lib/links";
 
 function SideBar() {
+  const handleSignOut = async (): Promise<void> => {
+    await signOut({ redirect: false });
+    window.location.href = LINK_LANDINGPAGE;
+  };
+
   return (
     <div className="hidden lg:flex col-span-2 rounded-xl bg-[#FFFFFF]">
       <ul className="flex flex-col gap-x-4 w-full ">
@@ -22,7 +29,10 @@ function SideBar() {
             </Link>
           </li>
         ))}
-        <li className="rounded-md flex justify-between items-center p-5 w-full cursor-pointer text-sm">
+        <li
+          className="rounded-md flex justify-between items-center p-5 w-full cursor-pointer text-sm"
+          onClick={() => handleSignOut()}
+        >
           <div className="flex justify-start items-center gap-x-3  text-[#C80000]">
             <IconLogout color="#C80000" />
             <p>خروج</p>

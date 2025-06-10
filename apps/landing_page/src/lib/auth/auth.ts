@@ -119,15 +119,14 @@ export const authOptions: NextAuthOptions = {
         token.user = user.user;
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
-        token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 1 day
+        token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000;
       }
-
       // Return previous token if the access token has not expired yet
       if (Date.now() < token.accessTokenExpires) {
         return token;
       } else {
         if (!token.refreshToken) throw new TypeError("Missing refresh_token");
-        
+
         // Get new access token
         try {
           const response = await postDataAPI("/account/refresh/", {
@@ -141,8 +140,8 @@ export const authOptions: NextAuthOptions = {
           // Update token with new access token
           token.accessToken = response.data.access;
           token.refreshToken = response.data.refresh ?? token.refreshToken;
-          token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 1 day
-          
+          token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000;
+
           return token;
         } catch (error) {
           return {

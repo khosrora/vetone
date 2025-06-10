@@ -1,9 +1,14 @@
 import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { DOMAIN, LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
+import {
+  DOMAIN,
+  LINK_LANDINGPAGE,
+  LINK_LANDINGPAGE_LOGIN,
+} from "@repo/lib/links";
 import { AxiosResponse } from "axios";
 import { getDataAPI, postDataAPI } from "../fetch/fetch_axios";
+import { signOut } from "next-auth/react";
 
 export interface IUser {
   id: number;
@@ -119,15 +124,18 @@ export const authOptions: NextAuthOptions = {
         token.user = user.user;
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
-        token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 1 day
+        token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 1 minute
       }
 
       // Return previous token if the access token has not expired yet
       if (Date.now() < token.accessTokenExpires) {
         return token;
       } else {
-        if (!token.refreshToken) throw new TypeError("Missing refresh_token");
-        
+        if (!token.refreshToken) {
+          await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE });
+          throw new TypeError("Missing refresh_token");
+        }
+
         // Get new access token
         try {
           const response = await postDataAPI("/account/refresh/", {
@@ -135,6 +143,7 @@ export const authOptions: NextAuthOptions = {
           });
 
           if (response.status !== 200) {
+            await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE });
             throw new Error("RefreshAccessTokenError");
           }
 
@@ -142,9 +151,10 @@ export const authOptions: NextAuthOptions = {
           token.accessToken = response.data.access;
           token.refreshToken = response.data.refresh ?? token.refreshToken;
           token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 1 day
-          
+
           return token;
         } catch (error) {
+          await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE });
           return {
             ...token,
             error: "RefreshAccessTokenError",

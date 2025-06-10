@@ -53,10 +53,16 @@ function GetPhoneNumber({
         </div>
         <input
           type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           className="input input-bordered w-full bg-zinc-100 focus:outline-none focus:ring-1 focus:ring-green-500"
           autoFocus
           {...register("phone", {
             required: { value: true, message: "this field is required" },
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "مقادیر وارد شده معتبر نیست"
+            }
           })}
         />
         <div className="label">
