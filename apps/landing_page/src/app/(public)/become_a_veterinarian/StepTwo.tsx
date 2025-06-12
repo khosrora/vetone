@@ -9,7 +9,7 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import DatePicker from "react-multi-date-picker";
 import "react-multi-date-picker/styles/layouts/mobile.css";
 import { toast } from "sonner";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import useSWR from "swr";
 import { CentersType } from "@/lib/types/CentersTypes";
 import { useRouter } from "next/navigation";
@@ -99,9 +99,9 @@ function StepTwo({
       );
       if (res.status === 201) {
         toast.success("درخواست شما با موفقیت ثبت شد.");
+        await signOut({ redirect: false });
         push("/");
       }
-      console.log(res.data);
     } catch (error) {
       toast.error("دوباره امتحان کنید.");
     }

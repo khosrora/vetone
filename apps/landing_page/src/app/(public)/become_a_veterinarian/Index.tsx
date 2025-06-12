@@ -5,8 +5,10 @@ import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import Steps from "./Steps";
 import { BasicInformationType } from "@/lib/types/register_veterinarianTypes";
+import { useRouter } from "next/navigation";
 
 function Index() {
+  const { back } = useRouter();
   const [step, setStep] = useState<number>(1);
   const [basicInformation, setBasicInformation] =
     useState<BasicInformationType>();
@@ -14,7 +16,10 @@ function Index() {
   return (
     <div className="mb-12 max-w-lg m-auto">
       {step === 1 ? (
-        <div className="flex justify-start items-center my-4 cursor-pointer">
+        <div
+          className="flex justify-start items-center my-4 cursor-pointer"
+          onClick={() => back()}
+        >
           <IconChevronRight />
           <p className="font-bold">درخواست دامپزشک شدن</p>
         </div>

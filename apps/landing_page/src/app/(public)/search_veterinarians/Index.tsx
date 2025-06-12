@@ -31,7 +31,7 @@ function Index({
       <div className="hidden lg:flex lg:col-span-3">
         <FilterItems />
       </div>
-      <div className="col-span-12 lg:col-span-9 space-y-4 lg:space-y-0">
+      <div className="col-span-12 lg:col-span-9">
         <FilterBtns />
         {!!isLoading ? (
           <> </>

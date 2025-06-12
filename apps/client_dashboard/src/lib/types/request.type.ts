@@ -5,6 +5,7 @@ export type animalType = {
   count: number;
   animal: string;
   request: number;
+  image: string;
 };
 
 export type rancherType = {

@@ -7,10 +7,7 @@ import { animalType, requestCardType } from "@/lib/types/request.type";
 import { IMAGE_PLACEHOLDER } from "@repo/lib/links";
 import { requestsStateEnum } from "@repo/lib/types";
 import { Alert } from "@repo/ui/alert";
-import {
-  IconPhone,
-  IconRadar2
-} from "@tabler/icons-react";
+import { IconPhone, IconRadar2 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import MediaThemeTailwindAudio from "player.style/tailwind-audio/react";

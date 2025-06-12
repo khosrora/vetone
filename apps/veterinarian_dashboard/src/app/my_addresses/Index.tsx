@@ -18,7 +18,7 @@ function Index() {
     !!token ? ["/province/addresses", token] : null,
     fetcher
   );
-
+  
   const handleDelete = async (id: number) => {
     try {
       const res = await deleteDataAPI(`/province/addresses/${id}/`, token);
@@ -33,6 +33,7 @@ function Index() {
   if (isLoading || !token) {
     return <VeterinarianLoading />;
   }
+  console.log(addresses)
   return (
     <>
       <div className="flex justify-between items-center">

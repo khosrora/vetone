@@ -1,5 +1,5 @@
 "use client";
-import { authFetcher } from "@/lib/fetch/fetch_api";
+import { getDataAPI } from "@/lib/fetch/fetch_axios";
 import { FavoriteCardType } from "@/lib/types/favoriteCard.type";
 import { LINK_LANDINGPAGE } from "@repo/lib/links";
 import { Alert } from "@repo/ui/alert";
@@ -10,7 +10,6 @@ import useSWR from "swr";
 import Error from "./Error";
 import TitleBack from "./TitleBack";
 import VeterinarianLoading from "./VeterinarianLoading";
-import { getDataAPI } from "@/lib/fetch/fetch_axios";
 export default function Desktop() {
   const { data: session } = useSession();
   const token: string = session?.accessToken!;

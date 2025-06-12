@@ -7,9 +7,11 @@ import { requestCardType } from "@/lib/types/request.type";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
 import Tabs from "./Tabs";
+import { Alert } from "@repo/ui/alert";
 export enum typeQuery {
   all = "all",
   inPerson = "inPerson",
+  phone = "phone",
 }
 
 function Index({ type }: { type: string }) {
@@ -33,9 +35,13 @@ function Index({ type }: { type: string }) {
         </select>
       </div>
       <div className="grid gap-4 grid-cols-1">
-        {requests.map((item: requestCardType) => (
-          <RequestCard key={item.id} request={item} />
-        ))}
+        {requests.length === 0 ? (
+          <Alert message="در حال حاضر هیچ درخواستی ثبت نشده است" />
+        ) : (
+          requests.map((item: requestCardType) => (
+            <RequestCard key={item.id} request={item} />
+          ))
+        )}
       </div>
     </div>
   );

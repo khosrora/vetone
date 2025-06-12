@@ -12,7 +12,7 @@ import Loader from "@/components/Loader";
 import VeterinarianLoading from "@/components/VeterinarianLoading";
 function Index() {
   const { data: session } = useSession();
-  const token: string = session?.accessToken!;;
+  const token: string = session?.accessToken!;
 
   const { data: wallets, isLoading } = useSWR(
     !!token ? ["/wallet/transactions", token] : null,
@@ -21,6 +21,7 @@ function Index() {
   if (isLoading || !token) {
     return <VeterinarianLoading />;
   }
+  
   return (
     <div className="p-4">
       <TitleBack text="کیف پول" />
@@ -44,7 +45,7 @@ function Index() {
         />
       ) : (
         <div className="space-y-4">
-          {wallets.results.map((item: walletCardType) => (
+          {wallets.map((item: walletCardType) => (
             <div
               key={item.id}
               className="flex justify-between items-center bg-white p-4 rounded-md w-full"

@@ -118,7 +118,17 @@ export const authOptions: NextAuthOptions = {
     error: "/login",
   },
   callbacks: {
-    async jwt({ token, user, account }: any) {
+    async jwt({ token, user, trigger }: any) {
+      if (trigger === "update") {
+        const res: AxiosResponse = await getDataAPI([
+          "/account/me/",
+          token.accessToken,
+        ]);
+        if (res.status === 200) {
+          token.user = res.data;
+          // session = { ...session, ...(session.user = user.data) };
+        }
+      }
       if (user) {
         // Initial sign in
         token.user = user.user;

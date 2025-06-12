@@ -24,4 +24,6 @@ export type FavoriteCardType = {
   code: string;
   state: string;
   user: number;
+  lat: string;
+  long: string;
 };

@@ -36,7 +36,7 @@ export const linksDashboad: LinkItems[] = [
   {
     id: 3,
     icon: <IconStethoscope size={20} />,
-    title: "درخواست پزشک شدن",
+    title: "درخواست دامپزشک شدن",
     link: `${LINK_LANDINGPAGE}become_a_veterinarian`,
   },
   {

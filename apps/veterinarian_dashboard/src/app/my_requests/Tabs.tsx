@@ -1,4 +1,4 @@
-import { IconBuildingHospital } from "@tabler/icons-react";
+import { IconBuildingHospital, IconPhone } from "@tabler/icons-react";
 import Link from "next/link";
 import { typeQuery } from "./Index";
 
@@ -17,6 +17,13 @@ function Tabs({ type }: { type: string }) {
       >
         <IconBuildingHospital size={16} />
         <p>حضوری</p>
+      </Link>
+      <Link
+        href={`/my_requests?type=${typeQuery.phone}`}
+        className={`flex justify-self-center px-2.5 gap-1 lg:gap-x-2 items-center rounded-full lg:px-4 py-2 ${type === typeQuery.phone && "bg-green-800 text-white"}`}
+      >
+        <IconPhone size={16} />
+        <p>تلفنی</p>
       </Link>
       {/* <Link
         href={"/"}

@@ -3,6 +3,8 @@ import { Img } from "@repo/ui/img";
 import React, { useState } from "react";
 import GetPhoneNumber from "./GetPhoneNumber";
 import CheckCode from "./CheckCode";
+import Link from "next/link";
+import { LINK_LANDINGPAGE } from "@repo/lib/links";
 
 function IndexLogin() {
   const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
@@ -22,6 +24,7 @@ function IndexLogin() {
           />
         )}
       </div>
+      <span className="text-xs"> ورود به منزله قبول <Link className="text-blue-500" target="_blank" href={`${LINK_LANDINGPAGE}/question`}>قوانین و مقررات</Link> است .</span>
     </div>
   );
 }

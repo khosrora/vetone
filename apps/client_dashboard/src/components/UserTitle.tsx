@@ -6,7 +6,6 @@ import React from "react";
 function UserTitle() {
   const { data: session } = useSession();
   const user: IUser | undefined = session?.user;
-
   return (
     <div className="bg-green_vetone p-6 flex justify-start items-center gap-x-3 rounded-lg">
       <div className="avatar">

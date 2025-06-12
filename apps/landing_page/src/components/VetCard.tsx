@@ -4,17 +4,16 @@ import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import { IMAGE_PLACEHOLDER, LINK_LANDINGPAGE } from "@repo/lib/links";
 import { Btn } from "@repo/ui/btn";
 import {
-  IconCarambolaFilled,
   IconCaretLeftFilled,
   IconHeart,
   IconMapPinFilled,
-  IconShare,
 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 import { toast } from "sonner";
 import Share from "./Share";
-import { Dispatch, SetStateAction } from "react";
+import Link from "next/link";
 
 function VetCard({
   item,
@@ -27,6 +26,7 @@ function VetCard({
   const token: string | undefined = session?.accessToken;
   const { status } = useSession();
   const { push } = useRouter();
+  // ok this is test
 
   const handleAddFav = async (id: number) => {
     try {
@@ -46,9 +46,9 @@ function VetCard({
       toast.error("قبلا به لیست اضافه شده است");
     }
   };
-
+  
   return (
-    <div className="p-4  lg:p-6 bg-white rounded-md space-y-2">
+    <div className="p-4 lg:p-6 bg-white rounded-md space-y-2 mb-2">
       <div className="flex justify-between items-center">
         <div className="flex justify-start items-center gap-x-2">
           <img
@@ -66,12 +66,13 @@ function VetCard({
           </div>
         </div>
         <div className="flex justify-end items-center gap-x-4 lg:gap-x-4">
-          <div className="flex gap-x-8">
+          {/* <div className="flex gap-x-8">
             <div className="flex items-center gap-x-2">
               <IconCarambolaFilled color="#ffaa00" />
               <p>{item.rate}</p>
             </div>
-          </div>
+          </div> */}
+
           <Share
             link={`${LINK_LANDINGPAGE}search_veterinarians/${item.slug}`}
           />
@@ -96,11 +97,20 @@ function VetCard({
           <p className="text-[11px] lg:text-sm">مشاوره متنی</p>
         </div>
       </div> */}
-      <div className="flex items-center gap-x-2 ml-8 bg-gray-100 w-full p-4 rounded-md">
-        <IconMapPinFilled size={20} color="gray" />
-        <div className="text-[10px] lg:text-sm flex truncate w-10/12 ">
-          <p>{item.province}</p>-<p>{item.city}</p>
+      <div className="flex justify-between items-center bg-gray-100 w-full p-4 rounded-md">
+        <div className="flex items-center gap-x-2 ml-8">
+          <IconMapPinFilled size={20} color="gray" />
+          <div className="text-[10px] lg:text-sm flex truncate w-10/12 ">
+            <p>{item.province}</p>-<p>{item.city}</p>
+          </div>
         </div>
+        <Link
+          target="_blank"
+          href={`https://www.google.com/maps/dir/?api=1&destination=${!!item.lat ? item.lat : "35.7804024"},${!!item.long ? item.long : "51.3937825"}`}
+          className="text-blue-400 link"
+        >
+          برای مسیر یابی اینجا کلیک کنید
+        </Link>
       </div>
       <div className="divider"></div>
       <div className="grid grid-cols-4 md:grid-cols-3 gap-x-2 items-center">

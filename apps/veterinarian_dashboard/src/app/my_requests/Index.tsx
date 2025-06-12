@@ -13,6 +13,7 @@ import VeterinarianLoading from "../../components/VeterinarianLoading";
 export enum typeQuery {
   all = "all",
   inPerson = "inPerson",
+  phone = "phone",
 }
 
 function Index({ type }: { type: string }) {
