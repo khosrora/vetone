@@ -59,7 +59,7 @@ function VetCard({
             <p className="font-bold text-base lg:text-xl block">
               {item.fullName}
             </p>
-            <p className="text-[11px] texxt-gray-500  ">
+            <p className="text-[11px] text-gray-500  ">
               {" "}
               <span>سابقه کاری :</span> {item.experience}
             </p>

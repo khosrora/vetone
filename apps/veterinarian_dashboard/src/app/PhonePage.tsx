@@ -2,11 +2,12 @@ import NavigationBottom from "@/components/NavigationBottom";
 import { LinkItems, linksDashboad } from "@/lib/constants/DashboardItems";
 import { LINK_LANDINGPAGE } from "@repo/lib/links";
 import { IconChevronLeft, IconLogout } from "@tabler/icons-react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
 
 function PhonePage() {
+  const { data: session } = useSession();
+
   const handleSignOut = async (): Promise<void> => {
     await signOut({ redirect: false });
     window.location.href = LINK_LANDINGPAGE;
@@ -21,7 +22,7 @@ function PhonePage() {
           </div>
         </div>
         <div className="flex flex-col space-y-3">
-          <p className="font-bold text-lg">دکتر رضا خانزاده</p>
+          <p className="font-bold text-lg">دکتر {session?.user.fullName}</p>
           <small className="text-[12px]">دامپزشک</small>
         </div>
       </div>

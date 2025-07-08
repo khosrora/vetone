@@ -44,11 +44,11 @@ function AddRancher() {
       if (res.status === 201) {
         toast.success("کاربر با موفقیت ثبت شد.");
         closeModal?.current?.click();
-        window.location.reload()
+        window.location.reload();
       }
       setIsLoad(false);
-    } catch (error) {
-      toast.error("دوباره امتحان کنید");
+    } catch (error: any) {
+      toast.error(error.response.data.message);
       closeModal?.current?.click();
       setIsLoad(false);
     }

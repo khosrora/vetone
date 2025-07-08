@@ -5,6 +5,7 @@ import Image from "next/image";
 import { IconDeviceWatch, IconMail, IconPhone } from "@tabler/icons-react";
 import { Img } from "@repo/ui/img";
 import { desc_project_footer, name_project } from "@repo/lib/titles";
+import TrustSeal from "./TrustSeal";
 
 function Footer() {
   return (
@@ -50,7 +51,7 @@ function Footer() {
             </li>
             <li className="text-xs font-semibold flex justify-start items-center">
               <IconPhone stroke={1} />
-              <small> تماس باما: 02144166955 </small>
+              <small> تماس باما: 02191098581 </small>
             </li>
             <li className="text-xs font-semibold flex justify-start items-center">
               <IconMail stroke={1} />
@@ -93,6 +94,9 @@ function Footer() {
               </Link>
             </li>
           </ul>
+        </li>
+        <li>
+          <TrustSeal />
         </li>
       </ul>
     </div>

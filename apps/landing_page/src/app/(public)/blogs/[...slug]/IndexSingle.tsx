@@ -51,27 +51,13 @@ async function IndexSingle({ params }: { params: { slug: string } }) {
                 آنلاین دامپزشک خود را رزرو کنید{" "}
               </p>
               <Link
-                href={"/"}
+                href={"/search_veterinarians"}
                 className="w-full p-4 text-center text-white rounded-lg text-sm bg-green_vetone block"
               >
                 رزرو نوبت
               </Link>
             </div>
-            <div className="space-y-4 bg-white p-6 rounded-xl">
-              <h3 className="text-base font-bold">پربازدیدترین مقالات</h3>
 
-              <div className="divider before:border-gray-600 after:border-gray-600 my-0"></div>
-              <div className="mt-0">
-                {[1, 2, 3].map((item: number) => (
-                  <Link
-                    href={"/"}
-                    className="w-full py-3.5 rounded-lg text-sm block text-gray-600"
-                  >
-                    مقاله شماره 1 درباره بدبختی ها
-                  </Link>
-                ))}
-              </div>
-            </div>
             <div className="space-y-4">
               <Link
                 href={"/"}

@@ -14,7 +14,7 @@ function VeterinarianSlider() {
   );
 
   if (isLoading) return <Loader />;
-  
+
   return (
     <div className="pb-4">
       <Swiper
@@ -29,7 +29,7 @@ function VeterinarianSlider() {
         {veterinarians.map((item: VeterinarianCardType) => (
           <SwiperSlide key={item.id}>
             <Link
-              href={`/`}
+              href={`/search_veterinarians/${item.slug}`}
               className="flex flex-col items-center rounded-md gap-y-2"
             >
               <img
