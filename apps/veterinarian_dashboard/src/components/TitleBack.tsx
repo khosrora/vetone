@@ -4,11 +4,11 @@ import { IconChevronRight } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
 function TitleBack({ text }: { text: string }) {
-  const { back } = useRouter();
+  const { push } = useRouter();
   return (
     <div
       className="flex justify-start items-center cursor-pointer"
-      onClick={() => back()}
+      onClick={() => push('/')}
     >
       <IconChevronRight />
       <p className="font-bold">{text}</p>

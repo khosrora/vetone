@@ -55,7 +55,7 @@ function Footer() {
             </li>
             <li className="text-xs font-semibold flex justify-start items-center">
               <IconMail stroke={1} />
-              <small> siranguav@gmail.com </small>
+              <small> Vetone2024@gmail.com </small>
             </li>
           </ul>
         </li>
