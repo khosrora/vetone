@@ -2,11 +2,11 @@ import React from "react";
 import Index from "./Index";
 
 function page({
-  searchParams: { veterinarian, type },
+  searchParams: { veterinarians, type },
 }: {
-  searchParams: { veterinarian: string; type: string };
+  searchParams: { veterinarians: string; type: string };
 }) {
-  return <Index veterinarianId={veterinarian} type={type} />;
+  return <Index veterinarianId={veterinarians} type={type} />;
 }
 
 export default page;

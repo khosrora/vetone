@@ -13,7 +13,7 @@ function Index({
   type: string;
 }) {
   const [step, setStep] = useState<number>(1);
-
+  
   return (
     <AnimalsProvider>
       <div className="px-4 mb-4 max-w-lg m-auto">

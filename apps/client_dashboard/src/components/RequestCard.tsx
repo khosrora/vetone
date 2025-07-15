@@ -22,10 +22,10 @@ function RequestCard({ request }: { request: requestCardType }) {
             />
             <div className="space-y-2 lg:space-y-3 px-4">
               <p className="font-bold text-xs lg:text-lg block">
-                {request.veterinarian.fullName}
+                {request?.veterinarian?.fullName}
               </p>
               <p className="text-[10px] lg:tet-sm texxt-gray-500 ">
-                {request.veterinarian.experience} سال سابقه
+                {request?.veterinarian?.experience} سال سابقه
               </p>
             </div>
           </div>

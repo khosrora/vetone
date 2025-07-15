@@ -74,7 +74,7 @@ function StepTwo({ veterinarianId , type }: { veterinarianId: string , type : st
       ?.toDate()
       .toLocaleDateString("zh-Hans-CN")
       .replaceAll("/", "-");
-
+    
     const animalsNewData = transformData(animals);
     if (!!image) formData.append("date", dateRequest);
     if (!!image) formData.append("image", image);
