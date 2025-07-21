@@ -1,3 +1,4 @@
+import BtnAddRequest from "@/components/BtnAddRequest";
 import UserComments from "@/components/UserComments";
 import { base_api } from "@/lib/fetch/base_api";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
@@ -10,7 +11,6 @@ import {
   IconThumbUpFilled,
   IconZoomScanFilled,
 } from "@tabler/icons-react";
-import Link from "next/link";
 
 async function getInitialVetData(slug: string) {
   const res = await fetch(`${base_api}/veterinary/${slug}`, {
@@ -24,7 +24,7 @@ async function getInitialVetData(slug: string) {
 
 async function page({ params: { slug } }: { params: { slug: string } }) {
   const data: VeterinarianCardType = await getInitialVetData(slug);
-
+  
   return (
     <div className="mx-auto max-w-7xl px-4 lg:px-0">
       <div className="grid grid-cols-12">
@@ -49,14 +49,7 @@ async function page({ params: { slug } }: { params: { slug: string } }) {
               </div>
             </div>
           </div>
-          <div className="w-full mt-20 lg:hidden">
-            <Link
-              href={`/receive_services?veterinarians=${data.id}`}
-              className="block bg-green_vetone rounded-md text-white text-center py-3"
-            >
-              دریافت نوبت مشاوره
-            </Link>
-          </div>
+          <BtnAddRequest isLarge={true} idVet={data.id} />
           <div className="bg-white p-4 lg:p-6 rounded-md mt-6 space-y-8 lg:mt-20">
             <div className="flex justify-between items-center">
               <p className="font-bold text-base lg:text-xl">
@@ -79,7 +72,7 @@ async function page({ params: { slug } }: { params: { slug: string } }) {
                 </p>
               </div>
               <div className="flex items-center gap-x-2">
-                <IconZoomScanFilled/>
+                <IconZoomScanFilled />
                 <p className="font-light text-[10px] lg:text-sm">
                   {" "}
                   کدنظام پزشکی:{" "}
@@ -126,14 +119,7 @@ async function page({ params: { slug } }: { params: { slug: string } }) {
                 <p className="font-light">اولویت نوبت</p>
                 <p className="font-bold">۱۷ دی ۱۴۰۳</p>
               </div> */}
-              <div className="w-full mt-4">
-                <Link
-                  href={`/receive_services?veterinarians=${data.id}`}
-                  className="block bg-green_vetone rounded-md text-white text-center py-3"
-                >
-                  دریافت نوبت مشاوره
-                </Link>
-              </div>
+              <BtnAddRequest isLarge={false} idVet={data.id} />
             </div>
           </div>
         </div>

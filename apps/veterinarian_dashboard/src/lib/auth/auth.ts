@@ -23,6 +23,7 @@ export interface IUser {
   password: string;
   phone: string;
   user_permissions: [];
+  image? : string | null
 }
 
 export type TokenType = {
@@ -178,6 +179,7 @@ export const authOptions: NextAuthOptions = {
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
         session.accessTokenExpires = token.accessTokenExpires;
+        session.error = token.error;
         return session;
       } catch (error) {
         console.error("Session error:", error);
@@ -218,10 +220,15 @@ export async function checkAuth() {
   return session.user;
 }
 
+export enum errorSession {
+  RefreshAccessTokenError = "RefreshAccessTokenError",
+}
+
 declare module "next-auth" {
   interface Session {
     user: IUser;
     accessToken: string;
     refreshToken: string;
+    error: errorSession.RefreshAccessTokenError;
   }
 }

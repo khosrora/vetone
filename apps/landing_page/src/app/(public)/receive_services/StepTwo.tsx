@@ -99,6 +99,7 @@ function StepTwo({ veterinarianId , type }: { veterinarianId: string , type : st
         setLoad(false);
       }
     } catch (error) {
+      toast.error('دوباره امتحان کنید.')
       setLoad(false);
     }
   };

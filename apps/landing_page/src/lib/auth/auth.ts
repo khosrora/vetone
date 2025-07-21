@@ -18,6 +18,7 @@ export interface IUser {
   password: string;
   phone: string;
   user_permissions: [];
+  image? : string | null
 }
 
 export type TokenType = {
@@ -71,7 +72,7 @@ export const authOptions: NextAuthOptions = {
             "/account/me/",
             tokenResponse.data.access,
           ]);
-
+          console.log(user)
           if (user.status !== 200) {
             console.error("Failed to get user data:", user.data);
             return null;

@@ -1,4 +1,5 @@
 "use client";
+import { errorSession } from "@/lib/auth/auth";
 import { base_path_vet, LINK_LANDINGPAGE } from "@repo/lib/links";
 import { name_project } from "@repo/lib/titles";
 import { Img } from "@repo/ui/img";
@@ -8,9 +9,12 @@ import { useEffect } from "react";
 
 function Header() {
   const { data: session } = useSession();
-
   useEffect(() => {
     if (session === null) {
+      signOut({ redirect: false });
+      window.location.href = LINK_LANDINGPAGE;
+    }
+    if (session?.error === errorSession.RefreshAccessTokenError) {
       signOut({ redirect: false });
       window.location.href = LINK_LANDINGPAGE;
     }
@@ -33,7 +37,7 @@ function Header() {
 
       <div className="avatar">
         <div className="w-12 rounded-full">
-          <img src="https://avatar.iran.liara.run/public" />
+          <img src={session?.user.image!} />
         </div>
       </div>
     </div>

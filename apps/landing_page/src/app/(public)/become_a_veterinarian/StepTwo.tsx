@@ -2,7 +2,7 @@
 import { Btn } from "@repo/ui/btn";
 import { IconPhotoFilled } from "@tabler/icons-react";
 
-import { fetcher, postDataAPI } from "@/lib/fetch/fetch_axios";
+import { fetcher, patchDataAPI, postDataAPI } from "@/lib/fetch/fetch_axios";
 import { Dispatch, SetStateAction, useState } from "react";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
@@ -40,6 +40,8 @@ function StepTwo({
   const [userImage, setUserImage] = useState<File | null>(null);
   const [userImagePreview, setUserImagePreview] = useState<string | null>(null);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleLicenseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -70,21 +72,29 @@ function StepTwo({
   };
 
   const handleSubmit = async () => {
-    if (!licenseImage || !idCardImage || !medicalLicense || !date || !userImage)
+    setLoading(true);
+    if (
+      !licenseImage ||
+      !idCardImage ||
+      !medicalLicense ||
+      !date ||
+      !userImage
+    ) {
+      setLoading(false);
       return toast.error("تمام اطلاعات را وارد کنید.");
+    }
 
     const formData = new FormData();
     const issuance_date = date
       ?.toDate()
       .toLocaleDateString("zh-Hans-CN")
       .replaceAll("/", "-");
+
     formData.append("license_image", licenseImage);
     formData.append("national_id_image", idCardImage);
-    formData.append("image", userImage);
     formData.append("issuance_date", issuance_date);
     formData.append("medical_license", medicalLicense);
     formData.append("medical_center", data[0].id);
-    formData.append("fullName", basicInformation?.fullName!);
     formData.append("city", basicInformation?.city!);
     formData.append("province", basicInformation?.province!);
     formData.append("latitude", basicInformation?.latitude!);
@@ -98,11 +108,26 @@ function StepTwo({
         token
       );
       if (res.status === 201) {
-        toast.success("درخواست شما با موفقیت ثبت شد.");
-        await signOut({ redirect: false });
-        push("/");
+        const userFormData = new FormData();
+        formData.append("fullName", basicInformation?.fullName!);
+        formData.append("image", userImage);
+        const resUserUpdate = await patchDataAPI(
+          `/account/me/`,
+          userFormData,
+          token
+        );
+        console.log(token);
+        console.log(resUserUpdate.status);
+        console.log(resUserUpdate.data);
+        if (resUserUpdate.status === 200) {
+          setLoading(false);
+          toast.success("درخواست شما با موفقیت ثبت شد.");
+          await signOut({ redirect: false });
+          // push("/");
+        }
       }
     } catch (error) {
+      setLoading(false);
       toast.error("دوباره امتحان کنید.");
     }
   };
@@ -228,7 +253,7 @@ function StepTwo({
             ))}
         </select>
       </div>
-      <Btn className="w-full mt-4" onClick={handleSubmit}>
+      <Btn className="w-full mt-4" onClick={handleSubmit} loading={loading}>
         ثبت درخواست
       </Btn>
     </div>

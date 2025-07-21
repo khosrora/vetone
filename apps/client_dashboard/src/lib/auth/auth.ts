@@ -18,6 +18,7 @@ export interface IUser {
   password: string;
   phone: string;
   user_permissions: [];
+  image? : string | null
 }
 
 export type TokenType = {
@@ -132,11 +133,11 @@ export const authOptions: NextAuthOptions = {
         token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000;
       }
       // Return previous token if the access token has not expired yet
+
       if (Date.now() < token.accessTokenExpires) {
         return token;
       } else {
         if (!token.refreshToken) throw new TypeError("Missing refresh_token");
-
         // Get new access token
         try {
           const response = await postDataAPI("/account/refresh/", {
@@ -167,6 +168,7 @@ export const authOptions: NextAuthOptions = {
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
         session.accessTokenExpires = token.accessTokenExpires;
+        session.error = token.error;
         return session;
       } catch (error) {
         console.error("Session error:", error);
@@ -207,10 +209,15 @@ export async function checkAuth() {
   return session.user;
 }
 
+export enum errorSession {
+  RefreshAccessTokenError = "RefreshAccessTokenError",
+}
+
 declare module "next-auth" {
   interface Session {
     user: IUser;
     accessToken: string;
     refreshToken: string;
+    error: errorSession.RefreshAccessTokenError;
   }
 }

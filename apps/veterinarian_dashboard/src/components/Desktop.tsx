@@ -21,7 +21,6 @@ import VeterinarianLoading from "./VeterinarianLoading";
 
 export default function Desktop() {
   const { data: session } = useSession();
-
   const token: string = session?.accessToken!;
   const shouldFetch = !!token;
   const { data, isLoading, error } = useSWR(
@@ -146,8 +145,8 @@ export default function Desktop() {
                   ) : (
                     request.map((item: requestCardType) => (
                       <tr key={item.id}>
-                        <th>{item.rancher.fullName}</th>
-                        <td>{item.rancher.phone}</td>
+                        <th>{item?.rancher?.fullName}</th>
+                        <td>{item?.rancher?.phone}</td>
                         <td>
                           {item.state === requestsStateEnum.Reject ? (
                             <p className="text-[12px] lg:text-sm text-red-500 font-semibold">

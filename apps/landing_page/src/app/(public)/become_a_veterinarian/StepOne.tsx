@@ -9,8 +9,8 @@ import { BasicInformationType } from "@/lib/types/register_veterinarianTypes";
 import { Btn } from "@repo/ui/btn";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Dispatch, SetStateAction, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const MapCm = dynamic(() => import("./MapCm"), {
   ssr: false,
@@ -57,7 +57,6 @@ function StepOne({
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {

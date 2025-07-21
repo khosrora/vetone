@@ -1,16 +1,16 @@
 "use client";
 import TitleBack from "@/components/TitleBack";
+import VeterinarianLoading from "@/components/VeterinarianLoading";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { walletCardType } from "@/lib/types/wallets.type";
 import { Alert } from "@repo/ui/alert";
 import { Btn } from "@repo/ui/btn";
 import { IconDownload } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
-import React from "react";
 import useSWR from "swr";
-import Loader from "@/components/Loader";
-import VeterinarianLoading from "@/components/VeterinarianLoading";
+
 function Index() {
+
   const { data: session } = useSession();
   const token: string = session?.accessToken!;
 
@@ -18,6 +18,7 @@ function Index() {
     !!token ? ["/wallet/transactions", token] : null,
     fetcher
   );
+  
   if (isLoading || !token) {
     return <VeterinarianLoading />;
   }
