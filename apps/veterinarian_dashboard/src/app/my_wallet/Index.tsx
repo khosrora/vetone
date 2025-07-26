@@ -1,26 +1,23 @@
 "use client";
 import TitleBack from "@/components/TitleBack";
-import VeterinarianLoading from "@/components/VeterinarianLoading";
-import { fetcher } from "@/lib/fetch/fetch_axios";
 import { Alert } from "@repo/ui/alert";
 import { Btn } from "@repo/ui/btn";
 import { useSession } from "next-auth/react";
-import useSWR from "swr";
-import WalletList from "./WalletList";
 import AddPaymentModal from "./AddPaymentModal";
+import WalletList from "./WalletList";
+import useSWR from "swr";
+import { fetcher } from "@/lib/fetch/fetch_axios";
+import { Loader } from "@repo/ui/loader";
 
 function Index() {
   const { data: session } = useSession();
   const token: string = session?.accessToken!;
 
-  const { data: wallets, isLoading } = useSWR(
-    !!token ? ["/wallet/transactions", token] : null,
+  const { data: wallet } = useSWR(
+    !!token ? ["/wallet/wallet", token] : null,
     fetcher
   );
 
-  if (isLoading || !token) {
-    return <VeterinarianLoading />;
-  }
   return (
     <>
       <div className="p-4">
@@ -28,9 +25,13 @@ function Index() {
         <div className="md:flex justify-between items-center space-y-6">
           <div className="">
             <h3 className="font-light text-sm py-4">موجودی کیف پول</h3>
-            <p className="font-bold text-3xl">
-              150,000 <small className="font-light">تومان</small>
-            </p>
+            {!wallet ? (
+              <Loader />
+            ) : (
+              <p className="font-bold text-3xl">
+                {new Intl.NumberFormat().format(Number(wallet.balance))} <small className="font-light">تومان</small>
+              </p>
+            )}
           </div>
           <div className="grid grid-cols-2 lg:flex justify-between gap-x-4 items-center">
             <Btn
@@ -49,14 +50,7 @@ function Index() {
         </div>
         <div className="divider"></div>
         <p className="font-bold my-4 text-lg">تراکنشات من</p>
-        {!wallets || wallets.length === 0 ? (
-          <Alert
-            message="در حال حاضر اطلاعاتی جهت نمایش وجود ندارد."
-            type="info"
-          />
-        ) : (
-          <WalletList wallets={wallets} />
-        )}
+        <WalletList token={token} />
       </div>
       <AddPaymentModal />
     </>
