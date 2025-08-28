@@ -62,4 +62,5 @@ export type requestCardType = {
   latitude: string;
   longitude: string;
   analysis_result: string;
+  phone: string | null;
 };

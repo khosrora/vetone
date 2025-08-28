@@ -43,8 +43,8 @@ function RequestCard({
           <div className="flex col-span-2 justify-start items-center gap-x-2">
             <img
               src={
-                !!request.rancher.image
-                  ? request.rancher.image
+                !!request.image
+                  ? request.image
                   : IMAGE_PLACEHOLDER
               }
               className="w-10 h-10 lg:w-16 lg:h-16"
@@ -52,7 +52,7 @@ function RequestCard({
             <div className="space-y-2 lg:space-y-3 px-4">
               <p className="font-bold text-sm lg:text-lg block"></p>
               <p className="text-[10px] lg:tet-sm texxt-gray-500 ">
-                {request.rancher.phone}
+                {request.phone}
               </p>
             </div>
           </div>
