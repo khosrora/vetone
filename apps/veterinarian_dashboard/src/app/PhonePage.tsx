@@ -22,7 +22,7 @@ function PhonePage() {
           </div>
         </div>
         <div className="flex flex-col space-y-3">
-          <p className="font-bold text-lg">دکتر {session?.user.fullName}</p>
+          <p className="font-bold text-lg">دکتر {session?.user.fullName} <Link className="mr-2 text-blue-900 text-xs underline" href={'/profile'}>ویرایش</Link></p> 
           <small className="text-[12px]">دامپزشک</small>
         </div>
       </div>

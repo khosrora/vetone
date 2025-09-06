@@ -43,8 +43,8 @@ function FormProfile() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-md p-4">
+      <div className="">
         <label className="form-control w-full space-y-1">
           <div className="label">
             <span className="label-text-alt text-sm">نام و نام خانوادگی</span>
@@ -52,7 +52,7 @@ function FormProfile() {
           <input
             type="text"
             placeholder="نام خود را وارد نمایید"
-            className="input input-bordered w-full input-md placholder:text-xs border-none"
+            className="input input-bordered w-full input-md placholder:text-xs border-none bg-zinc-50"
             {...register("fullName", {
               required: { value: true, message: "این فیلد الزامی است" },
             })}
@@ -62,7 +62,7 @@ function FormProfile() {
           )}
         </label>
       </div>
-      <div className="flex order-last my-4">
+      <div className="flex order-last mt-4">
         <Btn className="px-6 w-full md:w-6/12 lg:w-3/12 text-sm my-4 flex order-last">
           ویرایش اطلاعات
         </Btn>

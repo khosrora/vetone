@@ -58,7 +58,7 @@ export default function Desktop() {
             <div className="flex gap-x-2 items-center">
               <IconStethoscope size={20} />
               <p className="text-base font-bold flex items-center">
-                دکتر <p>{user?.fullName}</p>
+                دکتر <p>{user?.fullName}</p> <Link className="mr-2 text-blue-400 text-xs underline" href={'/profile'}>ویرایش</Link>
               </p>
             </div>
             <div className="flex gap-x-2 items-center">
