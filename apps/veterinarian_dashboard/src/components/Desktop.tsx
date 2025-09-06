@@ -38,6 +38,9 @@ export default function Desktop() {
   if (error) return <Error />;
   if (!data) return null;
   const { user, request } = data;
+  console.log(user);
+  console.log(request);
+
   return (
     <div className="p-4 lg:py-1 ">
       <div className="block lg:hidden">
@@ -58,13 +61,19 @@ export default function Desktop() {
             <div className="flex gap-x-2 items-center">
               <IconStethoscope size={20} />
               <p className="text-base font-bold flex items-center">
-                دکتر <p>{user?.fullName}</p> <Link className="mr-2 text-blue-400 text-xs underline" href={'/profile'}>ویرایش</Link>
+                {user.medical_center.title} <p> {user?.fullName}</p>
+                <Link
+                  className="mr-2 text-blue-400 text-xs underline"
+                  href={"/profile"}
+                >
+                  ویرایش
+                </Link>
               </p>
             </div>
             <div className="flex gap-x-2 items-center">
               <IconBuildingHospital size={20} />
               <p className="text-sm text-gray-700">
-                {user?.province},{user.city}
+                {user?.province.name},{user.city.name}
               </p>
             </div>
             <div className="flex gap-x-2 items-center">
