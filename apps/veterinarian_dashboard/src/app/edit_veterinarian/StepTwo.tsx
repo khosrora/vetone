@@ -1,247 +1,158 @@
 "use client";
+
 import { Btn } from "@repo/ui/btn";
 import { IconPhotoFilled } from "@tabler/icons-react";
-
-import { fetcher, patchDataAPI, postDataAPI } from "@/lib/fetch/fetch_axios";
-import { Dispatch, SetStateAction, useState } from "react";
+import { fetcher, patchDataAPI } from "@/lib/fetch/fetch_axios";
+import { CentersType } from "@/lib/types/CentersTypes";
+import { BasicInformationType } from "@/lib/types/register_veterinarianTypes";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import DatePicker from "react-multi-date-picker";
 import "react-multi-date-picker/styles/layouts/mobile.css";
 import { toast } from "sonner";
-import { signOut, useSession } from "next-auth/react";
 import useSWR from "swr";
-import { CentersType } from "@/lib/types/CentersTypes";
-import { useRouter } from "next/navigation";
-import { BasicInformationType } from "@/lib/types/register_veterinarianTypes";
+import ImageUpload from "@/components/ImageUpload";
 
-function StepTwo({
-  basicInformation,
-}: {
-  basicInformation: BasicInformationType | undefined;
-}) {
+type Props = {
+  basicInformation?: BasicInformationType;
+};
+
+export default function StepTwo({ basicInformation }: Props) {
   const { data, isLoading } = useSWR(["/veterinary/centers/"], fetcher);
-  const { data: session } = useSession();
-  const token: string = session?.accessToken!;
+  const { data: session, update } = useSession();
+  const token = session?.accessToken;
 
-  const [date, setDate] = useState<any>();
+  const [medicalCenter, setMedicalCenter] = useState<string>();
 
-  const [medicalLicense, setMedicalLicense] = useState<string>();
+  const [date, setDate] = useState<string | null>(
+    basicInformation?.issuance_date ?? null
+  );
+
+  const [medicalLicense, setMedicalLicense] = useState<string>(
+    basicInformation?.medical_license ?? ""
+  );
 
   const [licenseImage, setLicenseImage] = useState<File | null>(null);
-  const [licensePreview, setLicensePreview] = useState<string | null>(null);
+  const [licensePreview, setLicensePreview] = useState<string | null>(
+    basicInformation?.license_image ?? null
+  );
 
   const [idCardImage, setIdCardImage] = useState<File | null>(null);
-  const [idCardPreview, setIdCardPreview] = useState<string | null>(null);
+  const [idCardPreview, setIdCardPreview] = useState<string | null>(
+    basicInformation?.national_id_image ?? null
+  );
 
-  const [userImage, setUserImage] = useState<File | null>(null);
-  const [userImagePreview, setUserImagePreview] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const handleLicenseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setLicenseImage(file);
-      const previewUrl = URL.createObjectURL(file);
-      setLicensePreview(previewUrl);
-    }
-  };
-
-  const handleIdCardChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setIdCardImage(file);
-      const previewUrl = URL.createObjectURL(file);
-      setIdCardPreview(previewUrl);
-    }
-  };
-
-  const handleUserImageChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setFile: (f: File | null) => void,
+    setPreview: (p: string | null) => void
   ) => {
-    const file = event.target.files?.[0];
+    const file = e.target.files?.[0];
     if (file) {
-      setUserImage(file);
-      const previewUrl = URL.createObjectURL(file);
-      setUserImagePreview(previewUrl);
+      setFile(file);
+      setPreview(URL.createObjectURL(file));
     }
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
-    if (
-      !licenseImage ||
-      !idCardImage ||
-      !medicalLicense ||
-      !date ||
-      !userImage
-    ) {
-      setLoading(false);
-      return toast.error("تمام اطلاعات را وارد کنید.");
+    if (!token) {
+      toast.error("لطفا ابتدا وارد شوید.");
+      return;
     }
 
-    const formData = new FormData();
-    const issuance_date = date
-      ?.toDate()
-      .toLocaleDateString("zh-Hans-CN")
-      .replaceAll("/", "-");
+    setLoading(true);
 
-    formData.append("license_image", licenseImage);
-    formData.append("national_id_image", idCardImage);
-    formData.append("issuance_date", issuance_date);
-    formData.append("medical_license", medicalLicense);
-    formData.append("medical_center", data[0].id);
-    formData.append("city", basicInformation?.city!);
-    formData.append("province", basicInformation?.province!);
-    formData.append("latitude", basicInformation?.latitude!);
-    formData.append("longitude", basicInformation?.longitude!);
-    formData.append("street", basicInformation?.street!);
+    const formData = new FormData();
+    if (licenseImage) formData.append("license_image", licenseImage);
+    if (idCardImage) formData.append("national_id_image", idCardImage);
+    if (date) formData.append("issuance_date", date);
+    if (medicalLicense) formData.append("medical_license", medicalLicense);
+    formData.append("medical_center", medicalCenter!);
 
     try {
-      const res = await postDataAPI(
-        `/veterinary/register_veterinarian/`,
-        formData,
-        token
-      );
-      if (res.status === 201) {
-        const userFormData = new FormData();
-        formData.append("fullName", basicInformation?.fullName!);
-        formData.append("image", userImage);
-        const resUserUpdate = await patchDataAPI(
-          `/account/me/`,
-          userFormData,
-          token
-        );
-        console.log(token);
-        console.log(resUserUpdate.status);
-        console.log(resUserUpdate.data);
-        if (resUserUpdate.status === 200) {
-          setLoading(false);
-          toast.success("درخواست شما با موفقیت ثبت شد.");
-          await signOut({ redirect: false });
-          // push("/");
-        }
-      }
+      const res = await patchDataAPI(`/veterinary/me/`, formData, token);
+      update({ ...session, user: res.data });
+      toast.success("اطلاعات با موفقیت ثبت شد.");
     } catch (error) {
-      setLoading(false);
       toast.error("دوباره امتحان کنید.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
-        <div className="col-span-2">
-          <div className="flex flex-col justify-center items-center">
-            <p className="text-[14px] font-bold mb-2">تصویر کاربری</p>
-            <div className="border-2 border-dashed rounded-full min-h-32 w-32 overflow-hidden space-y-3 flex flex-col justify-center items-center relative">
-              {userImagePreview ? (
-                <img
-                  src={userImagePreview}
-                  alt="ID Card Preview"
-                  className="max-h-32"
-                />
-              ) : (
-                <>
-                  <IconPhotoFilled size={36} />
-                  <p className="text-[10px] lg:text-sm">افزودن عکس</p>
-                </>
-              )}
-              <input
-                className="absolute top-0 right-0 bottom-0 left-0 opacity-0 cursor-pointer"
-                type="file"
-                onChange={handleUserImageChange}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="">
-          <p className="text-[14px] font-bold mb-2">تصویر مجوز</p>
-          <div className="border-2 border-dashed rounded-md min-h-32 space-y-3 flex flex-col justify-center items-center relative">
-            {licensePreview ? (
-              <img
-                src={licensePreview}
-                alt="License Preview"
-                className="max-h-32"
-              />
-            ) : (
-              <>
-                <IconPhotoFilled size={36} />
-                <p className="text-[10px] lg:text-sm">افزودن عکس</p>
-              </>
-            )}
-            <input
-              className="absolute top-0 right-0 bottom-0 left-0 opacity-0 cursor-pointer"
-              type="file"
-              onChange={handleLicenseChange}
-            />
-          </div>
-        </div>
-        <div className="">
-          <p className="text-[14px] font-bold mb-2">تصویر کارت ملی</p>
-          <div className="border-2 border-dashed rounded-md min-h-32 space-y-3 flex flex-col justify-center items-center relative">
-            {idCardPreview ? (
-              <img
-                src={idCardPreview}
-                alt="ID Card Preview"
-                className="max-h-32"
-              />
-            ) : (
-              <>
-                <IconPhotoFilled size={36} />
-                <p className="text-[10px] lg:text-sm">افزودن عکس</p>
-              </>
-            )}
-            <input
-              className="absolute top-0 right-0 bottom-0 left-0 opacity-0 cursor-pointer"
-              type="file"
-              onChange={handleIdCardChange}
-            />
-          </div>
-        </div>
+        <ImageUpload
+          label="تصویر مجوز"
+          preview={licensePreview}
+          onChange={(e) =>
+            handleFileChange(e, setLicenseImage, setLicensePreview)
+          }
+        />
+        <ImageUpload
+          label="تصویر کارت ملی"
+          preview={idCardPreview}
+          onChange={(e) =>
+            handleFileChange(e, setIdCardImage, setIdCardPreview)
+          }
+        />
       </div>
-      <label className="form-control w-full mt-6">
+
+      {/* Medical License Code */}
+      <label className="form-control w-full">
         <div className="label">
-          <span className="label-text-alt  text-base">کد مجوز نظام پزشکی</span>
+          <span className="label-text-alt text-base">کد مجوز نظام پزشکی</span>
         </div>
         <input
           type="text"
           placeholder="کد مجوز نظام پزشکی خود را وارد نمایید"
-          className="input  w-full input-lg placeholder:text-sm"
+          className="input input-lg w-full placeholder:text-sm"
+          value={medicalLicense}
           onChange={(e) => setMedicalLicense(e.target.value)}
         />
       </label>
-      <div className="w-full">
+
+      {/* Issuance Date */}
+      <div>
         <div className="label">
           <span className="label-text-alt text-base">تاریخ صدور</span>
         </div>
         <DatePicker
           value={date}
-          onChange={setDate}
-          key={`${1}`}
+          onChange={(d) => {
+            if (Array.isArray(d)) return; // prevent range mode
+            setDate(d?.format?.("YYYY-MM-DD") ?? null);
+          }}
           calendar={persian}
           locale={persian_fa}
           calendarPosition="bottom-right"
+          format="YYYY-MM-DD"
           style={{
             width: "100%",
-            boxSizing: "border-box",
             padding: "1.8rem",
             marginTop: ".5rem",
             border: "1px solid rgb(255 255 255)",
           }}
-          containerStyle={{
-            width: "100%",
-          }}
-          placeholder="مثال :‌ 1 / 2 / 1400"
+          containerStyle={{ width: "100%" }}
+          placeholder="مثال :‌ 1400-02-01"
           className="rmdp-mobile"
         />
       </div>
-      <div className="w-full">
+
+      {/* Request Type */}
+      <div>
         <div className="label">
           <span className="label-text-alt text-base">نوع درخواست</span>
         </div>
-        <select disabled className="select select-md w-full">
+        <select
+          className="select select-md w-full"
+          onChange={(e) => setMedicalCenter(e.target.value)}
+        >
           {!isLoading &&
             data.map((item: CentersType) => (
               <option key={item.id} value={item.id}>
@@ -250,11 +161,11 @@ function StepTwo({
             ))}
         </select>
       </div>
+
+      {/* Submit */}
       <Btn className="w-full mt-4" onClick={handleSubmit} loading={loading}>
         ثبت درخواست
       </Btn>
     </div>
   );
 }
-
-export default StepTwo;

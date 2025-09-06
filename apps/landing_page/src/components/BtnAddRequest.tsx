@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import ChoiceTypeRequest from "./ChoiceTypeRequest";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 function BtnAddRequest({
   isLarge,
@@ -9,14 +11,20 @@ function BtnAddRequest({
   isLarge: boolean;
   idVet: number;
 }) {
+  const { status } = useSession();
+
   return (
     <>
       <div className={`w-full mt-4 ${isLarge ? "lg:hidden mt-14" : ""}`}>
         <div
           onClick={() => {
-            (
-              document.getElementById("my_modal_2") as HTMLFormElement
-            ).showModal();
+            if (status === "authenticated") {
+              (
+                document.getElementById("my_modal_2") as HTMLFormElement
+              ).showModal();
+            } else {
+              toast.error("ابتدا وارد وب سایت شوید");
+            }
           }}
           className="block bg-green_vetone rounded-md text-white text-center py-3"
         >

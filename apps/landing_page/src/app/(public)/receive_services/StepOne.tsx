@@ -11,14 +11,38 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useContext } from "react";
 import useSWR from "swr";
 
-function StepOne({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) {
+function StepOne({
+  veterinarianId,
+  setStep,
+}: {
+  veterinarianId: string;
+  setStep: Dispatch<SetStateAction<number>>;
+}) {
   const { data: session } = useSession();
   const token: string = session?.accessToken!;
+
   const { data, isLoading } = useSWR(
-    !!token ? [`/veterinary/animals/`, token] : null,
+    !!token
+      ? [
+          `/veterinary/veterinarian-animals/?veterinarian=${veterinarianId}`,
+          token,
+        ]
+      : null,
     fetcher
   );
-
+  console.log(data);
+  `
+  {
+    "id": 3,
+    "animal": {
+        "id": 6,
+        "name": "گربه",
+        "image": 4
+    },
+    "is_active": true,
+    "added_at": "2025-09-06T16:07:30.039174+03:30"
+}
+  `;
   const { animals, addAnimal, incrementQuantity, decrementQuantity } =
     useContext(AnimalsContext);
   console.log(animals);

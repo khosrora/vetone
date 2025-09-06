@@ -24,7 +24,6 @@ async function getInitialVetData(slug: string) {
 
 async function page({ params: { slug } }: { params: { slug: string } }) {
   const data: VeterinarianCardType = await getInitialVetData(slug);
-  
   return (
     <div className="mx-auto max-w-7xl px-4 lg:px-0">
       <div className="grid grid-cols-12">
@@ -68,7 +67,7 @@ async function page({ params: { slug } }: { params: { slug: string } }) {
               <div className="flex items-center gap-x-2">
                 <IconMapPinFilled />
                 <p className="text-[10px] lg:text-base">
-                  {data.city} , {data.province}
+                  {data.city.name} , {data.province.name}
                 </p>
               </div>
               <div className="flex items-center gap-x-2">
@@ -112,7 +111,7 @@ async function page({ params: { slug } }: { params: { slug: string } }) {
           <div className="w-full p-4">
             <div className="bg-white p-4 lg:p-6 rounded-md">
               <p className="font-bold text-[12px] lg:text-base">
-                نوبت‌دهی اینترنتی مطب دکتر علی اکبر سیاری
+                نوبت‌دهی اینترنتی مطب دکتر {data.fullName}
               </p>
               <div className="divider"></div>
               {/* <div className="flex justify-between items-center">

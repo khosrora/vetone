@@ -24,12 +24,14 @@ function StepTwo({
 }) {
   const { push } = useRouter();
   const { data, isLoading } = useSWR(["/veterinary/centers/"], fetcher);
+
   const { data: session } = useSession();
   const token: string = session?.accessToken!;
 
   const [date, setDate] = useState<any>();
 
   const [medicalLicense, setMedicalLicense] = useState<string>();
+  const [medicalCenter, setMedicalCenter] = useState<string>();
 
   const [licenseImage, setLicenseImage] = useState<File | null>(null);
   const [licensePreview, setLicensePreview] = useState<string | null>(null);
@@ -94,7 +96,7 @@ function StepTwo({
     formData.append("national_id_image", idCardImage);
     formData.append("issuance_date", issuance_date);
     formData.append("medical_license", medicalLicense);
-    formData.append("medical_center", data[0].id);
+    formData.append("medical_center", medicalCenter!);
     formData.append("city", basicInformation?.city!);
     formData.append("province", basicInformation?.province!);
     formData.append("latitude", basicInformation?.latitude!);
@@ -116,14 +118,11 @@ function StepTwo({
           userFormData,
           token
         );
-        console.log(token);
-        console.log(resUserUpdate.status);
-        console.log(resUserUpdate.data);
         if (resUserUpdate.status === 200) {
           setLoading(false);
           toast.success("درخواست شما با موفقیت ثبت شد.");
           await signOut({ redirect: false });
-          // push("/");
+          push("/");
         }
       }
     } catch (error) {
@@ -212,7 +211,7 @@ function StepTwo({
           type="text"
           placeholder="کد مجوز نظام پزشکی خود را وارد نمایید"
           className="input  w-full input-lg placeholder:text-sm"
-          onChange={(e) => setMedicalLicense(e.target.value)}
+          onChange={(e) => setMedicalLicense(e.target.value ?? data[0].id)}
         />
       </label>
       <div className="w-full">
@@ -242,9 +241,12 @@ function StepTwo({
       </div>
       <div className="w-full">
         <div className="label">
-          <span className="label-text-alt text-base">نوع درخواست</span>
+          <span className="label-text-alt text-base">نوع خدمت</span>
         </div>
-        <select disabled className="select select-md w-full">
+        <select
+          className="select select-md w-full"
+          onChange={(e) => setMedicalCenter(e.target.value)}
+        >
           {!isLoading &&
             data.map((item: CentersType) => (
               <option key={item.id} value={item.id}>

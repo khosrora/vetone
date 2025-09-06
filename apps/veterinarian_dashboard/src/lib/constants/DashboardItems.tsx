@@ -8,6 +8,7 @@ import {
   IconUser,
   IconEdit,
   IconRobot,
+  IconPlus,
 } from "@tabler/icons-react";
 
 export type LinkItems = {
@@ -32,30 +33,36 @@ export const linksDashboad: LinkItems[] = [
   },
   {
     id: 3,
+    icon: <IconPlus />,
+    title: "افزودن تخصص",
+    link: "/add_animals",
+  },
+  {
+    id: 4,
     icon: <IconRobot />,
     title: "هوش مصنوعی دارو",
     link: "/medicine",
   },
   {
-    id: 4,
+    id: 5,
     icon: <IconClipboardList size={20} />,
     title: "درخواست های من",
     link: "/my_requests",
   },
   {
-    id: 5,
+    id: 6,
     icon: <IconWallet size={20} />,
     title: "کیف پول",
     link: "/my_wallet",
   },
   {
-    id: 6,
+    id: 7,
     icon: <IconPaw size={20} />,
     title: "دامدار ها",
     link: "/ranchers",
   },
   {
-    id: 7,
+    id: 8,
     icon: <IconBrandGoogleMaps size={20} />,
     title: "آدرس محل کار",
     link: "/my_addresses",

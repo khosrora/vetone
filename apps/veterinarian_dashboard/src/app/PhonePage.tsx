@@ -1,9 +1,11 @@
 import NavigationBottom from "@/components/NavigationBottom";
 import { LinkItems, linksDashboad } from "@/lib/constants/DashboardItems";
-import { LINK_LANDINGPAGE } from "@repo/lib/links";
+import { base_path_vet, LINK_LANDINGPAGE } from "@repo/lib/links";
+import { Img } from "@repo/ui/img";
 import { IconChevronLeft, IconLogout } from "@tabler/icons-react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { veterinarian } from "@repo/lib/titles";
 
 function PhonePage() {
   const { data: session } = useSession();
@@ -17,13 +19,31 @@ function PhonePage() {
     <div className="flex flex-col lg:hidden">
       <div className="bg-green_vetone p-4 flex justify-start items-center gap-x-3">
         <div className="avatar">
-          <div className="ring-white ring-offset-base-100 ring ring-offset-2 w-16 rounded-full">
-            <img src="https://avatar.iran.liara.run/public" />
+          <div className="avatar">
+            <div className="w-12 rounded-full">
+              <Img
+                src={
+                  session?.user.image || `${base_path_vet}/images/doctor.jpg`
+                }
+                width={2000}
+                height={2000}
+                alt={veterinarian}
+                className="rounded-lg"
+              />
+            </div>
           </div>
         </div>
         <div className="flex flex-col space-y-3">
-          <p className="font-bold text-lg">دکتر {session?.user.fullName} <Link className="mr-2 text-blue-900 text-xs underline" href={'/profile'}>ویرایش</Link></p> 
-          <small className="text-[12px]">دامپزشک</small>
+          <p className="font-bold text-lg">
+            {session?.user.fullName}{" "}
+            <Link
+              className="mr-2 text-blue-900 text-xs underline"
+              href={"/profile"}
+            >
+              ویرایش
+            </Link>
+          </p>
+          {/* <small className="text-[12px]">دامپزشک</small> */}
         </div>
       </div>
       <div className="mt-4 py-6 ">

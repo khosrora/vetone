@@ -21,8 +21,8 @@ export type VeterinarianCardType = {
   experience: number;
   user: number;
   medical_center: number;
-  province: number;
-  city: number;
+  province: { id: number; name: string };
+  city: { id: number; name: string };
   lat: string;
   long: string;
 };

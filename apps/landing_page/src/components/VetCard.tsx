@@ -101,7 +101,7 @@ function VetCard({
         <div className="flex items-center gap-x-2 ml-8">
           <IconMapPinFilled size={20} color="gray" />
           <div className="text-[10px] lg:text-sm flex truncate w-10/12 ">
-            <p>{item.province}</p>-<p>{item.city}</p>
+            <p>{item.province.name}</p>-<p>{item.city.name}</p>
           </div>
         </div>
         <Link

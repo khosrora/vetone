@@ -13,12 +13,12 @@ function Index({
   type: string;
 }) {
   const [step, setStep] = useState<number>(1);
-  
+
   return (
     <AnimalsProvider>
       <div className="px-4 mb-4 max-w-lg m-auto">
         {step === 1 ? (
-          <StepOne setStep={setStep} />
+          <StepOne veterinarianId={veterinarianId} setStep={setStep} />
         ) : (
           <StepTwo veterinarianId={veterinarianId} type={type} />
         )}

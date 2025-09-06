@@ -38,9 +38,6 @@ export default function Desktop() {
   if (error) return <Error />;
   if (!data) return null;
   const { user, request } = data;
-  console.log(user);
-  console.log(request);
-
   return (
     <div className="p-4 lg:py-1 ">
       <div className="block lg:hidden">
@@ -48,14 +45,16 @@ export default function Desktop() {
       </div>
       <div className="space-y-6">
         <div className="bg-white block items-center lg:grid lg:grid-cols-10 rounded-lg ">
-          <div className="col-span-2 rounded-lg p-4">
-            <Img
-              src={user?.image || `${base_path_vet}/images/doctor.jpg`}
-              width={2000}
-              height={2000}
-              alt={veterinarian}
-              className="rounded-lg"
-            />
+          <div className="avatar">
+            <div className="w-24 rounded-full">
+              <Img
+                src={user?.image || `${base_path_vet}/images/doctor.jpg`}
+                width={2000}
+                height={2000}
+                alt={veterinarian}
+                className="rounded-lg"
+              />
+            </div>
           </div>
           <div className="p-4 col-span-8 space-y-4">
             <div className="flex gap-x-2 items-center">
@@ -68,12 +67,6 @@ export default function Desktop() {
                 >
                   ویرایش
                 </Link>
-              </p>
-            </div>
-            <div className="flex gap-x-2 items-center">
-              <IconBuildingHospital size={20} />
-              <p className="text-sm text-gray-700">
-                {user?.province.name},{user.city.name}
               </p>
             </div>
             <div className="flex gap-x-2 items-center">
