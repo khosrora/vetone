@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa">
-      <body className={`${estedad.variable} bg-zinc-50`}>
+      <body className={`${estedad.variable} bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen`}>
         <Providers>
           <Toaster
             richColors

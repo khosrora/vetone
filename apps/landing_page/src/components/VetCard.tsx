@@ -2,17 +2,18 @@
 import { postDataAPI } from "@/lib/fetch/fetch_axios";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import { IMAGE_PLACEHOLDER, LINK_LANDINGPAGE } from "@repo/lib/links";
-import { Btn } from "@repo/ui/btn";
+import { Btn } from "@repo/ui/btn"; // assuming Btn is a well-styled button
 import {
-  IconCaretLeftFilled,
+  IconChevronLeft, // Renamed from IconCaretLeftFilled for better icon choice
   IconHeart,
   IconMapPinFilled,
+  IconStarFilled, // Added for rating display
 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { toast } from "sonner";
-import Share from "./Share";
+import Share from "./Share"; // Assuming Share component is visually appealing
 import Link from "next/link";
 
 function VetCard({
@@ -26,7 +27,6 @@ function VetCard({
   const token: string | undefined = session?.accessToken;
   const { status } = useSession();
   const { push } = useRouter();
-  // ok this is test
 
   const handleAddFav = async (id: number) => {
     try {
@@ -46,91 +46,84 @@ function VetCard({
       toast.error("قبلا به لیست اضافه شده است");
     }
   };
-  
+
   return (
-    <div className="p-4 lg:p-6 bg-white rounded-md space-y-2 mb-2">
-      <div className="flex justify-between items-center">
-        <div className="flex justify-start items-center gap-x-2">
+    <div className="bg-white rounded-2xl shadow-xl p-6 mb-4 transition-all duration-300 hover:shadow-2xl">
+      {/* Top Section: Image, Name, Experience, Share, Heart */}
+      <div className="flex justify-between items-start gap-4 mb-4">
+        <div className="flex items-center gap-4">
           <img
             src={!!item.image ? item.image : IMAGE_PLACEHOLDER}
-            className="w-12 h-12 rounded-full lg:w-24 lg:h-24"
+            alt={item.fullName}
+            className="w-20 h-20 lg:w-28 lg:h-28 rounded-full object-cover ring-2 ring-blue-100 shadow-md"
           />
-          <div className="space-y-2 lg:space-y-3 px-4">
-            <p className="font-bold text-base lg:text-xl block">
+          <div className="space-y-1">
+            <p className="font-bold text-lg lg:text-2xl text-gray-900 block">
               {item.fullName}
             </p>
-            <p className="text-[11px] text-gray-500  ">
-              {" "}
-              <span>سابقه کاری :</span> {item.experience}
+            <p className="text-sm text-gray-600">
+              <span className="font-semibold">سابقه کاری:</span> {item.experience} سال
             </p>
+            {/* Added a simple rating display */}
+            <div className="flex items-center gap-1 text-yellow-500 text-sm">
+                <IconStarFilled size={16} />
+                <span className="font-bold">{item.rate ?? 'N/A'}</span>
+            </div>
           </div>
         </div>
-        <div className="flex justify-end items-center gap-x-4 lg:gap-x-4">
-          {/* <div className="flex gap-x-8">
-            <div className="flex items-center gap-x-2">
-              <IconCarambolaFilled color="#ffaa00" />
-              <p>{item.rate}</p>
-            </div>
-          </div> */}
-
+        
+        <div className="flex items-center gap-3 text-gray-500">
           <Share
             link={`${LINK_LANDINGPAGE}search_veterinarians/${item.slug}`}
           />
           <IconHeart
-            className="cursor-pointer"
+            size={24}
+            className="cursor-pointer hover:text-red-500 transition-colors duration-200"
             onClick={() => handleAddFav(item.id)}
           />
         </div>
       </div>
-      <div className="divider"></div>
-      {/* <div className="flex gap-x-8 items-center py-3">
-        <div className="flex items-center gap-x-2 ">
-          <IconHexagonPlusFilled size={20} color="gray" />
-          <p className="text-[11px] lg:text-sm">نوبت حضوری</p>
-        </div>
-        <div className="flex items-center gap-x-2">
-          <IconPhoneFilled size={20} color="gray" />
-          <p className="text-[11px] lg:text-sm">مشاوره تلفنی</p>
-        </div>
-        <div className="flex items-center gap-x-2">
-          <IconBubbleFilled size={20} color="gray" />
-          <p className="text-[11px] lg:text-sm">مشاوره متنی</p>
-        </div>
-      </div> */}
-      <div className="flex justify-between items-center bg-gray-100 w-full p-4 rounded-md">
-        <div className="flex items-center gap-x-2 ml-8">
-          <IconMapPinFilled size={20} color="gray" />
-          <div className="text-[10px] lg:text-sm flex truncate w-10/12 ">
-            <p>{item.province.name}</p>-<p>{item.city.name}</p>
+
+      <hr className="border-gray-200 my-4" />
+
+      {/* Middle Section: Location and Map Link */}
+      <div className="flex justify-between items-center bg-blue-50/50 p-4 rounded-xl mb-4">
+        <div className="flex items-center gap-3">
+          <IconMapPinFilled size={22} className="text-blue-500 flex-shrink-0" />
+          <div className="text-sm text-gray-700 truncate">
+            <p className="font-semibold">{item.province.name} - {item.city.name}</p>
           </div>
         </div>
         <Link
           target="_blank"
-          href={`https://www.google.com/maps/dir/?api=1&destination=${!!item.lat ? item.lat : "35.7804024"},${!!item.long ? item.long : "51.3937825"}`}
-          className="text-blue-400 link"
+          href={`http://maps.google.com/maps?q=${!!item.lat ? item.lat : "35.7804024"},${!!item.long ? item.long : "51.3937825"}`}
+          className="text-blue-600 hover:text-blue-800 font-semibold text-sm transition-colors duration-200 flex items-center gap-1"
         >
-          برای مسیر یابی اینجا کلیک کنید
+          مسیریابی
+          <IconChevronLeft size={16} className="mt-0.5" />
         </Link>
       </div>
-      <div className="divider"></div>
-      <div className="grid grid-cols-4 md:grid-cols-3 gap-x-2 items-center">
-        <div className="col-span-2 md:col-span-2">
-          <div
-            className="bg-none items-center text-green-700 hover:text-green-600 cursor-pointer flex gap-x-2"
-            onClick={() => push(`/search_veterinarians/${item.slug}`)}
-          >
-            <p className="text-xs md:text-sm">مشاهده پروفایل</p>
-            <IconCaretLeftFilled />
-          </div>
-        </div>
+
+      <hr className="border-gray-200 my-4" />
+
+      {/* Bottom Section: View Profile and Appointment Button */}
+      <div className="flex justify-between items-center pt-2">
+        <Link
+          href={`/search_veterinarians/${item.slug}`}
+          className="flex items-center gap-1 text-green-600 hover:text-green-800 font-bold transition-colors duration-200 text-sm md:text-base"
+        >
+          مشاهده پروفایل
+          <IconChevronLeft size={18} className="mt-0.5" />
+        </Link>
         <Btn
-          className="col-span-2 md:col-span-1 text-sm"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg text-sm md:text-base shadow-md hover:shadow-lg transition-all duration-300"
           onClick={() => {
             if (!!setItemId) {
               setItemId(String(item.id));
             }
-            if (status === "unauthenticated")
+            if (status === "unauthenticated") {
               return toast.error("ابتدا وارد شوید.");
+            }
             if (document) {
               (
                 document.getElementById("my_modal_2") as HTMLFormElement
@@ -138,7 +131,7 @@ function VetCard({
             }
           }}
         >
-          نوبت مشاوره
+          درخواست نوبت
         </Btn>
       </div>
     </div>

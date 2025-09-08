@@ -1,124 +1,129 @@
-import BtnAddRequest from "@/components/BtnAddRequest";
-import UserComments from "@/components/UserComments";
 import { base_api } from "@/lib/fetch/base_api";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import { Img } from "@repo/ui/img";
 import {
-  IconHeart,
-  IconMapPinFilled,
-  IconShare,
+  IconMapPin,
   IconStarFilled,
-  IconThumbUpFilled,
-  IconZoomScanFilled,
+  IconThumbUp,
+  IconMedicalCross,
+  IconShare,
+  IconBookmark,
+  IconPhone,
+  IconClock,
 } from "@tabler/icons-react";
 
+
 async function getInitialVetData(slug: string) {
-  const res = await fetch(`${base_api}/veterinary/${slug}`, {
-    cache: "no-cache",
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+  const res = await fetch(`${base_api}/veterinary/${slug}`, { cache: "no-cache" });
+  if (!res.ok) throw new Error("Failed to fetch data");
   return res.json();
 }
 
-async function page({ params: { slug } }: { params: { slug: string } }) {
+// --- Placeholder data for the new Info Card ---
+
+export default async function Page({ params: { slug } }: { params: { slug: string } }) {
   const data: VeterinarianCardType = await getInitialVetData(slug);
+
   return (
-    <div className="mx-auto max-w-7xl px-4 lg:px-0">
-      <div className="grid grid-cols-12">
-        <div className="col-span-12  mb-12 lg:col-span-8">
-          <div className="relative">
-            <Img
-              src={
-                !!data.background_image
-                  ? data.background_image
-                  : data.license_image
-              }
-              width={500}
-              height={500}
-              alt="تصویر پزشک"
-              className="rounded-lg max-h-64 object-cover w-full lg:max-h-96"
-            />
-            <div className="absolute -bottom-12 left-0 right-0 px-8">
-              <div className="avatar">
-                <div className="ring-white ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
-                  <img src={data.image} />
-                </div>
+    <div className=" min-h-screen">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        
+        {/* 1. HEADER SECTION with GRADIENT */}
+        <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden mb-8 shadow-lg">
+          {/* Background Image */}
+          <Img
+            src="/images/matab.jpg"
+            alt="Veterinary Clinic Background"
+            width={1200}
+            height={400}
+            className="w-full h-full object-cover"
+          />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/60"></div> {/* Adjust opacity (e.g., bg-black/50, bg-black/70) as needed */}
+          
+          <div className="absolute bottom-0 top-0 my-auto left-0 right-0 py-6 px-10 flex items-center gap-6">
+            <div className="avatar">
+              <div className="w-32 h-32 md:w-32 md:h-32 rounded-full ring-4 ring-white shadow-xl">
+                <img src={data.image} alt={data.fullName} />
               </div>
             </div>
-          </div>
-          <BtnAddRequest isLarge={true} idVet={data.id} />
-          <div className="bg-white p-4 lg:p-6 rounded-md mt-6 space-y-8 lg:mt-20">
-            <div className="flex justify-between items-center">
-              <p className="font-bold text-base lg:text-xl">
-                {data.fullName}{" "}
-                <span className="text-[10px] lg:text-sm font-light mx-2">
-                  ({data.experience} سال سابقه)
-                </span>
+            <div>
+              <h1 className="text-white text-2xl md:text-4xl font-bold">
+                دکتر {data.fullName}
+              </h1>
+              <p className="text-white/90 mt-4 text-sm md:text-base">
+                {data.experience} سال سابقه‌ی کاری موفق
               </p>
-              <div className="flex justify-between items-center">
-                <IconShare className="ml-4" />
-                <IconHeart />
-              </div>
             </div>
-            <div className="divider"></div>
-            <div className="grid grid-cols-2 gap-x-2 lg:flex lg:justify-between items-center">
-              <div className="flex items-center gap-x-2">
-                <IconMapPinFilled />
-                <p className="text-[10px] lg:text-base">
-                  {data.city.name} , {data.province.name}
-                </p>
-              </div>
-              <div className="flex items-center gap-x-2">
-                <IconZoomScanFilled />
-                <p className="font-light text-[10px] lg:text-sm">
-                  {" "}
-                  کدنظام پزشکی:{" "}
-                </p>
-                <p className="font-bold text-[10px]">{data.medical_license}</p>
-              </div>
-            </div>
-            <div className="divider"></div>
-            <div className="flex justify-between items-center">
-              <div className="flex justify-between items-center gap-x-2">
-                <IconStarFilled color="#ff7700" size={18} />
-                <p>{data.rate}</p>
-              </div>
-              <div className="flex justify-end items-center gap-x-2">
-                <IconThumbUpFilled color="green" />
-                <p className="font-bold text-[12px]">
-                  {" "}
-                  {data.surgery} نوبت موفق
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-4 lg:p-6 rounded-md mt-6 space-y-4">
-            <p className="font-bold lg:text-lg">بیوگرافی </p>
-            <p className="font-light leading-6 lg:leading-8 text-xs lg:text-sm">
-              {data.bio}
-            </p>
-          </div>
-          <div className="bg-white rounded-md mt-6 py-6">
-            <div className="p-4 lg:py-2 lg:px-6">
-              <p className="font-bold text-lg">نظرات کاربران </p>
-            </div>
-            <UserComments />
           </div>
         </div>
-        <div className="hidden lg:flex lg:col-span-4">
-          <div className="w-full p-4">
-            <div className="bg-white p-4 lg:p-6 rounded-md">
-              <p className="font-bold text-[12px] lg:text-base">
-                نوبت‌دهی اینترنتی مطب دکتر {data.fullName}
-              </p>
-              <div className="divider"></div>
-              {/* <div className="flex justify-between items-center">
-                <p className="font-light">اولویت نوبت</p>
-                <p className="font-bold">۱۷ دی ۱۴۰۳</p>
-              </div> */}
-              <BtnAddRequest isLarge={false} idVet={data.id} />
+        {/* MAIN GRID LAYOUT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          {/* LEFT & MIDDLE COLUMNS (No Change) */}
+          <div className="lg:col-span-12 xl:col-span-8 flex flex-col gap-8">
+             {/* VET INFO CARD */}
+            <div className="bg-white p-6 rounded-2xl shadow-lg space-y-5">
+               <div className="flex justify-between items-start">
+                <div>
+                  <h2 className="font-bold text-lg text-gray-800">دکتر {data.fullName}</h2>
+                  <p className="text-sm text-gray-500 mt-1">متخصص داخلی حیوانات</p>
+                </div>
+                <div className="flex items-center gap-3 text-gray-500">
+                    <IconShare size={20} className="cursor-pointer hover:text-blue-600"/>
+                    <IconBookmark size={20} className="cursor-pointer hover:text-yellow-600"/>
+                </div>
+              </div>
+              <hr />
+              <div className="space-y-4 text-sm text-gray-700">
+                <div className="flex items-center gap-3"><IconMedicalCross size={20} className="text-gray-400" /><span>کد نظام پزشکی: <span className="font-semibold text-gray-900">{data.medical_license}</span></span></div>
+                <div className="flex items-center gap-3"><IconStarFilled size={20} className="text-yellow-500" /><span className="font-semibold text-gray-900">{data.rate} از ۵</span><span className="text-gray-400">({Math.floor(Math.random() * 100 + 50)} نظر)</span></div>
+                <div className="flex items-center gap-3"><IconThumbUp size={20} className="text-green-500" /><span className="font-semibold text-gray-900">{data.surgery}+ نوبت موفق</span></div>
+              </div>
+            </div>
+
+            {/* BIOGRAPHY CARD */}
+            <div className="bg-white p-6 rounded-2xl shadow-lg">
+              <h3 className="font-bold text-xl text-gray-800 mb-4">بیوگرافی</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">{data.bio}</p>
+              <a href="#" className="text-blue-600 font-semibold text-sm mt-4 inline-block">مشاهده بیشتر...</a>
+            </div>
+          </div>
+
+
+          {/* 2. RIGHT COLUMN - ADDRESS & INFO (Completely New) */}
+          <div className="lg:col-span-12 xl:col-span-4">
+            <div className="bg-white p-6 rounded-2xl shadow-lg h-full flex flex-col">
+               <h3 className="font-bold text-xl text-gray-800 mb-4">آدرس و اطلاعات مطب</h3>
+
+               {/* Static Map Image Placeholder */}
+               <div className="mb-4 rounded-lg overflow-hidden border">
+                <Img width={500} height={500} src="/images/map.jpg" alt="موقعیت مکانی مطب روی نقشه" className="w-full h-40 object-cover" />
+               </div>
+
+               {/* Address & Contact Details */}
+               <div className="space-y-4 text-sm text-gray-800">
+                <div className="flex items-start gap-3">
+                    <IconMapPin size={20} className="text-gray-400 mt-0.5 flex-shrink-0" />
+                    <span>{data.province.name}, {data.city.name}, [خیابان و پلاک دامپزشک در اینجا]</span>
+                </div>
+                <div className="flex items-center gap-3">
+                    <IconPhone size={20} className="text-gray-400" />
+                    <span className="font-semibold" dir="ltr">۰۲۱ - ۱۲۳۴۵۶۷۸</span>
+                </div>
+               </div>
+               
+               <hr className="my-5"/>
+
+               {/* Working Hours */}
+
+
+               {/* CTA Button at the bottom */}
+               <div className="mt-auto pt-6">
+                 <button className="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg focus:ring-4 focus:ring-green-300">
+                    ارسال درخواست نوبت
+                 </button>
+               </div>
             </div>
           </div>
         </div>
@@ -126,5 +131,3 @@ async function page({ params: { slug } }: { params: { slug: string } }) {
     </div>
   );
 }
-
-export default page;

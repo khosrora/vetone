@@ -1,4 +1,5 @@
 "use client";
+import TitleBack from "@/components/TitleBack";
 import { postDataAPI } from "@/lib/fetch/fetch_axios";
 import { Btn } from "@repo/ui/btn";
 import { IconPhotoFilled } from "@tabler/icons-react";
@@ -10,7 +11,7 @@ import { toast } from "sonner";
 function Index() {
   const router = useRouter();
   const { data: session } = useSession();
-  const token: string = session?.accessToken!;;
+  const token: string = session?.accessToken!;
   const [userImage, setUserImage] = useState<File | null>(null);
   const [userImagePreview, setUserImagePreview] = useState<string | null>(null);
   const [desc, setDesc] = useState<string>("");
@@ -52,22 +53,24 @@ function Index() {
   };
 
   return (
-    <div className="max-w-xl m-auto p-4">
-      <div className="flex flex-col justify-center items-center space-y-8">
-        <div className="border-2 border-dashed w-full rounded-md py-12 overflow-hidden space-y-3 flex flex-col justify-center items-center relative">
-          <p className="text-[14px] font-bold mb-2">
-            فایل مورد نظر خود را انتخاب نمایید
+    <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 space-y-8">
+              <TitleBack text="ثبت درخواست" />
+        {/* آپلود عکس */}
+        <div className="border-2 border-dashed border-gray-300 hover:border-blue-400 transition rounded-xl p-8 flex flex-col items-center justify-center relative cursor-pointer text-center">
+          <p className="text-gray-700 font-semibold mb-3 text-sm">
+            فایل مورد نظر خود را انتخاب کنید
           </p>
           {userImagePreview ? (
             <img
               src={userImagePreview}
               alt="ID Card Preview"
-              className="max-h-32"
+              className="max-h-40 rounded-lg shadow-md"
             />
           ) : (
             <>
-              <IconPhotoFilled size={36} />
-              <p className="text-[10px] lg:text-sm">افزودن عکس</p>
+              <IconPhotoFilled size={40} className="text-gray-400 mb-2" />
+              <p className="text-xs text-gray-500">افزودن عکس</p>
             </>
           )}
           <input
@@ -76,23 +79,28 @@ function Index() {
             onChange={handleUserImageChange}
           />
         </div>
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text-alt text-sm">توضیحات</span>
-          </div>
+
+        {/* توضیحات */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            توضیحات
+          </label>
           <textarea
-            className="input w-full h-24 py-4  placeholder:text-xs  focus:ring-green-500 focus:ring-1 focus:outline-none focus:border-none"
-            placeholder="توضیحات خود را بنویسید"
+            className="w-full rounded-xl border border-gray-200 p-3 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            placeholder="توضیحات خود را بنویسید..."
+            rows={4}
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
-        </label>
+        </div>
+
+        {/* دکمه */}
         <Btn
-          className="w-full"
-          onClick={() => handleSend()}
+          className="w-full py-3 rounded-xl font-semibold bg-blue-600 hover:bg-blue-700 transition text-white"
+          onClick={handleSend}
           loading={loading}
           disabled={loading}
         >
-          ثبت
+          ثبت درخواست
         </Btn>
       </div>
     </div>

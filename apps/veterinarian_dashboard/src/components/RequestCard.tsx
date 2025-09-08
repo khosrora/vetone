@@ -37,102 +37,91 @@ function RequestCard({
   };
 
   return (
-    <div className="p-4 bg-white rounded-md space-y-2">
-      <div className="p-0  lg:p-6 bg-white rounded-md space-y-2">
-        <div className="grid grid-cols-3 lg:flex justify-between items-center">
-          <div className="flex col-span-2 justify-start items-center gap-x-2">
-            <img
-              src={
-                !!request.image
-                  ? request.image
-                  : IMAGE_PLACEHOLDER
-              }
-              className="w-10 h-10 lg:w-16 lg:h-16"
-            />
-            <div className="space-y-2 lg:space-y-3 px-4">
-              <p className="font-bold text-sm lg:text-lg block"></p>
-              <p className="text-[10px] lg:tet-sm texxt-gray-500 ">
-                {request.phone}
-              </p>
-            </div>
+    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition p-4 lg:p-6 space-y-4 border border-gray-100">
+      {/* بخش بالایی */}
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <img
+            src={request.image || IMAGE_PLACEHOLDER}
+            className="w-12 h-12 lg:w-16 lg:h-16 rounded-full object-cover shadow-sm border border-gray-200"
+            alt="request"
+          />
+          <div>
+            <p className="font-bold text-sm lg:text-base text-gray-800">
+              {request.fullname ?? "کاربر ناشناس"}
+            </p>
+            <p className="text-xs text-gray-500">{request.phone}</p>
           </div>
-          {request.type === requestsEnum.InPerson ? (
-            <div className="justify-self-end badge  bg-green-50 text-green-600  p-4 text-[10px] lg:text-xs">
-              حضوری
-            </div>
+        </div>
+
+        {request.type === requestsEnum.InPerson ? (
+          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+            حضوری
+          </span>
+        ) : (
+          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700">
+            تماس
+          </span>
+        )}
+      </div>
+
+      <hr className="border-gray-100" />
+
+      {/* بخش اطلاعات */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500">تاریخ:</span>
+          <Moment time={request.date} />
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500">وضعیت:</span>
+          {request.state === requestsStateEnum.Reject ? (
+            <span className="text-red-600 font-semibold">رد شده</span>
+          ) : request.state === requestsStateEnum.New ? (
+            <span className="text-yellow-500 font-semibold">
+              در انتظار تایید
+            </span>
           ) : (
-            <div className="justify-self-end badge  bg-yellow-400 text-yellow-600  p-4 text-[10px] lg:text-xs">
-              تماس
-            </div>
+            <span className="text-green-600 font-semibold">تایید شده</span>
           )}
         </div>
-        <div className="divider"></div>
-        <div className="grid grid-cols-1">
-          <div className="grid  grid-cols-2 lg:grid-cols-3 gap-4 gap-x-8 items-center py-3 col-span-2">
-            <div className="flex flex-row items-center gap-x-3 ">
-              <p className="text-[12px] lg:text-xs text-gray-600 font-regular">
-                {" "}
-                تاریخ:
-              </p>
-              <Moment time={request.date} />
-            </div>
-            <div className="flex items-center gap-x-3 justify-self-end  md:justify-self-center">
-              <p className="text-[12px] lg:text-xs text-gray-600 font-regular">
-                وضعیت:
-              </p>
-              {request.state === requestsStateEnum.Reject ? (
-                <p className="text-[12px] lg:text-sm text-red-500 font-semibold">
-                  رد شده
-                </p>
-              ) : request.state === requestsStateEnum.New ? (
-                <p className="text-[12px] lg:text-sm text-yellow-500 font-semibold">
-                  درانتطار تایید
-                </p>
-              ) : (
-                <p className="text-[12px] lg:text-sm text-green-600 font-semibold">
-                  تایید شده
-                </p>
-              )}
-            </div>
-            <div className="lg:flex items-center gap-x-3 hidden md:justify-self-end">
-              <p className="text-[12px] lg:text-xs text-gray-600 font-regular">
-                کدرهگیری:
-              </p>
-              <p className="text-[12px] lg:text-sm font-semibold">
-                {request.tracking_code}
-              </p>
-            </div>
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500">کد رهگیری:</span>
+          <span className="font-semibold">{request.tracking_code}</span>
+        </div>
+      </div>
+
+      <hr className="border-gray-100" />
+
+      {/* بخش پایینی */}
+      <div className="flex justify-between items-center">
+        {request.state === requestsStateEnum.New && (
+          <div className="flex gap-2">
+            <Btn
+              className="rounded-lg"
+              onClick={() =>
+                handleChangeRequestState(requestsStateEnum.Confirm)
+              }
+            >
+              تایید
+            </Btn>
+            <Btn
+              className="rounded-lg bg-red-600 hover:bg-red-700"
+              onClick={() =>
+                handleChangeRequestState(requestsStateEnum.Reject)
+              }
+            >
+              رد
+            </Btn>
           </div>
-        </div>
-        <div className="divider"></div>
-        <div className="flex justify-between items-center">
-          {request.state === requestsStateEnum.New && (
-            <div className="flex gap-x-2">
-              <Btn
-                onClick={() =>
-                  handleChangeRequestState(requestsStateEnum.Confirm)
-                }
-              >
-                تایید درخواست
-              </Btn>
-              <Btn
-                onClick={() =>
-                  handleChangeRequestState(requestsStateEnum.Reject)
-                }
-                bgColor="ui-bg-red-600"
-              >
-                رد درخواست
-              </Btn>
-            </div>
-          )}
-          <Link
-            href={`${LINK_DASHBOARD_VET}/my_requests/${request.id}`}
-            className="text-[10px] lg:text-sm font-bold text-green-700 flex items-center gap-x-2"
-          >
-            جزئیات درخواست
-            <IconCaretLeftFilled />
-          </Link>
-        </div>
+        )}
+        <Link
+          href={`${LINK_DASHBOARD_VET}/my_requests/${request.id}`}
+          className="text-xs lg:text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+        >
+          جزئیات درخواست
+          <IconCaretLeftFilled size={16} />
+        </Link>
       </div>
     </div>
   );

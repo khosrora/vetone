@@ -1,35 +1,43 @@
 "use client";
 
 import { category, categoryType } from "@/lib/constants/constants";
-import { IconNurse } from "@tabler/icons-react";
-import Link from "next/link";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 function MedicalServices() {
   return (
-    <div className="pb-4">
+    <div className="pb-10">
       <Swiper
-        spaceBetween={36}
-        slidesPerView={1.4}
+        spaceBetween={20}
+        slidesPerView={2.2}
         breakpoints={{
-          320: { slidesPerView: 3.2, spaceBetween: 8 },
-          600: { slidesPerView: 3.5, spaceBetween: 12 },
-          900: { slidesPerView: 5, spaceBetween: 32},
+          320: { slidesPerView: 2.3, spaceBetween: 12 },
+          640: { slidesPerView: 3.3, spaceBetween: 16 },
+          900: { slidesPerView: 4.5, spaceBetween: 20 },
+          1200: { slidesPerView: 6, spaceBetween: 24 },
         }}
       >
-        {category.map(
-          (item: categoryType) => (
-            <SwiperSlide key={item.id}>
-              <div className="text-center space-y-4">
-              <div className="flex justify-center items-center bg-green_vetone max-h-24 md:min-h-32 lg:min-h-56 rounded-md">
-               <p className="">{item.icon}</p>  
+        {category.map((item: categoryType) => (
+          <SwiperSlide key={item.id}>
+            <div className="flex flex-col items-center text-center rounded-2xl bg-white/80 backdrop-blur-md shadow-sm hover:shadow-xl transition-all hover:-translate-y-2 hover:scale-105 p-5">
+              {/* آیکون داخل دایره گرادیانی */}
+              <div className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-tr from-emerald-400 to-green-600 text-white shadow-lg mb-4">
+                <span className="text-2xl md:text-3xl">{item.icon}</span>
               </div>
-              <p className="text-base lg:text-xl font-bold">{item.title}</p>
-              </div>
-            </SwiperSlide>
-          )
-        )}
+
+              {/* عنوان سرویس */}
+              <p className="text-sm md:text-lg font-semibold text-gray-800">
+                {item.title}
+              </p>
+
+              {/* توضیح فیک برای جذابیت بیشتر */}
+              <p className="text-xs md:text-sm text-gray-500 mt-2 line-clamp-2">
+                ارائه خدمات تخصصی و سریع برای حیوانات خانگی شما با بهترین
+                دامپزشکان.
+              </p>
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

@@ -53,6 +53,7 @@ export type requestCardType = {
   type: requestsEnum;
   state: requestsStateEnum;
   date: string;
+  fullname:string;
   time: string;
   rancher: rancherType;
   veterinarian: veterinarianType;
