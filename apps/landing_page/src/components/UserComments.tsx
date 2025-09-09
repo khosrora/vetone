@@ -64,7 +64,7 @@ function UserComments() {
               </div>
 
               {/* متن نظر */}
-              <p className="font-light leading-6 lg:leading-7 text-xs lg:text-sm text-gray-700 line-clamp-4 lg:line-clamp-none">
+              <p className="line-clamp-2 font-light leading-6 lg:leading-7 text-xs lg:text-sm text-gray-700 line-clamp-4 lg:line-clamp-none">
                 {reviews.comment}
               </p>
             </div>

@@ -12,9 +12,9 @@ export default function Page() {
   return (
     <div className="space-y-12 lg:space-y-24 py-6 lg:py-6 ">
       {/* Hero Section with Image and Stats */}
-      <div className="lg:max-w-7xl mx-auto">
+      <div className="lg:max-w-7xl mx-auto z-0">
         <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0 p-4 lg:p-8 rounded-3xl  relative overflow-hidden">
-          <div className="flex-1 flex flex-col justify-center items-center lg:items-start space-y-4 z-10">
+          <div className="flex-1 flex flex-col justify-center items-center lg:items-start space-y-4">
             <p className="text-4xl lg:text-5xl text-green_vetone font-extrabold drop-shadow-lg">
               {name_project}
             </p>
@@ -39,7 +39,7 @@ export default function Page() {
             <SearchBox />
           </div>
           {/* Vet Image with Effect */}
-          <div className="flex-1 flex justify-end items-center relative z-10">
+          <div className="flex-1 flex justify-end items-center relative">
             <div className="relative w-64 h-64 lg:w-10/12 lg:h-80">
               <Img
                 src="/images/image.png"

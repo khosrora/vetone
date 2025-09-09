@@ -56,6 +56,7 @@ function SearchBox() {
         )}
 
         <BottomSheet
+          className="!z-[9999]"
           onDismiss={onDismiss}
           snapPoints={({ minHeight, maxHeight }) => [
             maxHeight / 1,

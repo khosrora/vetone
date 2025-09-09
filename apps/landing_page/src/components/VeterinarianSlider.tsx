@@ -27,7 +27,6 @@ function VeterinarianSlider() {
 
   return (
     <div className="pb-6">
-      <h2 className="text-lg font-bold mb-4">دامپزشکان پیشنهادی</h2>
       <Swiper
         spaceBetween={16}
         slidesPerView={1.2}

@@ -14,7 +14,7 @@ function MedicalServices() {
           320: { slidesPerView: 2.3, spaceBetween: 12 },
           640: { slidesPerView: 3.3, spaceBetween: 16 },
           900: { slidesPerView: 4.5, spaceBetween: 20 },
-          1200: { slidesPerView: 6, spaceBetween: 24 },
+          1200: { slidesPerView: 5, spaceBetween: 24 },
         }}
       >
         {category.map((item: categoryType) => (
