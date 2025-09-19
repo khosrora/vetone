@@ -1,4 +1,4 @@
-import Image from "next/image";
+import React from "react";
 
 type Props = {
   src: string;
@@ -10,12 +10,13 @@ type Props = {
 
 export function Img({ src, width, height, alt, className }: Props) {
   return (
-    <Image
+    <img
       src={src}
       width={width}
       height={height}
       alt={alt}
       className={className}
+      loading="lazy"
     />
   );
 }
