@@ -3,7 +3,7 @@ import { Btn } from "@repo/ui/btn";
 import { IconPhotoFilled } from "@tabler/icons-react";
 
 import { fetcher, patchDataAPI, postDataAPI } from "@/lib/fetch/fetch_axios";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import DatePicker from "react-multi-date-picker";
@@ -131,6 +131,13 @@ function StepTwo({
     }
   };
 
+  useEffect(() => {
+    if (!isLoading && data.length > 0) {
+      setMedicalCenter(data[0].id);
+    }
+  }, [isLoading, data]);
+
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
@@ -243,17 +250,18 @@ function StepTwo({
         <div className="label">
           <span className="label-text-alt text-base">نوع خدمت</span>
         </div>
-        <select
-          className="select select-md w-full"
-          onChange={(e) => setMedicalCenter(e.target.value)}
-        >
-          {!isLoading &&
-            data.map((item: CentersType) => (
+        {!isLoading && (
+          <select
+            className="select select-md w-full"
+            onChange={(e) => setMedicalCenter(e.target.value)}
+          >
+            {data.map((item: CentersType) => (
               <option key={item.id} value={item.id}>
                 {item.title}
               </option>
             ))}
-        </select>
+          </select>
+        )}
       </div>
       <Btn className="w-full mt-4" onClick={handleSubmit} loading={loading}>
         ثبت درخواست
