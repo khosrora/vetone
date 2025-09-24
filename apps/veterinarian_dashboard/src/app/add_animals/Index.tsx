@@ -126,7 +126,7 @@ export default function AnimalSelector() {
                     disabled={loading}
                     className="w-full bg-green-600 text-white font-bold py-3 px-6 rounded-xl 
                                disabled:opacity-60 disabled:cursor-not-allowed
-                               hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-blue-300"
+                               hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-green-300"
                 >
                     {loading ? "در حال ثبت تغییرات..." : "ثبت تغییرات"}
                 </button>

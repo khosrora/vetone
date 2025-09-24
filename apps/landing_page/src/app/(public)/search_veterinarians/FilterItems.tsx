@@ -80,8 +80,8 @@ function FilterItems({ onDismiss }: { onDismiss?: any }) {
               <div className="space-y-3">
                 {categories.map((item) => (
                   <label key={item} className="block">
-                    <input type="radio" name="category" className="sr-only peer" />
-                    <div className="w-full text-center cursor-pointer p-3 rounded-lg border border-gray-200 peer-checked:bg-green-600 peer-checked:text-white peer-checked:border-green-600 transition-all">
+                    <input type="radio" name="category" className="sr-only peer hidden" />
+                    <div className="w-full text-center cursor-pointer p-3 rounded-lg border  border-gray-200 peer-checked:bg-green-600 peer-checked:text-white peer-checked:border-green-600 transition-all ">
                       <span className="label-text font-semibold">{item}</span>
                     </div>
                   </label>

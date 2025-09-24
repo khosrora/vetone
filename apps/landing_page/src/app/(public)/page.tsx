@@ -24,7 +24,7 @@ export default function Page() {
             {/* Animated Stats */}
             <div className="flex gap-6 mt-4">
               <div className="flex flex-col items-center">
-                <span className="text-2xl lg:text-3xl font-bold text-green_vetone animate-pulse">+1200</span>
+                <span className="text-2xl lg:text-3xl font-bold text-green_vetone animate-pulse">+1</span>
                 <span className="text-xs text-gray-500">دامپزشک فعال</span>
               </div>
               <div className="flex flex-col items-center">
@@ -32,7 +32,7 @@ export default function Page() {
                 <span className="text-xs text-gray-500">مرکز درمانی</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-2xl lg:text-3xl font-bold text-green_vetone animate-pulse">+15K</span>
+                <span className="text-2xl lg:text-3xl font-bold text-green_vetone animate-pulse">+2</span>
                 <span className="text-xs text-gray-500">درخواست موفق</span>
               </div>
             </div>
@@ -77,7 +77,7 @@ export default function Page() {
           <TitleLink title="نظرات کاربران" />
           <div className="grid grid-cols-6">
             <div className="hidden lg:col-span-1 bg-green_vetone/20 rounded-md lg:flex flex-col justify-center items-center space-y-2">
-              <div className="w-28 h-28 rounded-full bg-green_vetone flex justify-center items-center">
+              <div className="w-28 h-32 p-8 rounded-full bg-green_vetone flex justify-center items-center">
                 <IconBubbleText size={52} color="white" />
               </div>
               <p>نظرات و حمایت</p>

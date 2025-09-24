@@ -41,7 +41,7 @@ function UserComments() {
       >
         {reviews.map((reviews) => (
           <SwiperSlide key={reviews.id}>
-            <div className="relative flex flex-col rounded-2xl bg-gradient-to-br from-green-50 to-white border border-green-100 shadow-md hover:shadow-xl transition hover:-translate-y-1 p-5 gap-y-4">
+            <div className="relative flex flex-col  rounded-2xl bg-gradient-to-br from-green-50 to-white border border-green-100 shadow-md  transition hover:-translate-y-1 p-5 gap-y-4">
               {/* آیکون نقل‌قول */}
               <IconQuote
                 size={28}
@@ -64,7 +64,7 @@ function UserComments() {
               </div>
 
               {/* متن نظر */}
-              <p className="line-clamp-2 font-light leading-6 lg:leading-7 text-xs lg:text-sm text-gray-700 line-clamp-4 lg:line-clamp-none">
+              <p className="font-light leading-6 lg:leading-7 text-xs lg:text-sm text-gray-700 line-clamp-4 lg:line-clamp-none">
                 {reviews.comment}
               </p>
             </div>

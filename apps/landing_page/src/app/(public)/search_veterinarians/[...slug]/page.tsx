@@ -86,7 +86,6 @@ export default async function Page({ params: { slug } }: { params: { slug: strin
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <h3 className="font-bold text-xl text-gray-800 mb-4">بیوگرافی</h3>
               <p className="text-gray-600 leading-relaxed text-sm">{data.bio}</p>
-              <a href="#" className="text-blue-600 font-semibold text-sm mt-4 inline-block">مشاهده بیشتر...</a>
             </div>
           </div>
 
