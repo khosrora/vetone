@@ -22,6 +22,7 @@ import VeterinarianLoading from "./VeterinarianLoading";
 export default function Desktop() {
   const { data: session } = useSession();
   const token: string = session?.accessToken!;
+  console.log(token)
   const shouldFetch = !!token;
   const { data, isLoading, error } = useSWR(
     shouldFetch ? ["dashboar-data", token] : null,

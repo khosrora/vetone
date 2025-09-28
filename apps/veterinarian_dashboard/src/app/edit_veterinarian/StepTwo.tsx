@@ -88,7 +88,7 @@ export default function StepTwo({ basicInformation }: Props) {
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
         <ImageUpload
-          label="تصویر مجوز"
+          label="تصویر مجوز یا تصویر کارت نظام پزشکی فعال"
           preview={licensePreview}
           onChange={(e) =>
             handleFileChange(e, setLicenseImage, setLicensePreview)

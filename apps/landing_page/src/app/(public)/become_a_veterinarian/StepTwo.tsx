@@ -111,8 +111,8 @@ function StepTwo({
       );
       if (res.status === 201) {
         const userFormData = new FormData();
-        formData.append("fullName", basicInformation?.fullName!);
-        formData.append("image", userImage);
+        userFormData.append("fullName", basicInformation?.fullName!);
+        userFormData.append("image", userImage);
         const resUserUpdate = await patchDataAPI(
           `/account/me/`,
           userFormData,
@@ -136,7 +136,6 @@ function StepTwo({
       setMedicalCenter(data[0].id);
     }
   }, [isLoading, data]);
-
 
   return (
     <div className="space-y-6">
@@ -166,7 +165,7 @@ function StepTwo({
           </div>
         </div>
         <div className="">
-          <p className="text-[14px] font-bold mb-2">تصویر مجوز</p>
+          <p className="text-[14px] font-bold mb-2">تصویر مجوز یا تصویر کارت نظام پزشکی فعال</p>
           <div className="border-2 border-dashed rounded-md min-h-32 space-y-3 flex flex-col justify-center items-center relative">
             {licensePreview ? (
               <img
