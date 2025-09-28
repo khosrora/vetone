@@ -12,22 +12,26 @@ import {
   IconClock,
 } from "@tabler/icons-react";
 
-
 async function getInitialVetData(slug: string) {
-  const res = await fetch(`${base_api}/veterinary/${slug}`, { cache: "no-cache" });
+  const res = await fetch(`${base_api}/veterinary/${slug}`, {
+    cache: "no-cache",
+  });
   if (!res.ok) throw new Error("Failed to fetch data");
   return res.json();
 }
 
 // --- Placeholder data for the new Info Card ---
 
-export default async function Page({ params: { slug } }: { params: { slug: string } }) {
+export default async function Page({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) {
   const data: VeterinarianCardType = await getInitialVetData(slug);
-
+  console.log(data)
   return (
     <div className=" min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        
         {/* 1. HEADER SECTION with GRADIENT */}
         <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden mb-8 shadow-lg">
           {/* Background Image */}
@@ -39,8 +43,8 @@ export default async function Page({ params: { slug } }: { params: { slug: strin
             className="w-full h-full object-cover"
           />
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/60"></div> {/* Adjust opacity (e.g., bg-black/50, bg-black/70) as needed */}
-          
+          <div className="absolute inset-0 bg-black/60"></div>{" "}
+          {/* Adjust opacity (e.g., bg-black/50, bg-black/70) as needed */}
           <div className="absolute bottom-0 top-0 my-auto left-0 right-0 py-6 px-10 flex items-center gap-6">
             <div className="avatar">
               <div className="w-32 h-32 md:w-32 md:h-32 rounded-full ring-4 ring-white shadow-xl">
@@ -59,70 +63,118 @@ export default async function Page({ params: { slug } }: { params: { slug: strin
         </div>
         {/* MAIN GRID LAYOUT */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
           {/* LEFT & MIDDLE COLUMNS (No Change) */}
           <div className="lg:col-span-12 xl:col-span-8 flex flex-col gap-8">
-             {/* VET INFO CARD */}
+            {/* VET INFO CARD */}
             <div className="bg-white p-6 rounded-2xl shadow-lg space-y-5">
-               <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start">
                 <div>
-                  <h2 className="font-bold text-lg text-gray-800">دکتر {data.fullName}</h2>
-                  <p className="text-sm text-gray-500 mt-1">متخصص داخلی حیوانات</p>
+                  <h2 className="font-bold text-lg text-gray-800">
+                    دکتر {data.fullName}
+                  </h2>
+                  <p className="text-sm text-gray-500 mt-1">
+                    متخصص داخلی حیوانات
+                  </p>
                 </div>
                 <div className="flex items-center gap-3 text-gray-500">
-                    <IconShare size={20} className="cursor-pointer hover:text-blue-600"/>
-                    <IconBookmark size={20} className="cursor-pointer hover:text-yellow-600"/>
+                  <IconShare
+                    size={20}
+                    className="cursor-pointer hover:text-blue-600"
+                  />
+                  <IconBookmark
+                    size={20}
+                    className="cursor-pointer hover:text-yellow-600"
+                  />
                 </div>
               </div>
               <hr />
               <div className="space-y-4 text-sm text-gray-700">
-                <div className="flex items-center gap-3"><IconMedicalCross size={20} className="text-gray-400" /><span>کد نظام پزشکی: <span className="font-semibold text-gray-900">{data.medical_license}</span></span></div>
-                <div className="flex items-center gap-3"><IconStarFilled size={20} className="text-yellow-500" /><span className="font-semibold text-gray-900">{data.rate} از ۵</span><span className="text-gray-400">({Math.floor(Math.random() * 100 + 50)} نظر)</span></div>
-                <div className="flex items-center gap-3"><IconThumbUp size={20} className="text-green-500" /><span className="font-semibold text-gray-900">{data.surgery}+ نوبت موفق</span></div>
+                <div className="flex items-center gap-3">
+                  <IconMedicalCross size={20} className="text-gray-400" />
+                  <span>
+                    کد نظام پزشکی:{" "}
+                    <span className="font-semibold text-gray-900">
+                      {data.medical_license}
+                    </span>
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <IconStarFilled size={20} className="text-yellow-500" />
+                  <span className="font-semibold text-gray-900">
+                    {data.rate} از ۵
+                  </span>
+                  <span className="text-gray-400">
+                    ({Math.floor(Math.random() * 100 + 50)} نظر)
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <IconThumbUp size={20} className="text-green-500" />
+                  <span className="font-semibold text-gray-900">
+                    {data.surgery}+ نوبت موفق
+                  </span>
+                </div>
               </div>
             </div>
 
             {/* BIOGRAPHY CARD */}
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <h3 className="font-bold text-xl text-gray-800 mb-4">بیوگرافی</h3>
-              <p className="text-gray-600 leading-relaxed text-sm">{data.bio}</p>
+              <p className="text-gray-600 leading-relaxed text-sm">
+                {data.bio}
+              </p>
             </div>
           </div>
-
 
           {/* 2. RIGHT COLUMN - ADDRESS & INFO (Completely New) */}
           <div className="lg:col-span-12 xl:col-span-4">
             <div className="bg-white p-6 rounded-2xl shadow-lg h-full flex flex-col">
-               <h3 className="font-bold text-xl text-gray-800 mb-4">آدرس و اطلاعات مطب</h3>
+              <h3 className="font-bold text-xl text-gray-800 mb-4">
+                آدرس و اطلاعات مطب
+              </h3>
 
-               {/* Static Map Image Placeholder */}
-               <div className="mb-4 rounded-lg overflow-hidden border">
-                <Img width={500} height={500} src="/images/map.jpg" alt="موقعیت مکانی مطب روی نقشه" className="w-full h-40 object-cover" />
-               </div>
+              {/* Static Map Image Placeholder */}
+              <div className="mb-4 rounded-lg overflow-hidden border">
+                <Img
+                  width={500}
+                  height={500}
+                  src="/images/map.jpg"
+                  alt="موقعیت مکانی مطب روی نقشه"
+                  className="w-full h-40 object-cover"
+                />
+              </div>
 
-               {/* Address & Contact Details */}
-               <div className="space-y-4 text-sm text-gray-800">
+              {/* Address & Contact Details */}
+              <div className="space-y-4 text-sm text-gray-800">
                 <div className="flex items-start gap-3">
-                    <IconMapPin size={20} className="text-gray-400 mt-0.5 flex-shrink-0" />
-                    <span>{data.province.name}, {data.city.name}, [خیابان و پلاک دامپزشک در اینجا]</span>
+                  <IconMapPin
+                    size={20}
+                    className="text-gray-400 mt-0.5 flex-shrink-0"
+                  />
+                  {!!data.province?.name && !!data.city?.name && (
+                    <span>
+                      {data?.province.name}, {data?.city.name}, [خیابان و پلاک
+                      دامپزشک در اینجا]
+                    </span>
+                  )}
                 </div>
                 <div className="flex items-center gap-3">
-                    <IconPhone size={20} className="text-gray-400" />
-                    <span className="font-semibold" dir="ltr">۰۲۱ - ۱۲۳۴۵۶۷۸</span>
+                  <IconPhone size={20} className="text-gray-400" />
+                  <span className="font-semibold" dir="ltr">
+                    ۰۲۱ - ۱۲۳۴۵۶۷۸
+                  </span>
                 </div>
-               </div>
-               
-               <hr className="my-5"/>
+              </div>
 
-               {/* Working Hours */}
+              <hr className="my-5" />
 
+              {/* Working Hours */}
 
-               {/* CTA Button at the bottom */}
-               <div className="mt-auto pt-6">
-                 <button className="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg focus:ring-4 focus:ring-green-300">
-                    ارسال درخواست نوبت
-                 </button>
-               </div>
+              {/* CTA Button at the bottom */}
+              <div className="mt-auto pt-6">
+                <button className="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg focus:ring-4 focus:ring-green-300">
+                  ارسال درخواست نوبت
+                </button>
+              </div>
             </div>
           </div>
         </div>
