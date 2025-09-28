@@ -1,4 +1,6 @@
-import { base_api } from "@/lib/fetch/base_api";
+import BtnAddRequest from "@/components/BtnAddRequest";
+
+import { base_api } from "@/lib/fetch/base_api"; 
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import { Img } from "@repo/ui/img";
 import {
@@ -10,6 +12,7 @@ import {
   IconBookmark,
   IconPhone,
   IconClock,
+  IconHeart,
 } from "@tabler/icons-react";
 
 async function getInitialVetData(slug: string) {
@@ -43,6 +46,7 @@ export default async function Page({
           />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/60"></div>{" "}
+       
           {/* Adjust opacity (e.g., bg-black/50, bg-black/70) as needed */}
           <div className="absolute bottom-0 top-0 my-auto left-0 right-0 py-6 px-10 flex items-center gap-6">
             <div className="avatar">
@@ -68,6 +72,7 @@ export default async function Page({
             <div className="bg-white p-6 rounded-2xl shadow-lg space-y-5">
               <div className="flex justify-between items-start">
                 <div>
+                     <BtnAddRequest isLarge={true} idVet={data.id} />
                   <h2 className="font-bold text-lg text-gray-800">
                     دکتر {data.fullName}
                   </h2>
@@ -75,16 +80,7 @@ export default async function Page({
                     متخصص داخلی حیوانات
                   </p>
                 </div>
-                <div className="flex items-center gap-3 text-gray-500">
-                  <IconShare
-                    size={20}
-                    className="cursor-pointer hover:text-blue-600"
-                  />
-                  <IconBookmark
-                    size={20}
-                    className="cursor-pointer hover:text-yellow-600"
-                  />
-                </div>
+                <div className="flex justify-between items-center"> <IconShare className="ml-4 cursor-pointer" /> <IconHeart className="cursor-pointer"/> </div>
               </div>
               <hr />
               <div className="space-y-4 text-sm text-gray-700">
@@ -97,6 +93,7 @@ export default async function Page({
                     </span>
                   </span>
                 </div>
+                {/*
                 <div className="flex items-center gap-3">
                   <IconStarFilled size={20} className="text-yellow-500" />
                   <span className="font-semibold text-gray-900">
@@ -106,6 +103,7 @@ export default async function Page({
                     ({Math.floor(Math.random() * 100 + 50)} نظر)
                   </span>
                 </div>
+                */}
                 <div className="flex items-center gap-3">
                   <IconThumbUp size={20} className="text-green-500" />
                   <span className="font-semibold text-gray-900">

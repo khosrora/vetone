@@ -61,19 +61,7 @@ function VeterinarianSlider() {
                 <p className="text-sm font-semibold text-gray-800 line-clamp-1">
                   {item.fullName}
                 </p>
-                {/* فیلد فیک */}
-                <p className="text-xs text-gray-500">تخصص: حیوانات خانگی</p>
-                {/* امتیاز فیک */}
-                <div className="flex items-center gap-0.5 text-yellow-500">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <IconStar
-                      key={i}
-                      size={14}
-                      fill={i < 4 ? "currentColor" : "none"} // امتیاز ۴/۵
-                      strokeWidth={1.5}
-                    />
-                  ))}
-                </div>
+
               </div>
             </Link>
           </SwiperSlide>

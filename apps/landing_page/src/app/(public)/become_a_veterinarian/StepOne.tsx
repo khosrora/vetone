@@ -17,7 +17,7 @@ const MapCm = dynamic(() => import("./MapCm"), {
 });
 
 type Inputs = {
-  fullName: string;
+  fullname: string;
   street: string;
 };
 
@@ -63,7 +63,7 @@ function StepOne({
     if (!latlong) return;
 
     let payload: BasicInformationType = {
-      fullName: data.fullName,
+      fullName: data.fullname,
       street: data.street,
       city: String(citiesId),
       province: String(provinceId),
@@ -84,7 +84,7 @@ function StepOne({
           type="text"
           placeholder="نام و نام خانوادگی خود را وارد نمایید"
           className="input input-bordered w-full placeholder:text-sm"
-          {...register("fullName", {
+          {...register("fullname", {
             required: {
               value: true,
               message: "وارد کردن این فیلد الزامی است",
