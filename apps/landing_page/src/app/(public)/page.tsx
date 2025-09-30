@@ -29,7 +29,7 @@ export default function Page() {
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-2xl lg:text-3xl font-bold text-green_vetone animate-pulse">+350</span>
-                <span className="text-xs text-gray-500">مرکز درمانی</span>
+                <span className="text-xs text-gray-500">دامداران</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-2xl lg:text-3xl font-bold text-green_vetone animate-pulse">+2</span>

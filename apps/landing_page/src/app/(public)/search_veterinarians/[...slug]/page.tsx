@@ -14,7 +14,6 @@ import {
   IconClock,
   IconHeart,
 } from "@tabler/icons-react";
-
 async function getInitialVetData(slug: string) {
   const res = await fetch(`${base_api}/veterinary/${slug}`, {
     cache: "no-cache",
@@ -22,7 +21,7 @@ async function getInitialVetData(slug: string) {
   if (!res.ok) throw new Error("Failed to fetch data");
   return res.json();
 }
-
+import FavoriteButton from "@/components/ButtonFavorite";
 // --- Placeholder data for the new Info Card ---
 
 export default async function Page({
@@ -80,7 +79,10 @@ export default async function Page({
                     متخصص داخلی حیوانات
                   </p>
                 </div>
-                <div className="flex justify-between items-center"> <IconShare className="ml-4 cursor-pointer" /> <IconHeart className="cursor-pointer"/> </div>
+                <div className="flex justify-between items-center"> 
+                  <IconShare className="ml-4 cursor-pointer" /> 
+                  <FavoriteButton vetId={data.id} initialFavorited={Boolean((data as any).is_favorited)} />
+                 </div>
               </div>
               <hr />
               <div className="space-y-4 text-sm text-gray-700">
