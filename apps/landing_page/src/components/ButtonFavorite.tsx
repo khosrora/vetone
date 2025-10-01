@@ -2,76 +2,84 @@
 
 import { useState } from "react";
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
-import { post_method } from "@/lib/fetch/fetch_api";
 import { useSession } from "next-auth/react";
-export default function FavoriteButton({
-  vetId,
-  initialFavorited = false,        // اگر توکن دارید پاس بدهید، وگرنه null
-  className = "",
-}: {
+import { toast } from "sonner";
+import { postDataAPI } from "@/lib/fetch/fetch_axios";
+import { useRouter } from "next/navigation";  // ✅ FIXED
+
+type FavoriteButtonProps = {
   vetId: number | string;
   initialFavorited?: boolean;
-  token?: string | null;
-  className?: string;
-}) {
-  const [liked, setLiked] = useState(initialFavorited);
-  const [loading, setLoading] = useState(false);
+};
+
+export default function FavoriteButton({
+  vetId,
+  initialFavorited = false,
+}: FavoriteButtonProps) {
   const { data: session } = useSession();
-  const token: string = session?.accessToken!;
-  async function onClick() {
-    if (loading || liked) return;
+  const token: string | undefined = session?.accessToken;
+  const router = useRouter();  // ✅ Correct usage for App Router
+
+  const [favorited, setFavorited] = useState<boolean>(initialFavorited);
+  const [loading, setLoading] = useState(false);
+
+  const handleToggleFav = async () => {
+    if (!token) {
+      toast.warning("ابتدا وارد وب سایت شوید.");
+      router.push("/auth/signin"); // ✅ Works with App Router
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      setLoading(true);
-
-      // post_method شما Response برمی‌گرداند (نه JSON)
-      const res = await post_method(
-        "/veterinary/favorites/add/",{veterinarian_id: vetId },
-        token
-      );
-
-      // اگر سرور 204 داد، یعنی موفق بوده
-      if (res.status === 204) {
-        setLiked(true);
-        return;
-      }
-
-      // تلاش برای خواندن JSON (اگر داشته باشد)
-      let ok = true;
-      try {
-        const ct = res.headers.get("content-type") || "";
-        if (ct.includes("application/json")) {
-          const body = await res.json();
-          // اگر بک‌اند فیلد ok دارد، از آن تبعیت می‌کنیم
-          if (body?.ok === false) ok = false;
+      if (!favorited) {
+        const res = await postDataAPI(
+          `/veterinary/favorites/add/`,
+          { veterinarian_id: vetId },
+          token
+        );
+        if (res.status === 201) {
+          setFavorited(true);
+          toast.success("دامپزشک به لیست علاقه مندی ها اضافه شد.");
         }
-      } catch {
-        // اگر JSON نبود، موفق را پیش‌فرض می‌گیریم مگر سرور non-2xx بدهد
+      } else {
+        const res = await postDataAPI(
+          `/veterinary/favorites/remove/`,
+          { veterinarian_id: vetId },
+          token
+        );
+        if (res.status === 200) {
+          setFavorited(false);
+          toast.success("دامپزشک از لیست علاقه مندی ها حذف شد.");
+        }
       }
-
-      if (!ok) throw new Error("Favorite add failed");
-      setLiked(true);
-    } catch (e) {
-      console.error(e);
-      // TODO: اینجا toast خطا بگذارید
+    } catch (error) {
+      toast.error("خطایی رخ داد. دوباره تلاش کنید.");
     } finally {
       setLoading(false);
     }
-  }
-
-  const Icon = liked ? IconHeartFilled : IconHeart;
+  };
 
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={loading || liked}
-      aria-pressed={liked}
-      title={liked ? "به علاقه‌مندی‌ها اضافه شد" : "افزودن به علاقه‌مندی‌ها"}
-      className={`p-2 rounded-lg hover:bg-gray-50 transition ${className} ${
-        liked ? "text-rose-500" : "text-gray-700"
-      } ${loading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}`}
-    >
-      <Icon />
-    </button>
+    <>
+      {favorited ? (
+        <IconHeartFilled
+          size={24}
+          className={`cursor-pointer text-red-500 ${
+            loading ? "opacity-50" : ""
+          }`}
+          onClick={loading ? undefined : handleToggleFav}
+        />
+      ) : (
+        <IconHeart
+          size={24}
+          className={`cursor-pointer hover:text-red-500 transition-colors duration-200 ${
+            loading ? "opacity-50" : ""
+          }`}
+          onClick={loading ? undefined : handleToggleFav}
+        />
+      )}
+    </>
   );
 }

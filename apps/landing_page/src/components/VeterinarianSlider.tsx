@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import useSWR from "swr";
 import Loader from "./Loader";
 
-import { IconStar } from "@tabler/icons-react";
+import { IconMap, IconRosetteDiscountCheckFilled, IconStar } from "@tabler/icons-react";
 
 function VeterinarianSlider() {
   const { data: veterinarians, isLoading } = useSWR(
@@ -41,7 +41,7 @@ function VeterinarianSlider() {
           <SwiperSlide key={item.id}>
             <Link
               href={`/search_veterinarians/${item.slug}`}
-              className="flex flex-col rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition hover:scale-105"
+              className="flex flex-col rounded-xl overflow-hidden bg-white shadow-sm  transition hover:scale-20 my-4 p-2"
             >
               {/* تصویر */}
               <div className="w-full h-32 md:h-40 overflow-hidden">
@@ -52,16 +52,28 @@ function VeterinarianSlider() {
                       : "https://imageserver.petsbest.com/marketing/blog/increased-vet-demand.jpg"
                   }
                   alt={item.fullName}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </div>
 
               {/* متن */}
-              <div className="p-3 flex flex-col items-start gap-1">
+              <div className="p-3 flex flex-row items-start gap-2">
                 <p className="text-sm font-semibold text-gray-800 line-clamp-1">
                   {item.fullName}
                 </p>
-
+                <IconRosetteDiscountCheckFilled color="green"/>
+              </div>
+              <div className="px-3 text-gray-500 flex flex-row items-center align-middle gap-2 my-3">
+                  <p className="inline-block text-xs">کد نظام پزشکی:</p>
+                <p className="text-xs line-clamp-1 font-semibold text-black">
+                  {item?.medical_license}
+                </p>
+              </div>
+                  <div className="px-3 text-gray-500 flex flex-row items-start gap-2">
+                  <IconMap size={16}/>
+                <p className="text-xs line-clamp-1">
+                  {item.province?.name}
+                </p>
               </div>
             </Link>
           </SwiperSlide>

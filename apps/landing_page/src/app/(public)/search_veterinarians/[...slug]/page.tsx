@@ -32,6 +32,7 @@ export default async function Page({
   params: { slug: string };
 }) {
   const data: VeterinarianCardType = await getInitialVetData(slug);
+  
   return (
     <div className=" min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
@@ -125,7 +126,7 @@ export default async function Page({
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <h3 className="font-bold text-xl text-gray-800 mb-4">بیوگرافی</h3>
               <p className="text-gray-600 leading-relaxed text-sm">
-                {data.bio}
+                {data.bio === null ? "دامپزشک مورد نظر توضیحی درباره خود ننوشته است" : data.bio }
               </p>
             </div>
           </div>
@@ -138,11 +139,11 @@ export default async function Page({
               </h3>
 
               {/* Static Map Image Placeholder */}
-              <div className="mb-4 rounded-lg overflow-hidden border">
+              <div className="mb-4 rounded-lg overflow-hidden w-full">
                 <Img
-                  width={500}
+                  width={1000}
                   height={500}
-                  src="/images/map.jpg"
+                  src="/images/map.jpeg"
                   alt="موقعیت مکانی مطب روی نقشه"
                   className="w-full h-40 object-cover"
                 />
@@ -157,14 +158,14 @@ export default async function Page({
                   />
                   {!!data.province?.name && !!data.city?.name && (
                     <span>
-                      {data?.province.name}, {data?.city.name}, {data?.street}
+                      {data?.province.name}, {data?.city.name}
                     </span>
                   )}
                 </div>
                 <div className="flex items-center gap-3">
                   <IconPhone size={20} className="text-gray-400" />
                   <span className="font-semibold" dir="ltr">
-                    ۰۲۱ - ۱۲۳۴۵۶۷۸
+                    {data.phone}
                   </span>
                 </div>
               </div>

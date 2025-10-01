@@ -56,7 +56,7 @@ export default function Page() {
         </div>
       </div>
       {/* Veterinarians Section */}
-      <div className="bg-white p-6 rounded-2xl">
+      <div className="bg-white p-8 rounded-2xl">
         <div className="max-w-7xl mx-auto">
           <TitleLink
             title="دامپزشکان برتر"
