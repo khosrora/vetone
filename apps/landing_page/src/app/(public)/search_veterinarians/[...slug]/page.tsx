@@ -37,7 +37,7 @@ export default async function Page({
         <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden mb-8 shadow-lg">
           {/* Background Image */}
           <Img
-            src="/images/matab.jpg"
+            src="/images/matab.svg"
             alt="Veterinary Clinic Background"
             width={1200}
             height={400}
@@ -151,8 +151,7 @@ export default async function Page({
                   />
                   {!!data.province?.name && !!data.city?.name && (
                     <span>
-                      {data?.province.name}, {data?.city.name}, [خیابان و پلاک
-                      دامپزشک در اینجا]
+                      {data?.province.name}, {data?.city.name}, {data?.street}
                     </span>
                   )}
                 </div>

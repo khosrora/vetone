@@ -61,7 +61,6 @@ function StepOne({
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (!latlong) return;
-
     let payload: BasicInformationType = {
       fullName: data.fullname,
       street: data.street,

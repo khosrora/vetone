@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import { post_method } from "@/lib/fetch/fetch_api";
+import { useSession } from "next-auth/react";
 export default function FavoriteButton({
   vetId,
-  initialFavorited = false,
-  token = null,         // اگر توکن دارید پاس بدهید، وگرنه null
+  initialFavorited = false,        // اگر توکن دارید پاس بدهید، وگرنه null
   className = "",
 }: {
   vetId: number | string;
@@ -16,7 +16,8 @@ export default function FavoriteButton({
 }) {
   const [liked, setLiked] = useState(initialFavorited);
   const [loading, setLoading] = useState(false);
-
+  const { data: session } = useSession();
+  const token: string = session?.accessToken!;
   async function onClick() {
     if (loading || liked) return;
     try {
@@ -24,8 +25,7 @@ export default function FavoriteButton({
 
       // post_method شما Response برمی‌گرداند (نه JSON)
       const res = await post_method(
-        "/veterinary/favorites/add/",
-        { veterinarian_id: vetId },
+        "/veterinary/favorites/add/",{veterinarian_id: vetId },
         token
       );
 

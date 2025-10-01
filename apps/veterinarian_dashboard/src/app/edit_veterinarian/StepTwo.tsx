@@ -33,6 +33,9 @@ export default function StepTwo({ basicInformation }: Props) {
   const [medicalLicense, setMedicalLicense] = useState<string>(
     basicInformation?.medical_license ?? ""
   );
+    const [bio, setBio] = useState<string>(
+    basicInformation?.bio ?? ""
+  );
 
   const [licenseImage, setLicenseImage] = useState<File | null>(null);
   const [licensePreview, setLicensePreview] = useState<string | null>(
@@ -71,6 +74,8 @@ export default function StepTwo({ basicInformation }: Props) {
     if (idCardImage) formData.append("national_id_image", idCardImage);
     if (date) formData.append("issuance_date", date);
     if (medicalLicense) formData.append("medical_license", medicalLicense);
+    if (bio) formData.append("bio", bio);
+
     formData.append("medical_center", medicalCenter!);
 
     try {
@@ -161,7 +166,17 @@ export default function StepTwo({ basicInformation }: Props) {
             ))}
         </select>
       </div>
-
+          <label className="form-control w-full">
+        <div className="label">
+          <span className="label-text-alt text-base">بیوگرافی</span>
+        </div>
+        <textarea
+          placeholder="توضیحاتی درباره خود وارد نمایید"
+          className="input input-lg w-full placeholder:text-sm h-48 p-4"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+        />
+      </label>
       {/* Submit */}
       <Btn className="w-full mt-4" onClick={handleSubmit} loading={loading}>
         ثبت درخواست

@@ -24,5 +24,6 @@ export type VeterinarianCardType = {
   province: { id: number; name: string };
   city: { id: number; name: string };
   lat: string;
+  street:string;
   long: string;
 };

@@ -40,7 +40,7 @@ export default function Page() {
           </div>
           {/* Vet Image with Effect */}
           <div className="flex-1 flex justify-end items-center relative">
-            <div className="relative w-64 h-64 lg:w-10/12 lg:h-80">
+            <div className="relativ w-10/12 ">
               <Img
                 src="/images/image.png"
                 alt={name_project}
