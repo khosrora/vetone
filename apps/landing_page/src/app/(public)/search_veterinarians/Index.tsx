@@ -1,15 +1,14 @@
 "use client";
+import ChoiceTypeRequest from "@/components/ChoiceTypeRequest";
 import VetCard from "@/components/VetCard";
 import { fetcher } from "@/lib/fetch/fetch_axios";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
-import { Alert } from "@repo/ui/alert";
-import useSWR from "swr";
-import { PropsSearchParams } from "./page";
-import FilterItems from "./FilterItems";
-import FilterBtns from "./FilterBtns";
-import ChoiceTypeRequest from "@/components/ChoiceTypeRequest";
-import { useState } from "react";
 import { IconSearchOff } from "@tabler/icons-react";
+import { useState } from "react";
+import useSWR from "swr";
+import FilterBtns from "./FilterBtns";
+import FilterItems from "./FilterItems";
+import { PropsSearchParams } from "./page";
 
 // +++ کامپوننت اسکلت برای نمایش در حالت لودینگ +++
 const VetCardSkeleton = () => (

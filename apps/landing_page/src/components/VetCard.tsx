@@ -46,7 +46,7 @@ function VetCard({
       toast.error("قبلا به لیست اضافه شده است");
     }
   };
-
+  
   return (
     <div className="bg-white rounded-2xl shadow-xl p-6 mb-4 transition-all duration-300 hover:shadow-2xl">
       {/* Top Section: Image, Name, Experience, Share, Heart */}
@@ -62,16 +62,17 @@ function VetCard({
               {item.fullName}
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-semibold">سابقه کاری:</span> {item.experience} سال
+              <span className="font-semibold">سابقه کاری:</span>{" "}
+              {item.experience} سال
             </p>
             {/* Added a simple rating display */}
             <div className="flex items-center gap-1 text-yellow-500 text-sm">
-                <IconStarFilled size={16} />
-                <span className="font-bold">{item.rate ?? 'N/A'}</span>
+              <IconStarFilled size={16} />
+              <span className="font-bold">{item.rate ?? "N/A"}</span>
             </div>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-3 text-gray-500">
           <Share
             link={`${LINK_LANDINGPAGE}search_veterinarians/${item.slug}`}
@@ -91,7 +92,9 @@ function VetCard({
         <div className="flex items-center gap-3">
           <IconMapPinFilled size={22} className="text-blue-500 flex-shrink-0" />
           <div className="text-sm text-gray-700 truncate">
-            <p className="font-semibold">{item.province.name} - {item.city.name}</p>
+            <p className="font-semibold">
+              {item?.province?.name} - {item?.city?.name}
+            </p>
           </div>
         </div>
         <Link

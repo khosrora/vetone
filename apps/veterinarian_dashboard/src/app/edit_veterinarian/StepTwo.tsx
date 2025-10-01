@@ -6,7 +6,7 @@ import { fetcher, patchDataAPI } from "@/lib/fetch/fetch_axios";
 import { CentersType } from "@/lib/types/CentersTypes";
 import { BasicInformationType } from "@/lib/types/register_veterinarianTypes";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import DatePicker from "react-multi-date-picker";
@@ -33,9 +33,7 @@ export default function StepTwo({ basicInformation }: Props) {
   const [medicalLicense, setMedicalLicense] = useState<string>(
     basicInformation?.medical_license ?? ""
   );
-    const [bio, setBio] = useState<string>(
-    basicInformation?.bio ?? ""
-  );
+  const [bio, setBio] = useState<string>(basicInformation?.bio ?? "");
 
   const [licenseImage, setLicenseImage] = useState<File | null>(null);
   const [licensePreview, setLicensePreview] = useState<string | null>(
@@ -48,6 +46,12 @@ export default function StepTwo({ basicInformation }: Props) {
   );
 
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading && data.length > 0) {
+      setMedicalCenter(data[0].id);
+    }
+  }, [isLoading, data]);
 
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -150,23 +154,24 @@ export default function StepTwo({ basicInformation }: Props) {
       </div>
 
       {/* Request Type */}
-      <div>
+      <div className="w-full">
         <div className="label">
-          <span className="label-text-alt text-base">نوع درخواست</span>
+          <span className="label-text-alt text-base">نوع خدمت</span>
         </div>
-        <select
-          className="select select-md w-full"
-          onChange={(e) => setMedicalCenter(e.target.value)}
-        >
-          {!isLoading &&
-            data.map((item: CentersType) => (
+        {!isLoading && (
+          <select
+            className="select select-md w-full"
+            onChange={(e) => setMedicalCenter(e.target.value)}
+          >
+            {data.map((item: CentersType) => (
               <option key={item.id} value={item.id}>
                 {item.title}
               </option>
             ))}
-        </select>
+          </select>
+        )}
       </div>
-          <label className="form-control w-full">
+      <label className="form-control w-full">
         <div className="label">
           <span className="label-text-alt text-base">بیوگرافی</span>
         </div>

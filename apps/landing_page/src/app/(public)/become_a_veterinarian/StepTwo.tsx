@@ -102,7 +102,6 @@ function StepTwo({
     formData.append("latitude", basicInformation?.latitude!);
     formData.append("longitude", basicInformation?.longitude!);
     formData.append("street", basicInformation?.street!);
-console.log("👉 token", token);
 
     try {
       const res = await postDataAPI(

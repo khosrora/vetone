@@ -15,6 +15,7 @@ import { toast } from "sonner";
 
 function Share({ link }: { link: string }) {
   const closeModal = useRef<HTMLButtonElement | null>(null);
+  
   return (
     <>
       <div

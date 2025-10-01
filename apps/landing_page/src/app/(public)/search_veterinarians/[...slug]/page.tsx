@@ -1,6 +1,6 @@
 import BtnAddRequest from "@/components/BtnAddRequest";
 
-import { base_api } from "@/lib/fetch/base_api"; 
+import { base_api } from "@/lib/fetch/base_api";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import { Img } from "@repo/ui/img";
 import {
@@ -22,6 +22,8 @@ async function getInitialVetData(slug: string) {
   return res.json();
 }
 import FavoriteButton from "@/components/ButtonFavorite";
+import Share from "@/components/Share";
+import { LINK_LANDINGPAGE } from "@repo/lib/links";
 // --- Placeholder data for the new Info Card ---
 
 export default async function Page({
@@ -45,7 +47,6 @@ export default async function Page({
           />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/60"></div>{" "}
-       
           {/* Adjust opacity (e.g., bg-black/50, bg-black/70) as needed */}
           <div className="absolute bottom-0 top-0 my-auto left-0 right-0 py-6 px-10 flex items-center gap-6">
             <div className="avatar">
@@ -71,7 +72,7 @@ export default async function Page({
             <div className="bg-white p-6 rounded-2xl shadow-lg space-y-5">
               <div className="flex justify-between items-start">
                 <div>
-                     <BtnAddRequest isLarge={true} idVet={data.id} />
+                  <BtnAddRequest isLarge={true} idVet={data.id} />
                   <h2 className="font-bold text-lg text-gray-800">
                     دکتر {data.fullName}
                   </h2>
@@ -79,10 +80,15 @@ export default async function Page({
                     متخصص داخلی حیوانات
                   </p>
                 </div>
-                <div className="flex justify-between items-center"> 
-                  <IconShare className="ml-4 cursor-pointer" /> 
-                  <FavoriteButton vetId={data.id} initialFavorited={Boolean((data as any).is_favorited)} />
-                 </div>
+                <div className="flex justify-between items-center">
+                  <Share
+                    link={`${LINK_LANDINGPAGE}search_veterinarians/${data.slug}`}
+                  />
+                  <FavoriteButton
+                    vetId={data.id}
+                    initialFavorited={Boolean((data as any).is_favorited)}
+                  />
+                </div>
               </div>
               <hr />
               <div className="space-y-4 text-sm text-gray-700">
