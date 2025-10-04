@@ -128,6 +128,10 @@ export const authOptions: NextAuthOptions = {
         if (res.status === 200) {
           token.user = res.data;
           // session = { ...session, ...(session.user = user.data) };
+        } else if (res.status === 401) {
+          // Handle 401 error by signing out the user
+          await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE });
+          throw new Error("Unauthorized");
         }
       }
       if (user) {
@@ -196,6 +200,7 @@ async function refreshAccessToken(token: any) {
     });
 
     if (response.status !== 200) {
+      await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE });
       throw new Error("RefreshAccessTokenError");
     }
 
@@ -206,6 +211,7 @@ async function refreshAccessToken(token: any) {
       accessTokenExpires: Date.now() + 5 * 60 * 1000, // 5 minutes
     };
   } catch (error) {
+    await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE });
     return {
       ...token,
       error: "RefreshAccessTokenError",
