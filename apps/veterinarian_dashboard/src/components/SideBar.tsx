@@ -49,7 +49,7 @@ function SideBar() {
 
                 p.then(async () => {
                   await signOut({
-                    redirect: true,
+                    redirect: false,
                     callbackUrl: "https://vet-one.ir/login",
                   });
                 });
