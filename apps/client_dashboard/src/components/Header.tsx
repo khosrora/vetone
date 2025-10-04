@@ -9,14 +9,14 @@ import { useEffect } from "react";
 
 function Header() {
   const { data: session } = useSession();
-  
+
   useEffect(() => {
     if (session === null) {
-      signOut({ redirect: false });
+      signOut({ redirect: false, callbackUrl: "https://vet-one.ir/login" });
       window.location.href = LINK_LANDINGPAGE_LOGIN;
     }
     if (session?.error === errorSession.RefreshAccessTokenError) {
-      signOut({ redirect: false });
+      signOut({ redirect: false, callbackUrl: "https://vet-one.ir/login" });
       window.location.href = LINK_LANDINGPAGE_LOGIN;
     }
   }, [session]);
