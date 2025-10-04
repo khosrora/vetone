@@ -14,6 +14,7 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401) {
       // Handle 401 Unauthorized errors
       await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
+      window.location.href = "http://vet-one.ir/";
     }
     return Promise.reject(error);
   }

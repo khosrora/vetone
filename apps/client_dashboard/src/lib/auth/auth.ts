@@ -18,7 +18,7 @@ export interface IUser {
   password: string;
   phone: string;
   user_permissions: [];
-  image? : string | null
+  image?: string | null;
 }
 
 export type TokenType = {
@@ -190,7 +190,7 @@ export const authOptions: NextAuthOptions = {
         if (token.error === "RefreshAccessTokenError") {
           return null;
         }
-        
+
         session.user = token.user;
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
