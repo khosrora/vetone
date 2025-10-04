@@ -117,7 +117,7 @@ export const authOptions: NextAuthOptions = {
     async redirect({ url, baseUrl }) {
        window.location.href = 'https://vet-one.ir/';
       // Otherwise, redirect to login page
-      return LINK_LANDINGPAGE_LOGIN;
+      return 'https://vet-one.ir/';
     },
     async jwt({ token, user, trigger }: any) {
       if (trigger === "update") {
