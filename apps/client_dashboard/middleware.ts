@@ -13,6 +13,7 @@ export function middleware(request: NextRequest) {
       ? "next-auth.session-token"
       : "__Secure-next-auth.session-token"
   );
+
   if (!cookie) {
     // If the cookie is not present, redirect to login
     return NextResponse.redirect(new URL(LOGIN_URL, request.url));

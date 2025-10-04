@@ -117,6 +117,14 @@ export const authOptions: NextAuthOptions = {
     error: LINK_LANDINGPAGE_LOGIN,
   },
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      // If it's a relative URL, make it absolute
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // If it's the same origin, allow it
+      else if (new URL(url).origin === baseUrl) return url;
+      // Otherwise, redirect to login page
+      return LINK_LANDINGPAGE_LOGIN;
+    },
     async jwt({ token, user, trigger }: any) {
       if (trigger === "update") {
         const res: AxiosResponse = await getDataAPI([

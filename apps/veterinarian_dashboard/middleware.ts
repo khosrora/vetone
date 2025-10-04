@@ -13,6 +13,7 @@ export function middleware(request: NextRequest) {
       ? "next-auth.session-token"
       : "__Secure-next-auth.session-token"
   );
+
   if (!cookie) {
     // If the cookie is not present, redirect to login
     return NextResponse.redirect(new URL(LOGIN_URL, request.url));
@@ -27,10 +28,11 @@ export const config = {
   matcher: [
     "/dashboard/:path*",
     "/my_requests/:path*",
-    "/my_wallet/:path*",
     "/medicine/:path*",
     "/profile/:path*",
-    "/favorite_veterinarians/:path*",
+    "/edit_veterinarian/:path*",
+    "/ranchers/:path*",
+    "/my_addresses/:path*",
     "/",
   ],
 };
