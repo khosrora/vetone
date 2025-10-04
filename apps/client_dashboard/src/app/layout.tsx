@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import Provider from "@/app/Provider";
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
+import SessionErrorHandler from "@/components/SessionErrorHandler";
 import { estedad } from "@/lib/local_fonts";
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${estedad.variable} bg-zinc-50 min-h-screen`}>
         <Provider>
+          <SessionErrorHandler />
           <Toaster
             richColors
             position="bottom-center"

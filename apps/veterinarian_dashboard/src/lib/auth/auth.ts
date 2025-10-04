@@ -114,8 +114,8 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: LINK_LANDINGPAGE_LOGIN,
-    signOut: "/logout",
-    error: "/login",
+    signOut: LINK_LANDINGPAGE_LOGIN,
+    error: LINK_LANDINGPAGE_LOGIN,
   },
   callbacks: {
     async jwt({ token, user, trigger }: any) {
@@ -128,9 +128,11 @@ export const authOptions: NextAuthOptions = {
           token.user = res.data;
           // session = { ...session, ...(session.user = user.data) };
         } else if (res.status === 401) {
-          // Handle 401 error by signing out the user
-          await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
-          throw new Error("Unauthorized");
+          // Handle 401 error by marking token as invalid
+          return {
+            ...token,
+            error: "RefreshAccessTokenError",
+          };
         }
       }
       if (user) {
@@ -146,8 +148,10 @@ export const authOptions: NextAuthOptions = {
         return token;
       } else {
         if (!token.refreshToken) {
-          await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
-          throw new TypeError("Missing refresh_token");
+          return {
+            ...token,
+            error: "RefreshAccessTokenError",
+          };
         }
 
         // Get new access token
@@ -157,8 +161,10 @@ export const authOptions: NextAuthOptions = {
           });
 
           if (response.status !== 200) {
-            await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
-            throw new Error("RefreshAccessTokenError");
+            return {
+              ...token,
+              error: "RefreshAccessTokenError",
+            };
           }
 
           // Update token with new access token
@@ -168,7 +174,6 @@ export const authOptions: NextAuthOptions = {
 
           return token;
         } catch (error) {
-          await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
           return {
             ...token,
             error: "RefreshAccessTokenError",
@@ -178,6 +183,11 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }: any) {
       try {
+        // If there's an error in the token, return null to force re-authentication
+        if (token.error === "RefreshAccessTokenError") {
+          return null;
+        }
+        
         session.user = token.user;
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
@@ -186,7 +196,7 @@ export const authOptions: NextAuthOptions = {
         return session;
       } catch (error) {
         console.error("Session error:", error);
-        return session;
+        return null;
       }
     },
   },
@@ -199,8 +209,10 @@ async function refreshAccessToken(token: any) {
     });
 
     if (response.status !== 200) {
-        await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
-      throw new Error("RefreshAccessTokenError");
+      return {
+        ...token,
+        error: "RefreshAccessTokenError",
+      };
     }
 
     return {
@@ -210,7 +222,6 @@ async function refreshAccessToken(token: any) {
       accessTokenExpires: Date.now() + 5 * 60 * 1000, // 5 minutes
     };
   } catch (error) {
-        await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
     return {
       ...token,
       error: "RefreshAccessTokenError",
