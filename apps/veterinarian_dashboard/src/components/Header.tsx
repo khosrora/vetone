@@ -1,6 +1,10 @@
 "use client";
 import { errorSession } from "@/lib/auth/auth";
-import { base_path_vet, LINK_LANDINGPAGE, LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
+import {
+  base_path_vet,
+  LINK_LANDINGPAGE,
+  LINK_LANDINGPAGE_LOGIN,
+} from "@repo/lib/links";
 import { name_project } from "@repo/lib/titles";
 import { Img } from "@repo/ui/img";
 import { signOut, useSession } from "next-auth/react";
@@ -11,11 +15,11 @@ function Header() {
   const { data: session } = useSession();
   useEffect(() => {
     if (session === null) {
-      signOut({ redirect: false });
+      signOut({ redirect: false, callbackUrl: "https://vet-one.ir/login" });
       window.location.href = LINK_LANDINGPAGE_LOGIN;
     }
     if (session?.error === errorSession.RefreshAccessTokenError) {
-      signOut({ redirect: false });
+      signOut({ redirect: false, callbackUrl: "https://vet-one.ir/login" });
       window.location.href = LINK_LANDINGPAGE_LOGIN;
     }
   }, [session]);

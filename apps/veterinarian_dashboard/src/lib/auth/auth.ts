@@ -7,7 +7,6 @@ import {
 } from "@repo/lib/links";
 import { AxiosResponse } from "axios";
 import { getDataAPI, postDataAPI } from "../fetch/fetch_axios";
-import { signOut } from "next-auth/react";
 
 export interface IUser {
   id: number;

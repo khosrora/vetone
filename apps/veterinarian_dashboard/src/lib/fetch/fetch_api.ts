@@ -1,6 +1,5 @@
 import { base_api } from "@/lib/fetch/base_api";
 import { signOut } from "next-auth/react";
-import { LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 
 // Helper function to handle 401 errors
 const handleUnauthorized = async (response: Response) => {

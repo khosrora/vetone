@@ -1,6 +1,5 @@
 import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { signOut } from "next-auth/react";
 
 import { DOMAIN, LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 import { AxiosResponse } from "axios";
