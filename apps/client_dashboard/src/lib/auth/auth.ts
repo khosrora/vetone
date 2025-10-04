@@ -115,10 +115,7 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async redirect({ url, baseUrl }) {
-      // If it's a relative URL, make it absolute
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      // If it's the same origin, allow it
-      else if (new URL(url).origin === baseUrl) return url;
+       window.location.href = 'https://vet-one.ir/';
       // Otherwise, redirect to login page
       return LINK_LANDINGPAGE_LOGIN;
     },
