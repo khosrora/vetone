@@ -1,18 +1,16 @@
 import BtnAddRequest from "@/components/BtnAddRequest";
 
+import FavoriteButton from "@/components/ButtonFavorite";
+import Share from "@/components/Share";
 import { base_api } from "@/lib/fetch/base_api";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
+import { LINK_LANDINGPAGE } from "@repo/lib/links";
 import { Img } from "@repo/ui/img";
 import {
   IconMapPin,
-  IconStarFilled,
-  IconThumbUp,
   IconMedicalCross,
-  IconShare,
-  IconBookmark,
   IconPhone,
-  IconClock,
-  IconHeart,
+  IconThumbUp
 } from "@tabler/icons-react";
 async function getInitialVetData(slug: string) {
   const res = await fetch(`${base_api}/veterinary/${slug}`, {
@@ -21,9 +19,6 @@ async function getInitialVetData(slug: string) {
   if (!res.ok) throw new Error("Failed to fetch data");
   return res.json();
 }
-import FavoriteButton from "@/components/ButtonFavorite";
-import Share from "@/components/Share";
-import { LINK_LANDINGPAGE } from "@repo/lib/links";
 // --- Placeholder data for the new Info Card ---
 
 export default async function Page({
