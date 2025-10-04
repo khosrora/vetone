@@ -1,5 +1,5 @@
+'use client';
 import BtnAddRequest from "@/components/BtnAddRequest";
-
 import { base_api } from "@/lib/fetch/base_api";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
 import { Img } from "@repo/ui/img";
@@ -24,15 +24,34 @@ async function getInitialVetData(slug: string) {
 import FavoriteButton from "@/components/ButtonFavorite";
 import Share from "@/components/Share";
 import { LINK_LANDINGPAGE } from "@repo/lib/links";
-// --- Placeholder data for the new Info Card ---
+import { Btn } from "@repo/ui/btn";
+import { toast } from "sonner";
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 
-export default async function Page({
+export default function  Page({
   params: { slug },
 }: {
   params: { slug: string };
 }) {
-  const data: VeterinarianCardType = await getInitialVetData(slug);
-  
+    const [data, setData] = useState<VeterinarianCardType | null>(null);
+  const [itemSlug, setItemSlug] = useState<string>('');
+  const { status } = useSession();
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(`${base_api}/veterinary/${slug}`, {
+        cache: "no-cache",
+      });
+      if (!res.ok) throw new Error("Failed to fetch data");
+      const result = await res.json();
+      setData(result);
+    }
+    fetchData();
+  }, [slug]);
+
+  if (!data) return <div>در حال بارگذاری...</div>;
+
   return (
     <div className=" min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
@@ -176,9 +195,23 @@ export default async function Page({
 
               {/* CTA Button at the bottom */}
               <div className="mt-auto pt-6">
-                <button className="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg focus:ring-4 focus:ring-green-300">
-                  ارسال درخواست نوبت
-                </button>
+                     <Btn
+          className="bg-green-600 hover:bg-green-700 w-full text-white font-bold py-2 px-6 rounded-lg"
+          onClick={() => {
+            if (!!data.slug) {
+              setItemSlug(data.slug); // استفاده از slug به جای id
+            }
+            if (status === "unauthenticated") {
+              return toast.error("ابتدا وارد شوید.");
+            }
+            const modal = document.getElementById("my_modal_2") as HTMLDialogElement;
+            if (modal) {
+              modal.showModal();
+            }
+          }}
+        >
+          درخواست نوبت
+        </Btn>
               </div>
             </div>
           </div>
