@@ -15,12 +15,10 @@ function Header() {
   const { data: session } = useSession();
   useEffect(() => {
     if (session === null) {
-      signOut({ redirect: true, callbackUrl: "https://vet-one.ir/login" });
-      window.location.href = LINK_LANDINGPAGE_LOGIN;
+      signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
     }
     if (session?.error === errorSession.RefreshAccessTokenError) {
-      signOut({ redirect: true, callbackUrl: "https://vet-one.ir/login" });
-      window.location.href = LINK_LANDINGPAGE_LOGIN;
+      signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
     }
   }, [session]);
 

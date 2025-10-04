@@ -1,6 +1,7 @@
 "use client";
 
 import { LinkItems, linksDashboad } from "@/lib/constants/DashboardItems";
+import { LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 import { IconLogout } from "@tabler/icons-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
@@ -9,7 +10,7 @@ import { toast } from "sonner";
 function SideBar() {
   
   const handleSignOut = async (): Promise<void> => {
-    await signOut({ redirect: true });
+    await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
   };
 
   const askConfirmLogout = () => {
@@ -50,7 +51,7 @@ function SideBar() {
                 p.then(async () => {
                   await signOut({
                     redirect: false,
-                    callbackUrl: "https://vet-one.ir/login",
+                    callbackUrl: LINK_LANDINGPAGE_LOGIN,
                   });
                 });
               }}

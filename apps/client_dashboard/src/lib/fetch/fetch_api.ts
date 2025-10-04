@@ -5,7 +5,7 @@ import { LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 // Helper function to handle 401 errors
 const handleUnauthorized = async (response: Response) => {
   if (response.status === 401) {
-    await signOut({ redirect: true, callbackUrl: "https://vet-one.ir/login" });
+    await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
   }
 };
 

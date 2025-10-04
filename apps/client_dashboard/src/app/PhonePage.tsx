@@ -9,8 +9,7 @@ import React from "react";
 
 function PhonePage() {
   const handleSignOut = async (): Promise<void> => {
-    await signOut({ redirect: true, callbackUrl: "https://vet-one.ir/login" });
-    window.location.href = LINK_LANDINGPAGE;
+    await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
   };
   return (
     <div className="flex flex-col lg:hidden">

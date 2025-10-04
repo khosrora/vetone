@@ -13,7 +13,7 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     if (error.response?.status === 401) {
       // Handle 401 Unauthorized errors
-      await signOut({ redirect: true, callbackUrl: "https://vet-one.ir/login" });
+      await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
     }
     return Promise.reject(error);
   }
