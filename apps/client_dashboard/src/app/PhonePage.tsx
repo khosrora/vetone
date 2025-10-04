@@ -1,7 +1,7 @@
 import NavigationBottom from "@/components/NavigationBottom";
 import UserTitle from "@/components/UserTitle";
 import { LinkItems, linksDashboad } from "@/lib/constants/DashboardItems";
-import { LINK_LANDINGPAGE } from "@repo/lib/links";
+import { LINK_LANDINGPAGE, LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 import { IconChevronLeft, IconLogout } from "@tabler/icons-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
@@ -9,8 +9,7 @@ import React from "react";
 
 function PhonePage() {
   const handleSignOut = async (): Promise<void> => {
-    await signOut({ redirect: false });
-    window.location.href = LINK_LANDINGPAGE;
+    await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
   };
   return (
     <div className="flex flex-col lg:hidden">

@@ -1,59 +1,68 @@
 "use client";
 
-import Link from "next/link";
 import { LinkItems, linksDashboad } from "@/lib/constants/DashboardItems";
+import { LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 import { IconLogout } from "@tabler/icons-react";
 import { signOut } from "next-auth/react";
-import { LINK_LANDINGPAGE } from "@repo/lib/links";
+import Link from "next/link";
 import { toast } from "sonner";
 
 function SideBar() {
-  // خروج بدون ریدایرکت؛ ریدایرکت را بعد از موفقیت انجام می‌دهیم تا toast دیده شود
+  
   const handleSignOut = async (): Promise<void> => {
-    await signOut({ redirect: false });
+    await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
   };
 
   const askConfirmLogout = () => {
     // یک toast سفارشی با دکمه‌های تأیید/انصراف
-    toast.custom((t) => (
-      <div className="rtl text-right p-4 w-80 rounded-xl bg-white shadow border">
-        <div className="font-semibold mb-1">تأیید خروج</div>
-        <div className="text-sm text-gray-600 mb-4">
-          مطمئن هستید می‌خواهید خارج شوید؟
-        </div>
-        <div className="flex items-center justify-end gap-2">
-          <button
-            className="px-3 py-1.5 rounded-lg border text-gray-700 hover:bg-gray-50"
-            onClick={() => toast.dismiss(t)}
-          >
-            انصراف
-          </button>
-          <button
-            className="px-3 py-1.5 rounded-lg bg-red-600 text-white hover:bg-red-700"
-            onClick={() => {
-              toast.dismiss(t);
-              const p = handleSignOut();
+    toast.custom(
+      (t) => (
+        <div className="rtl text-right p-4 w-80 rounded-xl bg-white shadow border">
+          <div className="font-semibold mb-1">تأیید خروج</div>
+          <div className="text-sm text-gray-600 mb-4">
+            مطمئن هستید می‌خواهید خارج شوید؟
+          </div>
+          <div className="flex items-center justify-end gap-2">
+            <button
+              className="px-3 py-1.5 rounded-lg border text-gray-700 hover:bg-gray-50"
+              onClick={() => toast.dismiss(t)}
+            >
+              انصراف
+            </button>
+            <button
+              className="px-3 py-1.5 rounded-lg bg-red-600 text-white hover:bg-red-700"
+              onClick={() => {
+                toast.dismiss(t);
+                const p = handleSignOut();
 
-              // وضعیت خروج (لودینگ/موفق/خطا)
-              toast.promise(p, {
-                loading: "در حال خروج…",
-                success: () => ({ message: "با موفقیت خارج شدید", duration: 2000 }),
-                error: () => ({ message: "خروج با خطا مواجه شد", duration: 3000 }),
-              });
+                // وضعیت خروج (لودینگ/موفق/خطا)
+                toast.promise(p, {
+                  loading: "در حال خروج…",
+                  success: () => ({
+                    message: "با موفقیت خارج شدید",
+                    duration: 2000,
+                  }),
+                  error: () => ({
+                    message: "خروج با خطا مواجه شد",
+                    duration: 3000,
+                  }),
+                });
 
-              p.then(() => {
-                // بعد از موفقیت، ریدایرکت
-                window.location.href = LINK_LANDINGPAGE;
-                // یا اگر مسیر داخلی Next.js است:
-                // router.replace(LINK_LANDINGPAGE);
-              });
-            }}
-          >
-            بله، خروج
-          </button>
+                p.then(async () => {
+                  await signOut({
+                    redirect: false,
+                    callbackUrl: LINK_LANDINGPAGE_LOGIN,
+                  });
+                });
+              }}
+            >
+              بله، خروج
+            </button>
+          </div>
         </div>
-      </div>
-    ), { duration: Infinity }); // تا کاربر یکی از دکمه‌ها را بزند باز بماند
+      ),
+      { duration: Infinity }
+    ); // تا کاربر یکی از دکمه‌ها را بزند باز بماند
   };
 
   return (
@@ -73,7 +82,7 @@ function SideBar() {
             </Link>
           </li>
         ))}
-                <li
+        <li
           className="rounded-md flex justify-between items-center p-5 w-full cursor-pointer text-sm"
           onClick={askConfirmLogout}
         >
@@ -82,7 +91,6 @@ function SideBar() {
             <p>خروج</p>
           </div>
         </li>
-
       </ul>
     </div>
   );

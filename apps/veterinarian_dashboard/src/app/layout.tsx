@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import "@repo/ui/styles.css";
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
+import SessionErrorHandler from "@/components/SessionErrorHandler";
 import Provider from "@/app/Provider";
 import { Toaster } from "sonner";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${estedad.variable} bg-zinc-50 min-h-screen`}>
         <Provider>
+          <SessionErrorHandler />
           <Toaster
             richColors
             position="bottom-center"

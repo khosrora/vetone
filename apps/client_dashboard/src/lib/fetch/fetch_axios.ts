@@ -1,8 +1,8 @@
 import { base_api } from "@/lib/fetch/base_api";
-import axios from "axios";
+import axiosInstance from "./axios-config";
 
 export const getDataAPI = async (array: [url: string, token?: string]) => {
-  const res = await axios.get(`${base_api}${array[0]}`, {
+  const res = await axiosInstance.get(`${base_api}${array[0]}`, {
     headers: {
       Authorization: !!array[1] ? "Bearer " + array[1] : null,
     },
@@ -10,7 +10,7 @@ export const getDataAPI = async (array: [url: string, token?: string]) => {
   return res;
 };
 export const getData = async (array: [url: string, token?: string]) => {
-  const res = await axios.get(`${array[0]}`, {
+  const res = await axiosInstance.get(`${array[0]}`, {
     headers: {
       Authorization: !!array[1] ? "Bearer " + array[1] : null,
     },
@@ -22,7 +22,7 @@ export const fetcher = (url: [url: string, token?: string]) =>
   getDataAPI(url).then((res) => res.data);
 
 export const postDataAPI = async (url: string, post: any, token?: string) => {
-  const res = await axios.post(`${base_api}${url}`, post, {
+  const res = await axiosInstance.post(`${base_api}${url}`, post, {
     headers: {
       Authorization: !!token ? "Bearer " + token : null,
     },
@@ -31,13 +31,13 @@ export const postDataAPI = async (url: string, post: any, token?: string) => {
 };
 
 export const putDataAPI = async (url: string, post: {}, token?: string) => {
-  const res = await axios.put(`${base_api}${url}`, post, {
-    headers: { Authorization: "token " + token },
+  const res = await axiosInstance.put(`${base_api}${url}`, post, {
+    headers: { Authorization: "Bearer " + token },
   });
   return res;
 };
 export const patchDataAPI = async (url: string, post: any, token?: string) => {
-  const res = await axios.patch(`${base_api}${url}`, post, {
+  const res = await axiosInstance.patch(`${base_api}${url}`, post, {
     headers: {
       Authorization: !!token ? "Bearer " + token : null,
     },
@@ -45,9 +45,9 @@ export const patchDataAPI = async (url: string, post: any, token?: string) => {
   return res;
 };
 export const deleteDataAPI = async (url: string, token?: string) => {
-  const res = await axios.delete(`${base_api}${url}`, {
+  const res = await axiosInstance.delete(`${base_api}${url}`, {
     headers: {
-      Authorization: +!!token ? "Bearer " + token : null,
+      Authorization: !!token ? "Bearer " + token : null,
     },
   });
   return res;

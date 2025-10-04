@@ -1,4 +1,13 @@
 import { base_api } from "@/lib/fetch/base_api";
+import { signOut } from "next-auth/react";
+import { LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
+
+// Helper function to handle 401 errors
+const handleUnauthorized = async (response: Response) => {
+  if (response.status === 401) {
+    await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
+  }
+};
 
 export const post_method = async (
   url: string,
@@ -15,6 +24,7 @@ export const post_method = async (
     body: JSON.stringify(data),
   });
   if (!res.ok) {
+    await handleUnauthorized(res);
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
@@ -37,6 +47,7 @@ export const put_method = async (
   });
 
   if (!res.ok) {
+    await handleUnauthorized(res);
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
@@ -59,6 +70,7 @@ export const patch_method = async (
     body: data,
   });
   if (!res.ok) {
+    await handleUnauthorized(res);
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
@@ -100,6 +112,7 @@ export const get_method = async (
     },
   });
   if (!res.ok) {
+    await handleUnauthorized(res);
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
@@ -117,6 +130,7 @@ export const authFetcher = async ([url, token]: [string, string]) => {
   });
 
   if (!res.ok) {
+    await handleUnauthorized(res);
     throw new Error("Failed to fetch " + url);
   }
 

@@ -5,7 +5,7 @@ import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { postDataAPI } from "@/lib/fetch/fetch_axios";
-import { useRouter } from "next/navigation";  // ✅ FIXED
+import { useRouter } from "next/navigation"; // ✅ FIXED
 
 type FavoriteButtonProps = {
   vetId: number | string;
@@ -18,7 +18,7 @@ export default function FavoriteButton({
 }: FavoriteButtonProps) {
   const { data: session } = useSession();
   const token: string | undefined = session?.accessToken;
-  const router = useRouter();  // ✅ Correct usage for App Router
+  const router = useRouter(); // ✅ Correct usage for App Router
 
   const [favorited, setFavorited] = useState<boolean>(initialFavorited);
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,6 @@ export default function FavoriteButton({
   const handleToggleFav = async () => {
     if (!token) {
       toast.warning("ابتدا وارد وب سایت شوید.");
-      router.push("/auth/signin"); // ✅ Works with App Router
       return;
     }
 
