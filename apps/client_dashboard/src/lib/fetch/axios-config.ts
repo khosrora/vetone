@@ -1,6 +1,6 @@
 import axios from "axios";
 import { signOut } from "next-auth/react";
-import { LINK_LANDINGPAGE } from "@repo/lib/links";
+import { LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 
 // Create axios instance
 const axiosInstance = axios.create();
@@ -13,8 +13,7 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     if (error.response?.status === 401) {
       // Handle 401 Unauthorized errors
-      console.log("401 Unauthorized - signing out user");
-      await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE });
+      await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
     }
     return Promise.reject(error);
   }

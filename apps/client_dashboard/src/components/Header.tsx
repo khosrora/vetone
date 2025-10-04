@@ -1,6 +1,6 @@
 "use client";
 import { errorSession } from "@/lib/auth/auth";
-import { LINK_LANDINGPAGE } from "@repo/lib/links";
+import { LINK_LANDINGPAGE, LINK_LANDINGPAGE_LOGIN } from "@repo/lib/links";
 import { name_project } from "@repo/lib/titles";
 import { Img } from "@repo/ui/img";
 import { signOut, useSession } from "next-auth/react";
@@ -13,11 +13,11 @@ function Header() {
   useEffect(() => {
     if (session === null) {
       signOut({ redirect: false });
-      window.location.href = LINK_LANDINGPAGE;
+      window.location.href = LINK_LANDINGPAGE_LOGIN;
     }
     if (session?.error === errorSession.RefreshAccessTokenError) {
       signOut({ redirect: false });
-      window.location.href = LINK_LANDINGPAGE;
+      window.location.href = LINK_LANDINGPAGE_LOGIN;
     }
   }, [session]);
 
