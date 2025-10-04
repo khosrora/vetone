@@ -121,7 +121,7 @@ function StepTwo({
         if (resUserUpdate.status === 200) {
           setLoading(false);
           toast.success("درخواست شما با موفقیت ثبت شد.");
-          await signOut({ redirect: false });
+          await signOut({ redirect: true });
           push("/");
         }
       }

@@ -9,7 +9,7 @@ import { toast } from "sonner";
 function SideBar() {
   
   const handleSignOut = async (): Promise<void> => {
-    await signOut({ redirect: false });
+    await signOut({ redirect: true });
   };
 
   const askConfirmLogout = () => {
@@ -49,7 +49,7 @@ function SideBar() {
 
                 p.then(async () => {
                   await signOut({
-                    redirect: false,
+                    redirect: true,
                     callbackUrl: "https://vet-one.ir/login",
                   });
                 });

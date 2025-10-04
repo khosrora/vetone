@@ -24,7 +24,7 @@ function CheckCode({
       signIn("credentials", {
         phoneNumber,
         otp: otp,
-        redirect: false,
+        redirect: true,
       })
         .then((res) => {
           if (res?.ok === false || res?.status === 401) {

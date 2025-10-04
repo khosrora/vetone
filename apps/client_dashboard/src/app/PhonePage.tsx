@@ -9,7 +9,7 @@ import React from "react";
 
 function PhonePage() {
   const handleSignOut = async (): Promise<void> => {
-    await signOut({ redirect: false, callbackUrl: "https://vet-one.ir/login" });
+    await signOut({ redirect: true, callbackUrl: "https://vet-one.ir/login" });
     window.location.href = LINK_LANDINGPAGE;
   };
   return (
