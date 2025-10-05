@@ -29,24 +29,43 @@ function VetCard({
   const { push } = useRouter();
 
   const handleAddFav = async (id: number) => {
-    try {
-      if (!!token) {
-        const res = await postDataAPI(
-          `/veterinary/favorites/add/`,
-          { veterinarian_id: id },
-          token
-        );
-        if (res.status === 201) {
-          toast.success("دامپزشک به لیست علاقه مندی ها اضافه شد.");
-        }
-      } else {
-        toast.warning("ابتدا وارد وب سایت شوید.");
-      }
-    } catch (error) {
-      toast.error("قبلا به لیست اضافه شده است");
-    }
-  };
+  console.log("Testing favorite add...");
+  console.log("ID:", id, "Type:", typeof id);
+  console.log("Token:", token?.substring(0, 20) + "...");
   
+  const payload = { veterinarian_id: id };
+  console.log("Payload:", JSON.stringify(payload));
+  
+  try {
+    if (!token) {
+      toast.warning("ابتدا وارد وب سایت شوید.");
+      return;
+    }
+    
+    const res = await postDataAPI(
+      `/veterinary/favorites/add/`,
+      payload,
+      token
+    );
+    
+    console.log("Success! Status:", res.status);
+    console.log("Response:", res.data);
+    
+    if (res.status === 201) {
+      toast.success("دامپزشک به لیست علاقه مندی ها اضافه شد.");
+    }
+  } catch (error: any) {
+    console.error("❌ ERROR:", {
+      status: error?.response?.status,
+      data: error?.response?.data,
+      message: error?.message,
+    });
+    
+    toast.error(JSON.stringify(error?.response?.data || "خطا"), {
+      duration: 10000,
+    });
+  }
+};
   return (
     <div className="bg-white rounded-2xl shadow-xl p-6 mb-4 transition-all duration-300 hover:shadow-2xl">
       {/* Top Section: Image, Name, Experience, Share, Heart */}
