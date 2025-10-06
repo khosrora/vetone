@@ -15,7 +15,7 @@ function BtnAddRequest({
 
   return (
     <>
-      <div className={`w-full mt-4 ${isLarge ? "lg:hidden mt-14" : ""}`}>
+      <div className={`w-full mt-4 ${isLarge ? "lg:hidden mt-14" : ""} `}>
         <div
           onClick={() => {
             if (status === "authenticated") {

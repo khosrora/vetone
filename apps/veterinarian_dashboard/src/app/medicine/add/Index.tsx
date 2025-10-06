@@ -57,7 +57,7 @@ function Index() {
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 space-y-8">
               <TitleBack text="ثبت درخواست" />
         {/* آپلود عکس */}
-        <div className="border-2 border-dashed border-gray-300 hover:border-blue-400 transition rounded-xl p-8 flex flex-col items-center justify-center relative cursor-pointer text-center">
+        <div className="border-2 border-dashed border-gray-300 hover:border-green-400 transition rounded-xl p-8 flex flex-col items-center justify-center relative cursor-pointer text-center">
           <p className="text-gray-700 font-semibold mb-3 text-sm">
             فایل مورد نظر خود را انتخاب کنید
           </p>
@@ -86,7 +86,7 @@ function Index() {
             توضیحات
           </label>
           <textarea
-            className="w-full rounded-xl border border-gray-200 p-3 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            className="w-full rounded-xl border border-gray-200 p-3 text-sm shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none transition"
             placeholder="توضیحات خود را بنویسید..."
             rows={4}
             onChange={(e) => setDesc(e.target.value)}
@@ -95,7 +95,7 @@ function Index() {
 
         {/* دکمه */}
         <Btn
-          className="w-full py-3 rounded-xl font-semibold bg-blue-600 hover:bg-blue-700 transition text-white"
+          className="w-full py-3 rounded-xl font-semibold bg-green-600 hover:bg-green-700 transition text-white"
           onClick={handleSend}
           loading={loading}
           disabled={loading}
