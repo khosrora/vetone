@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="fa">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/ios-128.png" />
+        <link rel="apple-touch-icon" href="/icons/ios/ios-128.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
