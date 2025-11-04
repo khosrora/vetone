@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import DatePicker from "react-multi-date-picker";
+
 import "react-multi-date-picker/styles/layouts/mobile.css";
 import { toast } from "sonner";
 import { signOut, useSession } from "next-auth/react";
@@ -14,6 +15,9 @@ import useSWR from "swr";
 import { CentersType } from "@/lib/types/CentersTypes";
 import { useRouter } from "next/navigation";
 import { BasicInformationType } from "@/lib/types/register_veterinarianTypes";
+import DateObject from "react-date-object";
+
+const today = new DateObject({ calendar: persian });
 
 function StepTwo({
   setStep,
@@ -165,7 +169,7 @@ function StepTwo({
           </div>
         </div>
         <div className="">
-          <p className="text-[14px] font-bold mb-2">تصویر مجوز یا تصویر کارت نظام پزشکی فعال</p>
+          <p className="text-[14px] font-bold mb-2">تصویر مجوز یا کارت نظام پزشکی</p>
           <div className="border-2 border-dashed rounded-md min-h-32 space-y-3 flex flex-col justify-center items-center relative">
             {licensePreview ? (
               <img
@@ -230,6 +234,7 @@ function StepTwo({
           key={`${1}`}
           calendar={persian}
           locale={persian_fa}
+          maxDate={today}
           calendarPosition="bottom-right"
           style={{
             width: "100%",

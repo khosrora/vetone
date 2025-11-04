@@ -99,13 +99,13 @@ export default function AnimalSelector() {
                             className={`
                                 relative flex flex-col items-center justify-center gap-3 p-4 
                                 rounded-2xl border-2 cursor-pointer transition-all duration-300
-                                ${isSelected ? "border-blue-500 bg-blue-50/50" : "border-gray-200 bg-gray-50 hover:border-gray-300"}
+                                ${isSelected ? "border-green-500 bg-green-50/50" : "border-gray-200 bg-gray-50 hover:border-gray-300"}
                             `}
                         >
                             {/* --- نشانگر انتخاب --- */}
                             {isSelected && (
                                 <IconCircleCheckFilled
-                                    className="absolute top-2 right-2 text-blue-600 bg-white rounded-full"
+                                    className="absolute top-2 right-2 text-green-600 bg-white rounded-full"
                                     size={24}
                                 />
                             )}

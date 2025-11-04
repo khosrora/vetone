@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState , useRef } from "react";
 import { Btn } from "@repo/ui/btn";
 import { toast } from "sonner";
 import { postDataAPI } from "@/lib/fetch/fetch_axios";
@@ -17,6 +17,41 @@ function CheckCode({
   const { push } = useRouter();
   const [otp, setOtp] = useState<string>("");
   const [load, setLoad] = useState<boolean>(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    const startWebOTP = async () => {
+      // بررسی پشتیبانی مرورگر از Web OTP API
+      if ("OTPCredential" in window) {
+        try {
+          abortControllerRef.current = new AbortController();
+          
+          const otpCredential = await navigator.credentials.get({
+            // @ts-ignore
+            otp: { transport: ["sms"] },
+            signal: abortControllerRef.current.signal,
+          });
+
+          if (otpCredential && "code" in otpCredential) {
+            // @ts-ignore
+            setOtp(otpCredential.code);
+            toast.success("کد تایید به صورت خودکار دریافت شد");
+          }
+        } catch (err: any) {
+          // اگر کاربر لغو کرد یا خطایی رخ داد
+        }
+      }
+    };
+
+    startWebOTP();
+
+    // پاکسازی هنگام unmount
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (otp.length === 6) {
@@ -49,10 +84,11 @@ function CheckCode({
       <small>کد تایید به شماره {phoneNumber} ارسال شده است.</small>
       <OtpInput
         value={otp}
+        inputType="number"
         onChange={setOtp}
         numInputs={6}
         renderSeparator={<span></span>}
-        renderInput={(props) => <input {...props} />}
+        renderInput={(props) => <input {...props}/>}
         containerStyle={{
           width: "100%",
           direction: "ltr",

@@ -184,7 +184,7 @@ export default function StepTwo({ basicInformation }: Props) {
       </label>
       {/* Submit */}
       <Btn className="w-full mt-4" onClick={handleSubmit} loading={loading}>
-        ثبت درخواست
+        ویرایش اطلاعات
       </Btn>
     </div>
   );
