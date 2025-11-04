@@ -10,7 +10,7 @@ import { toast } from "sonner";
 function SideBar() {
   
   const handleSignOut = async (): Promise<void> => {
-    await signOut({ redirect: true, callbackUrl: LINK_LANDINGPAGE_LOGIN });
+    await signOut({ redirect: false, callbackUrl: LINK_LANDINGPAGE_LOGIN });
   };
 
   const askConfirmLogout = () => {
