@@ -10,10 +10,10 @@ import Header from "@/components/Header";
 import NavigationBottom from "@/components/NavigationBottom";
 import Footer from "@/components/Footer";
 
-
 export const metadata: Metadata = {
   title: "خانه | وت وان ",
-  description: "وت وان | رزرو نوبت دامپزشک  , درمان پت , درمان دام , رزرو نوبت برای دام",
+  description:
+    "وت وان | رزرو نوبت دامپزشک  , درمان پت , درمان دام , رزرو نوبت برای دام",
 };
 
 export default function RootLayout({
@@ -23,7 +23,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa">
-      <body className={`${estedad.variable} bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen`}>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/ios-128.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+      </head>
+      <body
+        className={`${estedad.variable} bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen`}
+      >
         <Providers>
           <Toaster
             richColors

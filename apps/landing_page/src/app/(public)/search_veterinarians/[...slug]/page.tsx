@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import BtnAddRequest from "@/components/BtnAddRequest";
 import { base_api } from "@/lib/fetch/base_api";
 import { VeterinarianCardType } from "@/lib/types/VeterinarianTypes";
@@ -16,8 +16,8 @@ import Share from "@/components/Share";
 import { LINK_LANDINGPAGE } from "@repo/lib/links";
 import { Btn } from "@repo/ui/btn";
 import { toast } from "sonner";
-import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { AnimalsCardType } from "@/lib/types/AnimalsTypes";
 import VetDetailSkeleton from "@/components/loading/SingleLoad";
 import Link from "next/link";
@@ -30,7 +30,7 @@ export default function Page({
   const [data, setData] = useState<VeterinarianCardType | null>(null);
   const [animals, setAnimals] = useState<AnimalsCardType[]>([]);
   const [loading, setLoading] = useState(true);
-  const [itemSlug, setItemSlug] = useState<string>('');
+  const [itemSlug, setItemSlug] = useState<string>("");
   const { status } = useSession();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Page({
         const vetRes = await fetch(`${base_api}/veterinary/${slug}`, {
           cache: "no-cache",
         });
-        
+
         if (!vetRes.ok) throw new Error("Failed to fetch vet data");
         const vetData = await vetRes.json();
 
@@ -49,9 +49,12 @@ export default function Page({
         if (vetData?.id) {
           const [finalVetData, animalsData] = await Promise.all([
             Promise.resolve(vetData), // دیتای دامپزشک که قبلاً گرفتیم
-            fetch(`${base_api}/veterinary/veterinarian-animals/?veterinarian=${vetData.id}`, {
-              cache: "no-cache",
-            }).then(res => res.ok ? res.json() : { results: [] })
+            fetch(
+              `${base_api}/veterinary/veterinarian-animals/?veterinarian=${vetData.id}`,
+              {
+                cache: "no-cache",
+              }
+            ).then((res) => (res.ok ? res.json() : { results: [] })),
           ]);
 
           setData(finalVetData);
@@ -86,34 +89,43 @@ export default function Page({
     );
   }
 
-// ✅ ساخت تگ‌های SEO با لینک
+  // ✅ ساخت تگ‌های SEO با لینک
   const seoTags = [
     // تگ نام دامپزشک
     {
       text: `دامپزشک ${data.fullName}`,
       url: `/search_veterinarians?name=${encodeURIComponent(data.fullName)}`,
-      type: 'name'
+      type: "name",
     },
     // تگ‌های تخصص (حیوانات)
-    ...animals.map(animal => ({
+    ...animals.map((animal) => ({
       text: `دامپزشک ${animal.name}`,
       url: `/search_veterinarians?animal=${animal.id}`,
-      type: 'specialty'
+      type: "specialty",
     })),
     // تگ شهر
-    ...(data.city?.name ? [{
-      text: `دامپزشک در ${data.city.name}`,
-      url: `/search_veterinarians?city=${data.city.id}`,
-      type: 'location'
-    }] : []),
+    ...(data.city?.name
+      ? [
+          {
+            text: `دامپزشک در ${data.city.name}`,
+            url: `/search_veterinarians?city=${data.city.id}`,
+            type: "location",
+          },
+        ]
+      : []),
     // تگ استان
-    ...(data.province?.name ? [{
-      text: `دامپزشک در ${data.province.name}`,
-      url: `/search_veterinarians?province=${data.province.id}`,
-      type: 'location'
-    }] : []),
+    ...(data.province?.name
+      ? [
+          {
+            text: `دامپزشک در ${data.province.name}`,
+            url: `/search_veterinarians?province=${data.province.id}`,
+            type: "location",
+          },
+        ]
+      : []),
   ];
 
+  console.log(data);
   return (
     <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
@@ -185,7 +197,10 @@ export default function Page({
                 </div>
                 {animals.length > 0 && (
                   <div className="flex items-start gap-3">
-                    <IconPaw size={20} className="text-green-500 mt-1 flex-shrink-0" />
+                    <IconPaw
+                      size={20}
+                      className="text-green-500 mt-1 flex-shrink-0"
+                    />
                     <div>
                       <span className="font-semibold text-gray-900 block mb-2">
                         تخصص های دامپزشک:
@@ -211,7 +226,9 @@ export default function Page({
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <h3 className="font-bold text-xl text-gray-800 mb-4">بیوگرافی</h3>
               <p className="text-gray-600 leading-relaxed text-sm">
-                {data.bio === null ? "دامپزشک مورد نظر توضیحی درباره خود ننوشته است" : data.bio}
+                {data.bio === null
+                  ? "دامپزشک مورد نظر توضیحی درباره خود ننوشته است"
+                  : data.bio}
               </p>
             </div>
           </div>
@@ -227,26 +244,24 @@ export default function Page({
                 <div className="flex items-start gap-3">
                   <IconMapPin
                     size={20}
-                    className="text-gray-400 mt-0.5 flex-shrink-0"
+                    className="text-gray-400 flex-shrink-0"
                   />
-                  {!!data.province?.name && !!data.city?.name && (
-                    <span>
-                      {data?.province.name}, {data?.city.name}
-                    </span>
-                  )}
+                  {!!data.province?.name && <span>{data?.province.name}</span>}
                 </div>
-                <div className="flex items-center gap-3">
+                {/* <div className="flex items-center gap-3">
                   <IconPhone size={20} className="text-gray-400" />
                   <span className="font-semibold" dir="ltr">
                     {data.phone}
                   </span>
-                </div>
+                </div> */}
               </div>
 
               <hr className="my-5" />
 
-                           <div className="mb-6">
-                <h3 className="font-bold text-lg text-gray-800 mb-3">برچسب‌های مرتبط</h3>
+              <div className="mb-6">
+                <h3 className="font-bold text-lg text-gray-800 mb-3">
+                  برچسب‌های مرتبط
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {seoTags.map((tag, index) => (
                     <Link
@@ -270,7 +285,9 @@ export default function Page({
                     if (status === "unauthenticated") {
                       return toast.error("ابتدا وارد شوید.");
                     }
-                    const modal = document.getElementById("my_modal_2") as HTMLDialogElement;
+                    const modal = document.getElementById(
+                      "my_modal_2"
+                    ) as HTMLDialogElement;
                     if (modal) {
                       modal.showModal();
                     }
