@@ -4,6 +4,7 @@ import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 import Providers from "@/app/Provider";
 import { Toaster } from "sonner";
+import Script from 'next/script';
 
 // ! components
 import Header from "@/components/Header";
@@ -31,6 +32,20 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-4WB4ES543S`}
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4WB4ES543S', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
       </head>
       <body
         className={`${estedad.variable} bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen`}
