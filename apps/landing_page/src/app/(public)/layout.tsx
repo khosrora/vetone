@@ -4,7 +4,7 @@ import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 import Providers from "@/app/Provider";
 import { Toaster } from "sonner";
-import Script from 'next/script';
+import Script from "next/script";
 
 // ! components
 import Header from "@/components/Header";
@@ -31,6 +31,10 @@ export default function RootLayout({
         <meta
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
+        />
+        <meta
+          name="google-site-verification"
+          content="ZZbd1DxrAvOLP9YJxqkJ8tPtgQOf0jmmh910GUEUU6Y"
         />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=G-4WB4ES543S`}
